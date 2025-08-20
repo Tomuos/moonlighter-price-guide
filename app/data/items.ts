@@ -1,19 +1,19 @@
-import { Item } from "../../constants/types";
+import type { DungeonId, DungeonItem } from "../../constants/types";
+import { GOLEM_ITEMS } from "./golemItems";
 
-export const ITEMS: Item[] = [
-  {
-    id: "broken-sword",
-    name: "Broken Sword",
-    dungeon: "golem",
-    price: { normal: 100, popular: 150 },
-    notes: "Common drop from golems",
-    tags: ["weapon", "metal", "common"]
-  },
-  {
-    id: "fabric",
-    name: "Fabric",
-    dungeon: "golem",
-    price: { normal: 150, popular: 200 },
-    tags: ["cloth", "material"]
-  }
-];
+export const REGISTRY: Record<DungeonId, DungeonItem[]> = {
+  golem: GOLEM_ITEMS,
+  forest: [],
+  desert: [],
+  tech: [],
+  wanderer: [],
+};
+
+export function getItems(dungeon: DungeonId | "all"): DungeonItem[] {
+  const base = dungeon === "all"
+    ? Object.values(REGISTRY).flat()
+    : (REGISTRY[dungeon] ?? []);
+  return [...base].sort((a, b) =>
+    a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
+  );
+}

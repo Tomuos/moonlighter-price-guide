@@ -1,26 +1,15 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+import type { DungeonId } from "./types";
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+export const PALETTE = {
+  parchment: "#F9F8F6",   // warm paper
+  textDark:  "#0F1220",
+  coinGold:  "#F5C46D",
+};
 
-export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
+export const DUNGEON_THEME: Record<DungeonId, { accent: string; tint: string }> = {
+  golem:    { accent: "#00E0C6", tint: "rgba(0,224,198,0.08)" },
+  forest:   { accent: "#B5C43A", tint: "rgba(181,196,58,0.08)" },  // moss
+  desert:   { accent: "#FF6242", tint: "rgba(255,98,66,0.08)" },
+  tech:     { accent: "#9F8DCC", tint: "rgba(159,141,204,0.08)" },
+  wanderer: { accent: "#52D96E", tint: "rgba(82,217,110,0.08)" },
 };
