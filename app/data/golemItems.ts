@@ -2,8 +2,9 @@ import type { DungeonItem } from "../../constants/types";
 
 export const GOLEM_ITEMS: DungeonItem[] = [
   // --- Low-value mats ---
-  { id: "vine", name: "Vine", category: "material", rarity: "common", floors: [1,2,3], minPrice: 3,  popularPrice: 3,  notes: "Upgrade material" },
+  { id: "vine", name: "Vine", category: "material", rarity: "common", floors: [1,2,3], minPrice: 3,  popularPrice: 3,  notes: "Upgrade material", },
   { id: "root", name: "Root", category: "material", rarity: "common", floors: [1,2,3], minPrice: 6,  popularPrice: 7, notes:"scrap with magic mirror in menu" },
+  { id: "rich-jelly", name: "Rich Jelly", category: "material", rarity: "common", floors: [1,2,3], minPrice: 6,  popularPrice: 7, notes:"scrap with magic mirror in menu" },
   { id: "teethstone", name: "Teethstone", category: "material", rarity: "common", floors: [1,2,3], minPrice: 6,  popularPrice: 7,  notes: "Upgrade material" },
   { id: "whetstone", name: "Whetstone", category: "material", rarity: "common", floors: [1,2,3], minPrice: 17, popularPrice: 21, notes: "Upgrade material" },
   { id: "iron-bar", name: "Iron Bar", category: "material", rarity: "common", floors: [1,2,3], minPrice: 28, popularPrice: 34, notes: "Upgrade material" },
