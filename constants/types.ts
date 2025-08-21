@@ -34,7 +34,7 @@ export type EnchantUsage = {
 export type DungeonItem = {
   id: string;
   name: string;
-  image?: string;        
+  image?: any;     
   category: "material" | "artifact" | "core" | "special";
   floors: number[];      
   minPrice: number;
