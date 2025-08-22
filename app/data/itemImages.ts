@@ -9,6 +9,8 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), // ensure file name matches case
   "crystal-rock": require("../../assets/images/items/crystal_rock.png"),
 
+  "empowered-crystal": require("../../assets/images/items/empowered_crystal.png"),
+
   "fabric": require("../../assets/images/items/fabric.png"),
   "foundry-rests": require("../../assets/images/items/foundry_rests.png"),
 

@@ -2,6 +2,20 @@ import type { ImageSourcePropType } from "react-native";
 
 export type DungeonId = |"golem" | "forest" | "desert" | "tech" | "wanderer";
 
+export type DungeonItem = {
+  id: string;
+  name: string;
+  image?: any;     
+  category: "material" | "artifact" | "core" | "special";
+  floors: number[];      
+  minPrice: number;
+  popularPrice?: number;
+  rarity: string;        // 👈 new
+  notes?: string;
+  gearUsage?: GearUsage[];
+  enchantUsage?: EnchantUsage[];
+  brewUsage?: BrewUsage[];
+};
 export type Price = {
   normal: number;        // your baseline “perfect/normal” price
   popular?: number;      // optional boosted price when demand is high
@@ -31,16 +45,11 @@ export type EnchantUsage = {
   icon?: string;                  // optional icon uri or name
 };
 
-export type DungeonItem = {
-  id: string;
+export type BrewUsage = {
+  type: "potion";
   name: string;
-  image?: any;     
-  category: "material" | "artifact" | "core" | "special";
-  floors: number[];      
-  minPrice: number;
-  popularPrice?: number;
-  rarity: string;        // 👈 new
-  notes?: string;
-  gearUsage?: GearUsage[];
-  enchantUsage?: EnchantUsage[];
-};
+  quantity?: number;
+  gold?: number;
+  icon?: string;
+  requires?: string[];
+}
