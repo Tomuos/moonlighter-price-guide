@@ -40,7 +40,7 @@ export default function ItemCard({ item, onPressImage }: Props) {
         {itemImages[item.id] ? (
           <Image
             source={itemImages[item.id]}
-            style={{ width: 48, height: 48, borderRadius: 8 }}
+            style={{ width: 50, height: 50, resizeMode: "contain" }}
             onError={() => {}}
           />
         ) : (
