@@ -5,30 +5,34 @@ type Props = { value: string; onChange: (v: string) => void; onClear?: () => voi
 
 export default function SearchBar({ value, onChange, onClear }: Props) {
   const [focused, setFocused] = useState(false);
+
+  // colors
+  const base = "#2F3646";     // bg + idle border
+  const glow = "#26F9B6";     // focus glow
+  const glowStrong = "#5FFCD0"; // typing glow
+
+  // reactive border: stronger when typing
+  const border = value?.length ? glowStrong : (focused ? glow : base);
+
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: "#2F3646", // Golem text teal
-          borderColor: focused ? "#26f9b6ff" : "#2F3646", // match bg when not focused
-        },
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor: base, borderColor: border }]}>
       <TextInput
         value={value}
         onChangeText={onChange}
-        placeholder="Search items..."
-        placeholderTextColor="#ffffffff" // black placeholder
+        placeholder="Search items…"
+        placeholderTextColor="#FFFFFFCC"   // softer white
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={styles.input}
         autoCapitalize="none"
         autoCorrect={false}
-        clearButtonMode="while-editing"
+        clearButtonMode="while-editing"    // iOS; we keep your manual Clear too
+        selectionColor="#26F9B680"         // text selection highlight
+        returnKeyType="search"
       />
+
       {value ? (
-        <Pressable onPress={onClear}>
+        <Pressable onPress={onClear} hitSlop={12} accessibilityLabel="Clear search">
           <Text style={styles.clearText}>Clear</Text>
         </Pressable>
       ) : null}
@@ -48,11 +52,11 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    fontWeight: "bold", // bold text
-    color: "#000", // black text
+    fontWeight: "bold",
+    color: "#FFF",
   },
   clearText: {
     fontWeight: "600",
-    color: "#000",
+    color: "#FFF",
   },
 });
