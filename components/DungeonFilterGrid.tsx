@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   btn: {
-    width: "48%",
-    height: 72,
+    width: "30%",
+    height: 52,
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 12,

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, ImageBackground } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getItems } from "./data/items";
 import ItemCard from "../components/ItemCard";
@@ -26,6 +26,7 @@ export default function Home() {
 }, [query, dungeon]);
 
   return (
+    
     <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <Text style={styles.title}>Moonlighter Price Guide</Text>
       <DungeonFilterGrid value={dungeon} onChange={setDungeon} />
