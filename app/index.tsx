@@ -6,7 +6,6 @@ import ItemCard from "../components/ItemCard";
 import SearchBar from "../components/SearchBar";
 import DungeonFilterGrid from "../components/DungeonFilterGrid";
 import type { DungeonId } from "../constants/types";
-import { PALETTE } from "../constants/Colors";
 
 
 export default function Home() {
@@ -14,20 +13,29 @@ export default function Home() {
   const [dungeon, setDungeon] = useState<DungeonId | "all">("all");
   const insets = useSafeAreaInsets();
 
- const data = useMemo(() => {
-  const all = getItems(dungeon);                 // A→Z by default
-  const q = query.trim().toLowerCase();
-  if (!q) return all;
-  return all.filter(it =>
-    it.name.toLowerCase().includes(q) ||
-    (it.notes?.toLowerCase().includes(q) ?? false) ||
-    it.category.toLowerCase().includes(q)
-  );
-}, [query, dungeon]);
+  const data = useMemo(() => {
+    const all = getItems(dungeon); // A→Z by default
+    const q = query.trim().toLowerCase();
+    if (!q) return all;
+    return all.filter(it =>
+      it.name.toLowerCase().includes(q) ||
+      (it.notes?.toLowerCase().includes(q) ?? false) ||
+      it.category.toLowerCase().includes(q)
+    );
+  }, [query, dungeon]);
 
   return (
-    
+    // SINGLE parent element
     <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+      {/* Background image, absolutely positioned behind the content */}
+      <ImageBackground
+        source={require("../assets/images/Revision.png")} // make sure the path+case match
+        resizeMode="cover"
+        style={StyleSheet.absoluteFillObject}
+        imageStyle={{ opacity: 0.9 }}   // fade it so text stays readable
+        accessible={false}
+      />
+
       <Text style={styles.title}>Moonlighter Price Guide</Text>
       <DungeonFilterGrid value={dungeon} onChange={setDungeon} />
       <SearchBar value={query} onChange={setQuery} onClear={() => setQuery("")} />
@@ -47,7 +55,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     gap: 12,
-    backgroundColor: PALETTE.parchment, // ← parchment tint
+    // keep transparent so the image shows through
+    // backgroundColor: "transparent",
+    // // if you prefer a tint over the image:
+    // // backgroundColor: "rgba(250, 245, 230, 0.36)",
   },
   title: { fontSize: 28, fontWeight: "900", color: "#0f1220" },
 });
