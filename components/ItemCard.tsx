@@ -20,6 +20,8 @@ const rarityColors: Record<string, string> = {
   legendary: "#F59E0B",
 };
 
+
+
 export default function ItemCard({ item, onPressImage }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -65,6 +67,10 @@ export default function ItemCard({ item, onPressImage }: Props) {
               <Text style={[styles.rarityText, { color: rarityColor }]}>{item.rarity.toUpperCase()}</Text>
             </View>
           </View>
+
+           <Text style={styles.dungeon}>
+            Found in: {item.dungeon.charAt(0).toUpperCase() + item.dungeon.slice(1)} Dungeon
+          </Text>
 
           <Text style={styles.priceLine}>
             <Image source={require("../assets/images/Coin-norm.png")} style={{ width: 20, height: 14 }} />{" "}
@@ -180,6 +186,13 @@ const styles = StyleSheet.create({
   priceLine: { marginTop: 4, fontSize: 14, color: "#FFFFFF" },
   priceStrong: { fontSize: 16, fontWeight: "700", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
+
+    dungeon: {
+    fontSize: 12,
+    color: "#CBD5E1",
+    marginTop: 4
+  },
+
 
   spriteBox: {
     backgroundColor: "#ecd5a8ff",

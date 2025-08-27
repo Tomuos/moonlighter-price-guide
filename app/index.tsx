@@ -14,15 +14,50 @@ export default function Home() {
   const insets = useSafeAreaInsets();
 
   const data = useMemo(() => {
-    const all = getItems(dungeon); // A→Z by default
-    const q = query.trim().toLowerCase();
-    if (!q) return all;
-    return all.filter(it =>
-      it.name.toLowerCase().includes(q) ||
-      (it.notes?.toLowerCase().includes(q) ?? false) ||
-      it.category.toLowerCase().includes(q)
+  const all = getItems(dungeon); // A→Z by default
+  const q = query.trim().toLowerCase();
+  if (!q) return all;
+
+  // 1) gather all items that match anywhere
+  const matches = all.filter(it => {
+    const name = it.name.toLowerCase();
+    const notes = it.notes?.toLowerCase() ?? "";
+    const cat = it.category.toLowerCase();
+    return (
+      name.includes(q) ||
+      notes.includes(q) ||
+      cat.includes(q)
     );
-  }, [query, dungeon]);
+  });
+
+  // 2) rank by relevance: name startsWith > name includes > category/notes startsWith > category/notes includes
+  const score = (it: (typeof all)[number]) => {
+    const name = it.name.toLowerCase();
+    const notes = it.notes?.toLowerCase() ?? "";
+    const cat = it.category.toLowerCase();
+
+    if (name.startsWith(q)) return 0;
+    if (name.includes(q))  return 1;
+    if (cat.startsWith(q) || notes.startsWith(q)) return 2;
+    return 3; // cat/notes include q
+  };
+
+  matches.sort((a, b) => {
+    const sa = score(a);
+    const sb = score(b);
+    if (sa !== sb) return sa - sb;
+
+    // tie-break: earlier index in the name comes first (then alpha)
+    const ai = a.name.toLowerCase().indexOf(q);
+    const bi = b.name.toLowerCase().indexOf(q);
+    if (ai !== bi) return ai - bi;
+
+    return a.name.localeCompare(b.name);
+  });
+
+  return matches;
+}, [query, dungeon]);
+
 
   return (
     // SINGLE parent element
@@ -55,10 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     gap: 12,
-    // keep transparent so the image shows through
-    // backgroundColor: "transparent",
-    // // if you prefer a tint over the image:
-    // // backgroundColor: "rgba(250, 245, 230, 0.36)",
+    overflow: "hidden",          // <-- ADD: clips bounce/overscroll reveal
   },
   title: { fontSize: 28, fontWeight: "900", color: "#0f1220" },
 });
