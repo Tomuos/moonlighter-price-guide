@@ -5,7 +5,8 @@ export type DungeonId = |"golem" | "forest" | "desert" | "tech" | "wanderer";
 export type DungeonItem = {
   id: string;
   name: string;
-  image?: any;     
+  image?: any;    
+  dungeon: DungeonId; 
   category: "material" | "artifact" | "core" | "special";
   floors: number[];      
   minPrice: number;

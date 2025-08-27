@@ -50,11 +50,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   input: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#FFF",
-  },
+  flex: 1,
+  fontSize: 20,        // 🔼 increased size
+  fontWeight: "bold",
+  color: "#FFF",
+  paddingVertical: 4,  // optional: adds breathing room above/below text
+},
+
   clearText: {
     fontWeight: "600",
     color: "#FFF",
