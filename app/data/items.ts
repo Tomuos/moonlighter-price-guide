@@ -2,11 +2,12 @@
 import type { DungeonId, DungeonItem } from "../../constants/types"; // ✅ fix path
 import { GOLEM_ITEMS } from "./golemItems";
 import { FOREST_ITEMS } from "./forestItems";
+import { DESERT_ITEMS } from "./desertItems";
 
 export const ALL_ITEMS: Record<DungeonId, DungeonItem[]> = {
   golem: GOLEM_ITEMS,
   forest: FOREST_ITEMS,
-  desert: [],
+  desert: DESERT_ITEMS,
   tech: [],
   wanderer: [],
 };
