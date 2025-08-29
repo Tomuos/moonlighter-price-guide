@@ -15,14 +15,31 @@ export const itemImages: Record<string, ImageSourcePropType> = {
 
   "carnivorous-mutae-jottings": require("../../assets/images/items/Carnivorous_Mutae_jot.png"),
   "carnivorous-mutae-seeds": require("../../assets/images/items/carnivorous_mutae_seeds.png"),
+  "chilled-lava": require("../../assets/images/items/chilled-lava.png"),
+  "cloth-dye": require("../../assets/images/items/cloth-dye.png"),
   "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), // ensure file name matches case
   "crystal-rock": require("../../assets/images/items/crystal_rock.png"),
-
   "empowered-crystal": require("../../assets/images/items/empowered_crystal.png"), 
+
+
+  "desert-hist-1": require("../../assets/images/items/desert-hist1.png"),
+  "desert-hist-2": require("../../assets/images/items/desert-hist2.png"),
+  "desert-hist-3": require("../../assets/images/items/desert-hist3.png"),
+  "desert-rope": require("../../assets/images/items/desert-rope.png"),
+  "desert-steel-ingot": require("../../assets/images/items/desert-steel-ingot.png"),
+  "desert-steel-sheet": require("../../assets/images/items/desert-steel-sheet.png"),
+  "desert-stone": require("../../assets/images/items/desert-stone.png"),
+  "diamagnetic-sand": require("../../assets/images/items/diamagnetic-sand.png"),
+
 
   "fabric": require("../../assets/images/items/fabric.png"),
   "fertile-soil": require("../../assets/images/items/fertile_soil.png"),
   "fertilizer": require("../../assets/images/items/fertilizer.png"),
+  "fire-gem": require("../../assets/images/items/fire-gem.png"),
+  "fire-jelly": require("../../assets/images/items/fire-jelly.png"),
+  "fireproof-cloth": require("../../assets/images/items/fireproof-cloth.png"),
+  "flammable-dust": require("../../assets/images/items/flammable-dust.png"),
+  "fluid-conduct": require("../../assets/images/items/fluid-conduct.png"),
   "fluid-vessel": require("../../assets/images/items/fluid_vessel.png"),
   "forest-fruits": require("../../assets/images/items/forest_fruits.png"),
 
@@ -52,16 +69,23 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   
 
   "hardened-steel": require("../../assets/images/items/hardened_steel.png"),
+  "high-levitation-core": require("../../assets/images/items/high-levitation-core.png"),
 
   "iron-bar": require("../../assets/images/items/iron_bar.png"),
+  "inflammable-liquid": require("../../assets/images/items/inflamable-liquid.png"),
+  "insulating-dust": require("../../assets/images/items/insulating-dust.png"),
 
   "life-fluid": require("../../assets/images/items/life_fluid.png"),
   "light-essence": require("../../assets/images/items/light_essence.png"),
 
   "magic-mushroom": require("../../assets/images/items/magic_mushroom.png"),
   "magic-wood": require("../../assets/images/items/magic_wood.png"),
+  "magnetic-core": require("../../assets/images/items/magnetic-core.png"),
+  "magnetic-tool": require("../../assets/images/items/magnetic-tool.png"),
+  "mangetite": require("../../assets/images/items/mangetite.png"),
   "modified-seeds": require("../../assets/images/items/modified_seeds.png"),
 
+  "naja-jottings": require("../../assets/images/items/naja-jottings.png"),
   "nutritive-water": require("../../assets/images/items/nutritive_water.png"),
 
   "old-bulb": require("../../assets/images/items/old_bulb.png"),
@@ -72,18 +96,24 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "preserved-root": require("../../assets/images/items/preserved_root.png"),
   "pure-acid": require("../../assets/images/items/pure_acid.png"),
 
+  "resistant-glass": require("../../assets/images/items/resistant-glass.png"),
   "rich-jelly": require("../../assets/images/items/rich_jelly.png"), // ensure file name matches case
   "root": require("../../assets/images/items/root.png"),
   "rune-tool": require("../../assets/images/items/rune_tool.png"),
 
-  "teethstone": require("../../assets/images/items/teethstone.png"),
-
+  
+  "soldering-iron": require("../../assets/images/items/soldering-iron.png"),
   "speed-powder": require("../../assets/images/items/speed_powder.png"),
   "straw": require("../../assets/images/items/straw.png"),
   "strong-leaves": require("../../assets/images/items/strong_leaves.png"),
-
+  
+  "teethstone": require("../../assets/images/items/teethstone.png"),
+  "thermo-magnetic-engine": require("../../assets/images/items/thermo-magnetic-engine.png"),
+  
   "vine": require("../../assets/images/items/vine.png"),
   "venomous-spores": require("../../assets/images/items/venomous_spores.png"),
+  "venom-jelly": require("../../assets/images/items/venom-jelly.png"),
+  "volcanic-stone": require("../../assets/images/items/volcanic-stone.png"),
 
   "water-sphere": require("../../assets/images/items/water_sphere.png"),
   "water-lamp": require("../../assets/images/items/water_lamp.png"),

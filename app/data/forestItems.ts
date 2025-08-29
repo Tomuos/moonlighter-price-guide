@@ -4,6 +4,10 @@ export const FOREST_ITEMS: DungeonItem[] = [
   { id: "magic-mushroom",  name: "Magic Mushroom",  dungeon: "forest", category: "material", floors: [1,2,3], minPrice: 66,  popularPrice: 81,  rarity: "common" },
   { id: "plant-flesh",     name: "Plant Flesh",     dungeon: "forest", category: "material", floors: [1,2,3], minPrice: 66,  popularPrice: 81,  rarity: "common" },
   { id: "venomous-spores", name: "Venomous Spores", dungeon: "forest", category: "material", floors: [1,2,3], minPrice: 66,  popularPrice: 81,  rarity: "common" },
+  { id: "venom-jelly",     name: "Venom Jelly",     dungeon: "forest", category: "material", floors: [1,2,3], minPrice: 22,  popularPrice: 27,  rarity: "common", notes: "Potion ingredient", brewUsage: [
+    { type: "potion", name: "HP Potion II", gold: 800 }
+  ]
+},
 
   { id: "magic-wood",      name: "Magic Wood",      dungeon: "forest", category: "material", floors: [1,2,3], minPrice: 110, popularPrice: 135, rarity: "uncommon", notes: "Used for gear upgrades (armour)" ,gearUsage: [
     { type: "armour", name: "Forest Bandana I",   quantity: 2 },

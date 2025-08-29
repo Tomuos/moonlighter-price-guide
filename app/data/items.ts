@@ -8,7 +8,7 @@ export const ALL_ITEMS: Record<DungeonId, DungeonItem[]> = {
   golem: GOLEM_ITEMS,
   forest: FOREST_ITEMS,
   desert: DESERT_ITEMS,
-  tech: [],
+  tech: [TECH_ITEMS],
   wanderer: [],
 };
 
