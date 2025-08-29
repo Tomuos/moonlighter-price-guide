@@ -5,13 +5,13 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "cloth-dye", name: "Cloth Dye", dungeon:"desert", category: "material", minPrice: 2400, popularPrice: 3025, rarity: "uncommon", floors: [1,2,3] },
 
-  { id: "desert-history-1", name: "Desert History I", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
-  { id: "desert-history-2", name: "Desert History II", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
-  { id: "desert-history-3", name: "Desert History III", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
+  { id: "desert-hist-1", name: "Desert History I", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
+  { id: "desert-hist-2", name: "Desert History II", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
+  { id: "desert-hist-3", name: "Desert History III", dungeon:"desert", category: "artifact", minPrice: 13200, popularPrice: 16500, rarity: "epic", floors: [1,2,3] },
 
-  { id: "desert-rope", name: "Desert Rope", dungeon:"desert", category: "material", minPrice: 500, popularPrice: 525, rarity: "common", floors: [1,2,3], notes: "Crafting" },
+  { id: "desert-rope", name: "Desert Rope", dungeon:"desert", category: "material", minPrice: 500, popularPrice: 525, rarity: "common", floors: [1,2,3] },
 
-  { id: "desert-steel-ingot", name: "Desert Steel Ingot", dungeon:"desert", category: "material", minPrice: 6600, popularPrice: 8250, rarity: "rare", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "desert-steel-ingot", name: "Desert Steel Ingot", dungeon:"desert", category: "material", minPrice: 6600, popularPrice: 8250, rarity: "rare", floors: [1,2,3], notes: "Used in armour & weapon crafting", gearUsage: [
     { type: "armour", name: "Steel Helmet III", quantity: 1 },
     { type: "armour", name: "Steel Chestplate III", quantity: 1 },
     { type: "armour", name: "Steel Boots III", quantity: 1 },
@@ -30,17 +30,21 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "diamagnetic-sand", name: "Diamagnetic Sand", dungeon:"desert", category: "material", minPrice: 440, popularPrice: 550, rarity: "common", floors: [1,2,3] },
 
-  { id: "fire-gem", name: "Fire Gem", dungeon:"desert", category: "material", minPrice: 1500, popularPrice: 1870, rarity: "rare", floors: [1,2,3], notes: "Crafting",  gearUsage: [
+  { id: "fire-gem", name: "Fire Gem", dungeon:"desert", category: "material", minPrice: 1500, popularPrice: 1870, rarity: "rare", floors: [1,2,3], notes: "Used for armour crafting",  gearUsage: [
     { type: "weapon", name: "Reborn Short Sword", quantity: 4 },
   ], },
 
-  { id: "fire-jelly", name: "Fire Jelly", dungeon:"desert", category: "material", minPrice: 80, popularPrice: 110, rarity: "common", floors: [1,2,3], notes: "From Merchant Culture" },
+  { id: "fire-jelly", name: "Fire Jelly", dungeon:"desert", category: "material", minPrice: 80, popularPrice: 110, rarity: "common", floors: [1,2,3], notes: "Potion brewing material", brewUsage: [
+  { type: "potion", name: "HP Potion I",  gold: 125 },                   
+  { type: "potion", name: "HP Potion III", gold: 3000, requires: ["Fire Jelly"] },
+  
+] },
 
-  { id: "fireproof-cloth", name: "Fireproof Cloth", dungeon:"desert", category: "material", minPrice: 1000, popularPrice: 1265, rarity: "uncommon", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "fireproof-cloth", name: "Fireproof Cloth", dungeon:"desert", category: "material", minPrice: 1000, popularPrice: 1265, rarity: "uncommon", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Fabric Armor Set", quantity: 15 },
   ], },
 
-  { id: "flammable-dust", name: "Flammable Dust", dungeon:"desert", category: "material", minPrice: 400, popularPrice: 440, rarity: "common", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "flammable-dust", name: "Flammable Dust", dungeon:"desert", category: "material", minPrice: 400, popularPrice: 440, rarity: "common", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Steel Armor Set", quantity: 8 },
   ], },
 
@@ -50,7 +54,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "inflammable-liquid", name: "Inflammable Liquid", dungeon:"desert", category: "material", minPrice: 4000, popularPrice: 4950, rarity: "rare", floors: [1,2,3] },
 
-  { id: "insulating-dust", name: "Insulating Dust", dungeon:"desert", category: "material", minPrice: 1800, popularPrice: 2255, rarity: "uncommon", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "insulating-dust", name: "Insulating Dust", dungeon:"desert", category: "material", minPrice: 1800, popularPrice: 2255, rarity: "uncommon", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Iron Armor Set", quantity: 6 },
   ], },
 
@@ -58,7 +62,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "magnetic-tool", name: "Magnetic Tool", dungeon:"desert", category: "material", minPrice: 6000, popularPrice: 7150, rarity: "rare", floors: [1,2,3] },
 
-  { id: "magnetite", name: "Magnetite", dungeon:"desert", category: "material", minPrice: 700, popularPrice: 880, rarity: "uncommon", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "mangetite", name: "Mangetite", dungeon:"desert", category: "material", minPrice: 700, popularPrice: 880, rarity: "uncommon", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Iron Armor Set", quantity: 12 },
   ], },
 
@@ -68,7 +72,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "soldering-iron", name: "Soldering Iron", dungeon:"desert", category: "material", minPrice: 4700, popularPrice: 5885, rarity: "rare", floors: [1,2,3] },
 
-  { id: "thermo-magnetic-engine", name: "Thermo Magnetic Engine", dungeon:"desert", category: "material", minPrice: 8000, popularPrice: 10120, rarity: "epic", floors: [1,2,3], notes: "Crafting", gearUsage: [
+  { id: "thermo-magnetic-engine", name: "Thermo Magnetic Engine", dungeon:"desert", category: "material", minPrice: 8000, popularPrice: 10120, rarity: "epic", floors: [1,2,3], notes: "Used for weapon crafting", gearUsage: [
     { type: "weapon", name: "Commander Short Sword", quantity: 3 },
     { type: "weapon", name: "Reborn Short Sword", quantity: 3 },
   ], },

@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   rarityDot: { width: 6, height: 6, borderRadius: 3, marginRight: 6 },
   rarityText: { fontSize: 11, fontWeight: "800" },
 
-  priceLine: { marginTop: 4, fontSize: 14, color: "#FFFFFF" },
+  priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
   priceStrong: { fontSize: 16, fontWeight: "700", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
 
