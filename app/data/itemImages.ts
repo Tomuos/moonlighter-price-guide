@@ -2,23 +2,29 @@ import type { ImageSourcePropType } from "react-native";
 
 // "": require("../../assets/images/items"), <-- when you need to add a new line
 export const itemImages: Record<string, ImageSourcePropType> = {
+  "ac-adapter": require("../../assets/images/items/ac-adapter.png"),
   "ancient-pot": require("../../assets/images/items/ancient_pot.png"),
   "ancient-wood": require("../../assets/images/items/ancient_wood.png"),
+  "argon-bottle": require("../../assets/images/items/argon-bottle.png"),
 
   "blade-leaves": require("../../assets/images/items/blade_leaves.png"),
 
   "botany-jottings-i": require("../../assets/images/items/botany_jot1.png"),
   "botany-jottings-ii": require("../../assets/images/items/botany_jot2.png"),
   "botany-jottings-iii": require("../../assets/images/items/botany_jot3.png"),
-  
+
+  "broken-battery": require("../../assets/images/items/broken-battery.png"),  
   "broken-sword": require("../../assets/images/items/broken_sword.png"),
 
   "carnivorous-mutae-jottings": require("../../assets/images/items/Carnivorous_Mutae_jot.png"),
   "carnivorous-mutae-seeds": require("../../assets/images/items/carnivorous_mutae_seeds.png"),
   "chilled-lava": require("../../assets/images/items/chilled-lava.png"),
   "cloth-dye": require("../../assets/images/items/cloth-dye.png"),
+  "conductor-metal": require("../../assets/images/items/conductor-metal.png"),
+  "copper-reel": require("../../assets/images/items/copper-reel.png"),
   "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), // ensure file name matches case
   "crystal-rock": require("../../assets/images/items/crystal_rock.png"),
+  "crystal-shards": require("../../assets/images/items/crystal-shards.png"),
   "empowered-crystal": require("../../assets/images/items/empowered_crystal.png"), 
 
 
@@ -32,6 +38,10 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "diamagnetic-sand": require("../../assets/images/items/diamagnetic-sand.png"),
 
 
+  "electric-jelly": require("../../assets/images/items/electric-jelly.png"),
+  "energy-capacitor": require("../../assets/images/items/energy-capacitor.png"),
+
+
   "fabric": require("../../assets/images/items/fabric.png"),
   "fertile-soil": require("../../assets/images/items/fertile_soil.png"),
   "fertilizer": require("../../assets/images/items/fertilizer.png"),
@@ -41,6 +51,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "flammable-dust": require("../../assets/images/items/flammable-dust.png"),
   "fluid-conduct": require("../../assets/images/items/fluid-conduct.png"),
   "fluid-vessel": require("../../assets/images/items/fluid_vessel.png"),
+  "flux-energy-jottings": require("../../assets/images/items/flux-energy-jottings.png"),
   "forest-fruits": require("../../assets/images/items/forest_fruits.png"),
 
   "forest-history-i": require("../../assets/images/items/forest_hist1.png"),
@@ -66,6 +77,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
 
   "golem-volume": require("../../assets/images/items/golem_volume.png"),
   "gold-runes": require("../../assets/images/items/gold_runes.png"),
+  "gold-strands": require("../../assets/images/items/gold-strands.png"),
   
 
   "hardened-steel": require("../../assets/images/items/hardened_steel.png"),
@@ -83,6 +95,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "magnetic-core": require("../../assets/images/items/magnetic-core.png"),
   "magnetic-tool": require("../../assets/images/items/magnetic-tool.png"),
   "mangetite": require("../../assets/images/items/mangetite.png"),
+  "mercury": require("../../assets/images/items/mercury.png"),
   "modified-seeds": require("../../assets/images/items/modified_seeds.png"),
 
   "naja-jottings": require("../../assets/images/items/naja-jottings.png"),
@@ -93,6 +106,8 @@ export const itemImages: Record<string, ImageSourcePropType> = {
 
   "petals": require("../../assets/images/items/petals.png"),
   "plant-flesh": require("../../assets/images/items/plant_flesh.png"),
+  "plastic-film": require("../../assets/images/items/plastic-film.png"),
+  "power-supply": require("../../assets/images/items/power-supply.png"),
   "preserved-root": require("../../assets/images/items/preserved_root.png"),
   "pure-acid": require("../../assets/images/items/pure_acid.png"),
 
@@ -107,9 +122,17 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "straw": require("../../assets/images/items/straw.png"),
   "strong-leaves": require("../../assets/images/items/strong_leaves.png"),
   
+  "tech-hist-1": require("../../assets/images/items/tech-hist-1.png"),
+  "tech-hist-2": require("../../assets/images/items/tech-hist-2.png"),
+  "tech-hist-3": require("../../assets/images/items/tech-hist-3.png"),
   "teethstone": require("../../assets/images/items/teethstone.png"),
+  "tesla-coil-engine": require("../../assets/images/items/tesla-coil-engine.png"),
   "thermo-magnetic-engine": require("../../assets/images/items/thermo-magnetic-engine.png"),
+  "treated-wood": require("../../assets/images/items/treated-wood.png"),
+  "triple-cell-battery": require("../../assets/images/items/triple-cell-battery.png"),
+  "tungsten-reel": require("../../assets/images/items/tungsten-reel.png"),
   
+  "vacuum-tube": require("../../assets/images/items/vacuum-tube.png"),
   "vine": require("../../assets/images/items/vine.png"),
   "venomous-spores": require("../../assets/images/items/venomous_spores.png"),
   "venom-jelly": require("../../assets/images/items/venom-jelly.png"),
@@ -117,8 +140,12 @@ export const itemImages: Record<string, ImageSourcePropType> = {
 
   "water-sphere": require("../../assets/images/items/water_sphere.png"),
   "water-lamp": require("../../assets/images/items/water_lamp.png"),
+  "welding-gun": require("../../assets/images/items/welding-gun.png"),
+  "welding-rods": require("../../assets/images/items/welding-rods.png"),
   "whetstone": require("../../assets/images/items/whetstone.png"),
   "white-stone": require("../../assets/images/items/white_stone.png"),
+  "wires": require("../../assets/images/items/wires.png"),
+  "wolfram-rock": require("../../assets/images/items/wolfram-rock.png"),
 
 
  
