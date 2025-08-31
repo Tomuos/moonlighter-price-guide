@@ -4,13 +4,14 @@ import { GOLEM_ITEMS } from "./golemItems";
 import { FOREST_ITEMS } from "./forestItems";
 import { DESERT_ITEMS } from "./desertItems";
 import { TECH_ITEMS } from "./techItems";
+import { WANDERER_ITEMS } from "./wandererItems";
 
 export const ALL_ITEMS: Record<DungeonId, DungeonItem[]> = {
   golem: GOLEM_ITEMS,
   forest: FOREST_ITEMS,
   desert: DESERT_ITEMS,
   tech: TECH_ITEMS,
-  wanderer: [],
+  wanderer: WANDERER_ITEMS,
 };
 
 export function getItems(dungeon: DungeonId | "all"): DungeonItem[] {
