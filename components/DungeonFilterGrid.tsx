@@ -64,22 +64,22 @@ export default function DungeonFilterGrid({ value, onChange }: Props) {
 
 const styles = StyleSheet.create({
   grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 8,
-  },
-  btn: {
-    width: "30%",
-    height: 52,
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  flexDirection: "row",
+  flexWrap: "wrap",
+  gap: 8,
+},
+btn: {
+  flexBasis: "30%",   // instead of width
+  flexGrow: 1,        // lets them stretch evenly
+  height: 46,
+  borderWidth: 1,
+  borderRadius: 12,
+  paddingHorizontal: 12,
+  paddingVertical: 8,
+  alignItems: "center",
+  justifyContent: "center",
+},
   pressed: { opacity: 0.9, transform: [{ scale: 0.98 }] },
   labelRow: { flexDirection: "row", alignItems: "center", justifyContent: "center" },
-  text: { fontWeight: "800", textAlign: "center", fontSize: 18, lineHeight: 22, includeFontPadding: false },
+  text: { fontWeight: "800", textAlign: "center", fontSize: 15, lineHeight: 22, includeFontPadding: false },
 });
