@@ -26,7 +26,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "conductor-metal": require("../../assets/images/items/conductor-metal.png"),
   "coins": require("../../assets/images/items/coins.png"),
   "copper-reel": require("../../assets/images/items/copper-reel.png"),
-  "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), // ensure file name matches case
+  "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), 
   "crystal-rock": require("../../assets/images/items/crystal_rock.png"),
   "crystal-shards": require("../../assets/images/items/crystal-shards.png"),
   "empowered-crystal": require("../../assets/images/items/empowered_crystal.png"), 

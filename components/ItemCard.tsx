@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   rarityText: { fontSize: 11, fontWeight: "800" },
 
   priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
-  priceStrong: { fontSize: 16, fontWeight: "700", color: "#FFFFFF" },
+  priceStrong: { fontSize: 14, fontWeight: "500", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
 
     dungeon: {
