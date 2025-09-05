@@ -71,7 +71,10 @@ export default function Home() {
         accessible={false}
       />
 
-      <Text style={styles.title}>Moonlighter Price Guide</Text>
+      
+        <Text style={styles.title}>Moonlighter Price Guide</Text>
+
+      
       <DungeonFilterGrid value={dungeon} onChange={setDungeon} />
       <SearchBar value={query} onChange={setQuery} onClear={() => setQuery("")} />
       <FlatList
@@ -92,5 +95,5 @@ const styles = StyleSheet.create({
     gap: 12,
     overflow: "hidden",          // <-- ADD: clips bounce/overscroll reveal
   },
-  title: { fontSize: 28, fontWeight: "900", color: "#0f1220" },
+  title: { fontSize: 24, fontWeight: "900", color: "#0f1220" },
 });
