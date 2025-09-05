@@ -25,36 +25,36 @@ export default function DungeonFilterGrid({ value, onChange }: Props) {
 
         return (
           <Pressable
-            key={d.id}
-            onPress={() => onChange(d.id)}
-            accessibilityRole="button"
-            accessibilityState={{ selected: active }}
-            accessibilityLabel={`${d.label} filter`}
-            hitSlop={6}
-            style={({ pressed }) => [
-              styles.btn,
-              { borderColor: d.border, backgroundColor: active ? "#1F2533" : d.bg },
-              pressed && styles.pressed,
-            ]}
-          >
-            <View style={styles.labelRow}>
-              {d.id === "all" && (
-                // pick ONE of these icon names: "book-open-variant" or "treasure-chest"
-                <MaterialCommunityIcons
-                  name="book-open-variant"
-                  size={18}
-                  color={color}
-                  style={{ marginRight: 6 }}
-                />
-              )}
-              <Text
-                numberOfLines={2}
-                adjustsFontSizeToFit={false}
-                style={[styles.text, { color }]}
-              >
-                {d.label}
-              </Text>
-            </View>
+              key={d.id}
+              onPress={() => onChange(d.id)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: active }}
+              style={[
+                styles.btn,
+                {
+                  backgroundColor: d.bg,
+                  borderColor: active ? d.text : d.border,
+                  borderWidth: active ? 3 : 1,   // 👈 thicker border when active
+                },
+              ]}
+            >
+              <View style={styles.labelRow}>
+                {d.id === "all" && (
+                  <MaterialCommunityIcons
+                    name="book-open-variant"
+                    size={18}
+                    color={color}
+                    style={{ marginRight: 6 }}
+                  />
+                )}
+                <Text
+                  numberOfLines={2}
+                  adjustsFontSizeToFit={false}
+                  style={[styles.text, { color }]}
+                >
+                  {d.label}
+                </Text>
+              </View>
           </Pressable>
         );
       })}

@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, Image, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  StyleSheet,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+ 
+} from "react-native";
 import type { DungeonItem } from "../constants/types";
 import { itemImages } from "../app/data/itemImages";
 
@@ -13,14 +23,12 @@ type Props = {
 };
 
 const rarityColors: Record<string, string> = {
-  common: "#9CA3AF",
-  uncommon: "#22C55E",
-  rare: "#3B82F6",
-  epic: "#A855F7",
-  legendary: "#F59E0B",
+  common: "#c1ccdeff",
+  uncommon: "#6cffa2ff",
+  rare: "#45aafdff",
+  epic: "#c383ffff",
+  legendary: "#ffc052ff",
 };
-
-
 
 export default function ItemCard({ item, onPressImage }: Props) {
   const [open, setOpen] = useState(false);
@@ -37,6 +45,9 @@ export default function ItemCard({ item, onPressImage }: Props) {
     (item.enchantUsage?.length ?? 0) > 0 ||
     (item.brewUsage?.length ?? 0) > 0;
 
+  // --- OPTIONAL DEBUG (uncomment to see the intrinsic size RN sees) ---
+  // const asset = RNImage.resolveAssetSource(itemImages[item.id] as any);
+
   return (
     <View style={styles.card}>
       <View style={styles.row}>
@@ -47,13 +58,27 @@ export default function ItemCard({ item, onPressImage }: Props) {
             accessibilityLabel={`${item.name} image`}
           >
             {itemImages[item.id] ? (
-              <Image source={itemImages[item.id]} style={styles.spriteImage} onError={() => {}} />
+              <Image
+              source={itemImages[item.id]}
+              style={[
+                styles.spriteImage,
+                item.dungeon === "wanderer" && { transform: [{ scale: 0.9 }] } // adjust here
+              ]}
+              resizeMode="contain"
+              onError={() => {}}
+            />
             ) : (
               <View style={[styles.image, styles.placeholder]}>
                 <Text style={styles.placeholderText}>?</Text>
               </View>
             )}
           </Pressable>
+
+          {/* --- OPTIONAL DEBUG (uncomment to display) ---
+          <Text style={{ fontSize: 10, color: "#111", marginTop: 2 }}>
+            {asset?.width}×{asset?.height}px
+          </Text>
+          */}
         </View>
 
         <View style={{ flex: 1, marginLeft: 12 }}>
@@ -68,7 +93,7 @@ export default function ItemCard({ item, onPressImage }: Props) {
             </View>
           </View>
 
-           <Text style={styles.dungeon}>
+          <Text style={styles.dungeon}>
             Found in: {item.dungeon.charAt(0).toUpperCase() + item.dungeon.slice(1)} Dungeon
           </Text>
 
@@ -187,12 +212,11 @@ const styles = StyleSheet.create({
   priceStrong: { fontSize: 14, fontWeight: "500", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
 
-    dungeon: {
+  dungeon: {
     fontSize: 12,
     color: "#CBD5E1",
-    marginTop: 4
+    marginTop: 4,
   },
-
 
   spriteBox: {
     backgroundColor: "#ecd5a8ff",
@@ -201,7 +225,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  spriteImage: { width: 48, height: 48, resizeMode: "contain" },
+  spriteImage: { width: 48, height: 48 }, // 48x48 display box
 
   notes: { color: "#a3e635", fontSize: 12, marginTop: 4 },
 
