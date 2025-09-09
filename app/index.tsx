@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
-import { View,  FlatList, StyleSheet, ImageBackground, Image, useWindowDimensions } from "react-native";
+import { View,  FlatList, StyleSheet, ImageBackground, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 import { getItems } from "./data/items";
 import ItemCard from "../components/ItemCard";
 import SearchBar from "../components/SearchBar";
@@ -9,15 +8,10 @@ import DungeonFilterGrid from "../components/DungeonFilterGrid";
 import type { DungeonId } from "../constants/types";
 
 
-
-
 export default function Home() {
   const [query, setQuery] = useState("");
   const [dungeon, setDungeon] = useState<DungeonId | "all">("all");
   const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
-
-  const headerHeight = Math.max(56, Math.min(80, width * 0.14));
 
   const data = useMemo(() => {
   const all = getItems(dungeon); // A→Z by default
@@ -65,54 +59,46 @@ export default function Home() {
 }, [query, dungeon]);
 
 
-    return (
-    <View style={{ flex: 1 }}>
+  return (
+    // SINGLE parent element
+    <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+      {/* Background image, absolutely positioned behind the content */}
       <ImageBackground
-        source={require("../assets/images/background/Revision.png")}
+        source={require("../assets/images/background/rev-full.png")} // make sure the path+case match
         resizeMode="cover"
         style={StyleSheet.absoluteFillObject}
-        imageStyle={{ opacity: 0.9 }}
+        imageStyle={{ opacity: 0.9 }}   // fade it so text stays readable
         accessible={false}
       />
 
-      {/* Use ONLY this safe-area padding on the header (remove the separate spacer) */}
-      <View style={[styles.header, { paddingTop: insets.top, height: headerHeight + insets.top }]}>
-        <Image
+      
+         <Image
           source={require("../assets/images/logo/Moonlighter-Logo.png")}
-          style={{ height: headerHeight, width: width * 0.9 }}
           resizeMode="contain"
-          accessible
+          style={{ width: "100%", height: 64 }}
           accessibilityLabel="Moonlighter Price Guide"
         />
-      </View>
 
-      <View style={styles.content}>
-        <DungeonFilterGrid value={dungeon} onChange={setDungeon} />
-        <SearchBar value={query} onChange={setQuery} onClear={() => setQuery("")} />
-        <FlatList
-          data={data}
-          keyExtractor={(it) => it.id}
-          ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
-          renderItem={({ item }) => <ItemCard item={item} />}
-          contentContainerStyle={{ paddingBottom: 24 }}
-        />
-      </View>
+      
+      <DungeonFilterGrid value={dungeon} onChange={setDungeon} />
+      <SearchBar value={query} onChange={setQuery} onClear={() => setQuery("")} />
+      <FlatList
+        data={data}
+        keyExtractor={(it) => it.id}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        renderItem={({ item }) => <ItemCard item={item} />}
+        contentContainerStyle={{ paddingBottom: 24 }}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#B3F5EE", // your blue strip
-     height: 70,
-    marginBottom: 12,
-  },
-  content: {
+  container: {
     flex: 1,
-    paddingHorizontal: 16,
+    padding: 16,
     gap: 12,
+    overflow: "hidden",          
   },
-  
+  title: { fontSize: 24, fontWeight: "900", color: "#0f1220" },
 });
