@@ -1,33 +1,70 @@
 import { useState } from "react";
-import { View, TextInput, Pressable, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  Pressable,
+  Text,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 
-type Props = { value: string; onChange: (v: string) => void; onClear?: () => void };
+// Allow exactly one of { onChange } or { onChangeText }
+type BaseProps = {
+  value: string;
+  onClear?: () => void;
 
-export default function SearchBar({ value, onChange, onClear }: Props) {
+  // ⬇️ these were missing
+  placeholder?: string;
+  placeholderTextColor?: string;
+  style?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
+};
+
+type WithOnChange = { onChange: (v: string) => void; onChangeText?: never };
+type WithOnChangeText = { onChangeText: (v: string) => void; onChange?: never };
+
+export type Props = BaseProps & (WithOnChange | WithOnChangeText);
+
+export default function SearchBar(props: Props) {
+  const {
+    value,
+    onClear,
+    placeholder = "Search…",
+    placeholderTextColor = "#FFFFFFCC",
+    style,
+    inputStyle,
+  } = props;
+
   const [focused, setFocused] = useState(false);
+  const handleChange = "onChange" in props ? props.onChange : props.onChangeText;
 
-  // colors
-  const base = "#2F3646";     // bg + idle border
-  const glow = "#26F9B6";     // focus glow
-  const glowStrong = "#5FFCD0"; // typing glow
-
-  // reactive border: stronger when typing
-  const border = value?.length ? glowStrong : (focused ? glow : base);
+  const base = "#2F3646";
+  const glow = "#26F9B6";
+  const glowStrong = "#5FFCD0";
+  const border = value?.length ? glowStrong : focused ? glow : base;
 
   return (
-    <View style={[styles.container, { backgroundColor: base, borderColor: border }]}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: base, borderColor: border },
+        style, // allow caller layout overrides
+      ]}
+    >
       <TextInput
         value={value}
-        onChangeText={onChange}
-        placeholder="Search items…"
-        placeholderTextColor="#FFFFFFCC"   // softer white
+        onChangeText={handleChange}
+        placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        style={styles.input}
+        style={[styles.input, inputStyle]}
         autoCapitalize="none"
         autoCorrect={false}
-        clearButtonMode="while-editing"    // iOS; we keep your manual Clear too
-        selectionColor="#26F9B680"         // text selection highlight
+        clearButtonMode="while-editing"
+        selectionColor="#26F9B680"
         returnKeyType="search"
       />
 
@@ -48,15 +85,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     alignItems: "center",
+    
   },
   input: {
-  flex: 1,
-  fontSize: 20,        // 🔼 increased size
-  fontWeight: "bold",
-  color: "#FFF",
-  paddingVertical: 4,  // optional: adds breathing room above/below text
-},
-
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFF",
+    paddingVertical: 4,
+  },
   clearText: {
     fontWeight: "600",
     color: "#FFF",
