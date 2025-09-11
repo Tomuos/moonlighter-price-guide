@@ -1,90 +1,79 @@
-// components/GearFilterGrid.tsx
+import React from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
+import type { GearId } from "../constants/gear";
+import { GEAR } from "../constants/gear";
 
-export type GearKind = "all" | "weapons" | "armour" | "rings";
 export type GearFilterGridProps = {
-  value: GearKind;
-  onChange: (v: GearKind) => void;
+  value: GearId | "all";
+  onChange: (v: GearId | "all") => void;
 };
 
-const BASE_BG = "#2F3646";
-const BASE_BORDER = "#5A6378";
-const ALL_COLOR = "#EDDA0F";
-
-const COLORS: Record<Exclude<GearKind, "all">, string> = {
-  weapons: "#ABCDC9",
-  armour:  "#D3968A",
-  rings:   "#FF9BD7",
+const ALL_BUTTON = {
+  id: "all" as const,
+  label: "All Gear",
+  text: "#EDDA0F",
+  bg: "#2F3646",
+  border: "#5A6378",
 };
-
-const BUTTONS: { id: GearKind; label: string; text: string }[] = [
-  { id: "all",     label: "All Gear", text: ALL_COLOR },
-  { id: "weapons", label: "Weapons",  text: COLORS.weapons },
-  { id: "armour",  label: "Armour",   text: COLORS.armour },
-  { id: "rings",   label: "Rings",    text: COLORS.rings },
-];
 
 export default function GearFilterGrid({ value, onChange }: GearFilterGridProps) {
-  const renderBtn = (b: { id: GearKind; label: string; text: string }) => {
-    const active = value === b.id;
-    const color = active ? "#FFFFFF" : b.text;
+  const raw = [ALL_BUTTON, ...GEAR];
 
-    return (
-      <Pressable
-        key={b.id}
-        onPress={() => onChange(b.id)}
-        accessibilityRole="button"
-        accessibilityState={{ selected: active }}
-        style={[
-          styles.btn,
-          {
-            backgroundColor: BASE_BG,
-            borderColor: active ? b.text : BASE_BORDER,
-            borderWidth: active ? 3 : 1,
-          },
-        ]}
-      >
-        <Text style={[styles.text, { color }]}>{b.label}</Text>
-      </Pressable>
-    );
-  };
+  // dedupe in case "all" sneaks into GEAR
+  const seen = new Set<string>();
+  const buttons = raw.filter(b => (!seen.has(b.id) && seen.add(b.id) !== undefined) || false);
 
   return (
-    <View style={styles.wrap}>
-      <View style={styles.row}>
-        {renderBtn(BUTTONS[0])}
-        {renderBtn(BUTTONS[1])}
-      </View>
-      <View style={styles.row}>
-        {renderBtn(BUTTONS[2])}
-        {renderBtn(BUTTONS[3])}
-      </View>
+    <View style={styles.grid}>
+      {buttons.map((g) => {
+        const active = value === g.id;
+
+        return (
+          <Pressable
+            key={`gear-${g.id}`}
+            onPress={() => onChange(g.id)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: active }}
+            style={[
+              styles.btn,
+              {
+                backgroundColor: g.bg,
+                borderColor: active ? g.text : g.border, // thicker + palette when active
+                borderWidth: active ? 3 : 1,
+              },
+            ]}
+          >
+            {/* 👇 text colour always equals the palette colour, so it matches the active border */}
+            <Text numberOfLines={2} style={[styles.text, { color: g.text }]}>
+              {g.label}
+            </Text>
+          </Pressable>
+        );
+      })}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-    gap: 12, 
-  },
-  row: {
-    flexDirection: "row",
-    gap: 12, 
-  },
+  grid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   btn: {
-    flex: 1,              
-    height: 44,           
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  minWidth: "48%",        // two per row minimum
+  flexBasis: "48%",
+  flexGrow: 1,            // 👈 lets them stretch to the container edges
+  flexShrink: 1,
+  height: 46,
+  borderRadius: 12,
+  paddingHorizontal: 12,
+  paddingVertical: 8,
+  alignItems: "center",
+  justifyContent: "center",
+  borderWidth: 1,
+},
   text: {
     fontWeight: "800",
     textAlign: "center",
-    fontSize: 16,
-    lineHeight: 20,
+    fontSize: 15,
+    lineHeight: 22,
     includeFontPadding: false,
   },
 });

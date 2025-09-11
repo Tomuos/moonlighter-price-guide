@@ -1,5 +1,5 @@
 // app/data/items.ts
-import type { DungeonId, DungeonItem } from "../../constants/types"; // ✅ fix path
+import type { DungeonId, DungeonItem } from "../../constants/types"; 
 import { GOLEM_ITEMS } from "./golemItems";
 import { FOREST_ITEMS } from "./forestItems";
 import { DESERT_ITEMS } from "./desertItems";
