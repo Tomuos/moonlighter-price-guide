@@ -80,7 +80,6 @@ export default function SearchBar(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 8,
     padding: 12,
     borderRadius: 12,
     borderWidth: 2,

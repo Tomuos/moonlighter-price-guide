@@ -53,4 +53,54 @@ export type BrewUsage = {
   gold?: number;
   icon?: string;
   requires?: string[];
+};
+
+/** ---------------------------
+ *          GEAR
+ *  -------------------------- */
+export type GearId = "weapons" | "armour" | "amulets";
+
+export type GearTier = 0 | 1 | 2 | 3 | 4;
+
+export interface WeaponStats {
+  base: number;
+  enchant: { "+": number; "++": number; "+++": number };
+  /** e.g., "Stun", "Poison", "Burn", "Shock" */
+  special?: string;
 }
+
+export type MaterialLine = {
+  itemName: string;
+  quantity: number;
+  altItems?: string[]; // optional alternates
+};
+
+export type GearUpgrade = {
+  tier: GearTier;            // the tier you’re upgrading TO
+  cost?: number;             // gold
+  materials?: MaterialLine[];// required items
+  effects?: string[];        // e.g. "+10% dmg"
+};
+
+
+export interface GearItem {
+  id: string;
+  name: string;
+  kind: GearId;              // "weapons"
+  image?: ImageSourcePropType;
+  slot?: string;               // e.g., "short-sword"
+  tier?: GearTier;             // 0..4
+  craftedAt?: string;
+  summary?: string;
+  notes?: string;
+
+  craftCost?: number;
+  upgradeCost?: number;
+
+  recipe?: MaterialLine[];
+  effects?: string[];
+  upgrades?: GearUpgrade[];
+
+  /** NEW (optional for weapons) */
+  weaponStats?: WeaponStats;
+};

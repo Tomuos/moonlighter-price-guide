@@ -3,6 +3,8 @@ import { View, ImageBackground, Image, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Tabs from "./Tabs";  // 
 
+
+
 export default function Index() {
   const insets = useSafeAreaInsets();
   return (

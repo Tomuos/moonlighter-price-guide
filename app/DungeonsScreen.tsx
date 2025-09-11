@@ -8,7 +8,7 @@ import { getItems } from "../app/data/items";
 import type { DungeonId } from "../constants/types";
 
 export default function DungeonsScreen() {
-  // no extra padding here; index handles safe-area
+ 
   const [query, setQuery] = useState("");
   const [dungeon, setDungeon] = useState<DungeonId | "all">("all");
 
