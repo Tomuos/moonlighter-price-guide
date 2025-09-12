@@ -22,54 +22,87 @@ const COLORS = {
 export default function Tabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Dungeons"
+  initialRouteName="Dungeons"
+  screenOptions={{
+    tabBarStyle: {
+      backgroundColor: "#2F3646",   // inactive tabs
+      height: 44,
+      marginBottom: 10,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
       
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: "#2F3646",
-          height: 44,
-          marginBottom: 10,
-          borderRadius: 12,
-        },
-        tabBarItemStyle: { paddingVertical: 6 },
-        // fallback colors (used when a screen doesn't override)
-        tabBarIndicatorStyle: { backgroundColor: "#2F3646", height: 3, borderRadius: 3 },
-        tabBarActiveTintColor: COLORS.inactiveText,
-        tabBarInactiveTintColor: COLORS.inactiveText,
-        tabBarLabelStyle: { fontWeight: "800", textTransform: "none" as const },
-        tabBarPressColor: "transparent",
-      }}
-    >
-      <Tab.Screen
-        name="Dungeons"
-        component={DungeonsScreen}
-        options={{
-          // color the underline for this tab
-          tabBarIndicatorStyle: { backgroundColor: COLORS.dungeons.indicator, height: 3, borderRadius: 3 },
-          // color the label when active
-          tabBarLabel: ({ focused }) => (
-            <Text style={[styles.label, { color: focused ? COLORS.dungeons.activeText : COLORS.inactiveText }]}>
-              Dungeons
-            </Text>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Gear"
-        component={GearScreen}
-        options={{
-          tabBarIndicatorStyle: { backgroundColor: COLORS.gear.indicator, height: 3, borderRadius: 3 },
-          tabBarLabel: ({ focused }) => (
-            <Text style={[styles.label, { color: focused ? COLORS.gear.activeText : COLORS.inactiveText }]}>
-              Gear
-            </Text>
-          ),
-        }}
-      />
-    </Tab.Navigator>
+     
+    },
+    tabBarItemStyle: { paddingVertical: 0 },
+    tabBarIndicatorStyle: {
+      height: "100%",               // base fill
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+    },
+    tabBarLabelStyle: { fontWeight: "800", textTransform: "none" as const,  },
+    tabBarPressColor: "transparent",
+  }}
+>
+  <Tab.Screen
+    name="Dungeons"
+    component={DungeonsScreen}
+    options={{
+      tabBarIndicatorStyle: {
+        backgroundColor: "#475b81ff", // active bg fill
+        height: "100%",
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
+        borderBottomWidth: 3,          // 👈 add underline
+        borderBottomColor: COLORS.dungeons.indicator,
+      },
+      tabBarLabel: ({ focused }) => (
+        <Text
+          style={[
+            styles.label,
+            { color: focused ? COLORS.dungeons.activeText : COLORS.inactiveText },
+          ]}
+        >
+          Dungeons
+        </Text>
+      ),
+    }}
+  />
+  <Tab.Screen
+    name="Gear"
+    component={GearScreen}
+    options={{
+      tabBarIndicatorStyle: {
+        backgroundColor: "#475b81ff",
+        height: "100%",
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
+        borderBottomWidth: 3,          // 👈 underline
+        borderBottomColor: COLORS.gear.indicator,
+      },
+      tabBarLabel: ({ focused }) => (
+        <Text
+          style={[
+            styles.label,
+            { color: focused ? COLORS.gear.activeText : COLORS.inactiveText },
+          ]}
+        >
+          Gear
+        </Text>
+      ),
+    }}
+  />
+</Tab.Navigator>
+
+
   );
 }
 
 const styles = StyleSheet.create({
-  label: { fontWeight: "800", letterSpacing: 0.25 },
+  label: { 
+    fontWeight: "800", 
+    letterSpacing: 0.25,
+    fontSize: 20,      // 👈 bump size here
+  },
 });
