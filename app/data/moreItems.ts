@@ -18,6 +18,4 @@ export function getMoreItems(gear: GearId | "all"): GearItem[] {
   );
 }
 
-// optional helpers to mirror items.ts style
-export const byStat = (items: GearItem[], stat: string) =>
-  items.filter(i => i.stats?.some(s => s.key === stat));
+

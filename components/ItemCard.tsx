@@ -51,7 +51,8 @@ export default function ItemCard({ item, onPressImage }: Props) {
   return (
     <View style={styles.card}>
       <View style={styles.row}>
-        <View style={styles.spriteBox}>
+        <View style={[styles.spriteBox, { borderColor: rarityColor }]}>
+
           <Pressable
             onPress={() => onPressImage?.(item)}
             accessibilityRole="button"
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   placeholder: { borderWidth: 1, borderColor: "#374151" },
   placeholderText: { color: "#64748b", fontWeight: "700", fontSize: 18 },
 
-  title: { fontSize: 16, fontWeight: "700", marginRight: 8 },
+  title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
 
   rarityPill: {
     flexDirection: "row",
@@ -219,12 +220,13 @@ const styles = StyleSheet.create({
   },
 
   spriteBox: {
-    backgroundColor: "#ecd5a8ff",
-    padding: 4,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  backgroundColor: "#ecd5a8ff", // keep your box fill
+  padding: 4,
+  borderRadius: 5,
+  justifyContent: "center",
+  alignItems: "center",
+  borderWidth: 2,               
+},
   spriteImage: { width: 48, height: 48 }, // 48x48 display box
 
   notes: { color: "#a3e635", fontSize: 12, marginTop: 4 },

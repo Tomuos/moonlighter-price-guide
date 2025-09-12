@@ -23,9 +23,9 @@ type Props = {
 };
 
 const KIND_COLORS: Record<GearId, { pill: string; text: string; box: string }> = {
-  weapons: { pill: "#62E6DB", text: "#62E6DB", box: "#0e2930" },
-  armour:  { pill: "#F0C36B", text: "#F0C36B", box: "#2b2210" },
-  amulets:   { pill: "#FAA5EF", text: "#FAA5EF", box: "#301a2d" },
+  weapons: { pill: "#62E6DB", text: "#62E6DB", box: "#ecd5a8ff" },
+  armour:  { pill: "#F0C36B", text: "#F0C36B", box: "#ecd5a8ff" },
+  amulets: { pill: "#FAA5EF", text: "#FAA5EF", box: "#ecd5a8ff" },
 };
 
 const TIER_COLORS: Record<number, string> = {
@@ -52,11 +52,15 @@ export default function GearCard({ gear, onPressImage }: Props) {
 
   const tierColor = gear.tier ? TIER_COLORS[gear.tier] ?? "#e2e8f0" : "#e2e8f0";
 
+  const recipeCount = gear.recipe?.materials?.length ?? 0;
   const hasDetails =
-    (gear.recipe?.length ?? 0) > 0 ||
+    recipeCount > 0 ||
     (gear.effects?.length ?? 0) > 0 ||
     (gear.upgrades?.length ?? 0) > 0 ||
+    (gear.enchantments?.length ?? 0) > 0 ||
     !!gear.notes;
+
+    
 
   return (
     <View style={styles.card}>
@@ -95,16 +99,18 @@ export default function GearCard({ gear, onPressImage }: Props) {
             {gear.name}
           </Text>
 
-          <View style={{ flexDirection: "row", gap: 8, marginTop: 4 }}>
-            {/* Kind pill */}
-            <View style={[styles.rarityPill, { borderColor: kindColors.pill }]}>
-              <View style={[styles.rarityDot, { backgroundColor: kindColors.pill }]} />
-              <Text style={[styles.rarityText, { color: kindColors.text }]}>
-                {gear.kind.toUpperCase()}
-              </Text>
-            </View>
+          <View style={{ flexDirection: "row", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
+            {/* hide kind pill for weapons */}
+            {gear.kind !== "weapons" && (
+              <View style={[styles.rarityPill, { borderColor: kindColors.pill }]}>
+                <View style={[styles.rarityDot, { backgroundColor: kindColors.pill }]} />
+                <Text style={[styles.rarityText, { color: kindColors.text }]}>
+                  {gear.kind.toUpperCase()}
+                </Text>
+              </View>
+            )}
 
-            {/* Tier pill (optional) */}
+            {/* tier */}
             {gear.tier != null && (
               <View style={[styles.rarityPill, { borderColor: tierColor }]}>
                 <View style={[styles.rarityDot, { backgroundColor: tierColor }]} />
@@ -113,15 +119,22 @@ export default function GearCard({ gear, onPressImage }: Props) {
                 </Text>
               </View>
             )}
+
+            {/* base dmg */}
+            {gear.kind === "weapons" && (gear.baseDamage != null || gear.weaponStats?.base != null) && (
+              <View style={[styles.badge, { borderColor: "#62E6DB", backgroundColor: "#0e2930" }]}>
+                <Text style={[styles.badgeText, { color: "#62E6DB" }]}>
+                  Base DMG: {gear.baseDamage ?? gear.weaponStats?.base}
+                </Text>
+              </View>
+            )}
           </View>
 
-          {/* Crafted at / slot / meta line */}
           <Text style={styles.meta}>
             {gear.slot ? `${capitalize(gear.slot)} • ` : ""}
             {gear.craftedAt ? `Crafted at: ${gear.craftedAt}` : "Craftable gear"}
           </Text>
 
-          {/* Costs */}
           {(gear.craftCost != null || gear.upgradeCost != null) && (
             <Text style={styles.priceLine}>
               {gear.craftCost != null && (
@@ -156,12 +169,15 @@ export default function GearCard({ gear, onPressImage }: Props) {
         )}
       </View>
 
-      {/* Recipe */}
-      {open && (gear.recipe?.length ?? 0) > 0 && (
+      {/* Blacksmith Recipe */}
+      {open && recipeCount > 0 && (
         <View style={styles.dropdown}>
-          <Text style={styles.dropdownTitle}>Recipe</Text>
-          {gear.recipe!.map((r, idx) => (
-            <Text key={idx} style={styles.dropdownItem}>
+          <Text style={styles.dropdownTitle}>Blacksmith Recipe</Text>
+          {gear.recipe?.gold != null && (
+            <Text style={styles.dropdownItem}>🪙 Gold: {gear.recipe.gold}</Text>
+          )}
+          {gear.recipe!.materials!.map((r, idx: number) => (
+            <Text key={`${r.itemName}-${idx}`} style={styles.dropdownItem}>
               {bulletFor(gear.kind)} {r.itemName} × {r.quantity}
               {r.altItems?.length ? `  (or: ${r.altItems.join(", ")})` : ""}
             </Text>
@@ -169,12 +185,29 @@ export default function GearCard({ gear, onPressImage }: Props) {
         </View>
       )}
 
-      {/* Effects / Stats */}
+      {/* Enchantments */}
+      {open && (gear.enchantments?.length ?? 0) > 0 && (
+        <View style={styles.dropdown}>
+          <Text style={styles.dropdownTitle}>Enchantments</Text>
+          {gear.enchantments!.map((e, idx: number) => (
+            <Text key={`${e.bonus}-${idx}`} style={styles.dropdownItem}>
+              ✨ {typeof (e as any).tier !== "undefined" ? `Tier ${(e as any).tier}: ` : ""}{e.bonus}
+            </Text>
+          ))}
+          {gear.weaponStats?.enchant && (
+            <Text style={[styles.dropdownItem, { opacity: 0.9 }]}>
+              (+/{gear.weaponStats.enchant["+"]}  ++/{gear.weaponStats.enchant["++"]}  +++/{gear.weaponStats.enchant["+++"]})
+            </Text>
+          )}
+        </View>
+      )}
+
+      {/* Effects */}
       {open && (gear.effects?.length ?? 0) > 0 && (
         <View style={styles.dropdown}>
           <Text style={styles.dropdownTitle}>Effects</Text>
           {gear.effects!.map((e, idx) => (
-            <Text key={idx} style={styles.dropdownItem}>
+            <Text key={`${e}-${idx}`} style={styles.dropdownItem}>
               ✨ {e}
             </Text>
           ))}
@@ -186,7 +219,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
         <View style={styles.dropdown}>
           <Text style={styles.dropdownTitle}>Upgrades</Text>
           {gear.upgrades!.map((u, idx) => (
-            <Text key={idx} style={styles.dropdownItem}>
+            <Text key={`u-${u.tier}-${idx}`} style={styles.dropdownItem}>
               ⬆️ Tier {u.tier}: {u.cost != null ? `${u.cost}g` : "—"}
               {u.materials?.length
                 ? ` • ${u.materials.map((m) => `${m.itemName}×${m.quantity}`).join(", ")}`
@@ -247,7 +280,7 @@ const styles = StyleSheet.create({
   placeholder: { borderWidth: 1, borderColor: "#374151" },
   placeholderText: { color: "#64748b", fontWeight: "700", fontSize: 18 },
 
-  title: { fontSize: 16, fontWeight: "700", marginRight: 8 },
+  title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
 
   rarityPill: {
     flexDirection: "row",
@@ -263,6 +296,17 @@ const styles = StyleSheet.create({
   rarityDot: { width: 6, height: 6, borderRadius: 3, marginRight: 6 },
   rarityText: { fontSize: 11, fontWeight: "800" },
 
+  badge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 999,
+    borderWidth: 1,
+    backgroundColor: "#111827",
+  },
+  badgeText: { fontSize: 11, fontWeight: "800" },
+
   priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
   priceStrong: { fontSize: 14, fontWeight: "500", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
@@ -272,7 +316,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
+    borderWidth: 2,
+    
   },
   spriteImage: { width: 48, height: 48 },
 

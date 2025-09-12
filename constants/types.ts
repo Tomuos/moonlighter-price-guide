@@ -58,9 +58,10 @@ export type BrewUsage = {
 /** ---------------------------
  *          GEAR
  *  -------------------------- */
-export type GearId = "weapons" | "armour" | "amulets";
+export type GearId = "weapons" | "armour" | "amulets"; // rings → amulets
 
-export type GearTier = 0 | 1 | 2 | 3 | 4;
+export type GearTier = 0 | 1 | 2 | 3 | 4 | 5;
+
 
 export interface WeaponStats {
   base: number;
@@ -69,24 +70,43 @@ export interface WeaponStats {
   special?: string;
 }
 
+/** Re-usable line item for materials */
 export type MaterialLine = {
   itemName: string;
   quantity: number;
   altItems?: string[]; // optional alternates
 };
 
+/** Optional per-upgrade step for armour/amulets/weapons */
 export type GearUpgrade = {
-  tier: GearTier;            // the tier you’re upgrading TO
-  cost?: number;             // gold
-  materials?: MaterialLine[];// required items
-  effects?: string[];        // e.g. "+10% dmg"
+  /** the tier you’re upgrading TO */
+  tier: GearTier;
+  /** gold */
+  cost?: number;
+  /** required items */
+  materials?: MaterialLine[];
+  /** e.g. "+10% dmg" */
+  effects?: string[];
 };
 
+/** Use MaterialLine to avoid an undefined MaterialRef */
+export type BlacksmithRecipe = {
+  materials: MaterialLine[];
+  gold: number;
+};
+
+/** For an “Enchantments” dropdown list (independent of WeaponStats.enchant) */
+export type EnchantmentTier = {
+  tier: number;            // 1..N (works for I–V upgrades too)
+  bonus: string;           // e.g. "Level II · Damage 960"
+  gold?: number;           // optional per-level gold cost
+  cost?: MaterialLine[];   // optional per-level materials
+};
 
 export interface GearItem {
   id: string;
   name: string;
-  kind: GearId;              // "weapons"
+  kind: GearId;                // "weapons" | "armour" | "amulets"
   image?: ImageSourcePropType;
   slot?: string;               // e.g., "short-sword"
   tier?: GearTier;             // 0..4
@@ -94,13 +114,17 @@ export interface GearItem {
   summary?: string;
   notes?: string;
 
+  /** Weapons */
+  baseDamage?: number;         // shown on main card
+  weaponStats?: WeaponStats;   // quick +/++/+++ numbers (optional)
+  enchantments?: EnchantmentTier[]; // for the dropdown (optional)
+
+  /** Crafting / Upgrading */
+  recipe?: BlacksmithRecipe;   // blacksmith recipe (dropdown)
   craftCost?: number;
   upgradeCost?: number;
-
-  recipe?: MaterialLine[];
-  effects?: string[];
   upgrades?: GearUpgrade[];
 
-  /** NEW (optional for weapons) */
-  weaponStats?: WeaponStats;
+  /** Misc effects (badges, etc.) */
+  effects?: string[];
 };

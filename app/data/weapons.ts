@@ -1,108 +1,243 @@
-import type { GearItem } from "@/constants/types";
+// app/data/weapons.ts (or wherever this lives)
+import type { GearItem, EnchantmentTier, MaterialLine } from "@/constants/types";
 
-export const WEAPONS: GearItem[] = [
-  {
-    id: "training-short-sword",
-    name: "Training Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 0,
-    weaponStats: {
-      base: 20,
-      enchant: { "+": 27, "++": 34, "+++": 41 },
-    },
+const BASE_WEAPONS: GearItem[] = [
+  { id: "training-short-sword", name: "Training Short Sword", kind: "weapons", slot: "short-sword", tier: 0, 
+    weaponStats: { base: 20, enchant: { "+": 27, "++": 34, "+++": 41 } },
     summary: "Basic training blade.",
   },
-  {
-    id: "soldier-short-sword",
-    name: "Soldier Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 1,
-    weaponStats: {
-      base: 50,
-      enchant: { "+": 74, "++": 98, "+++": 122 },
-    },
+  { id: "soldier-short-sword", name: "Soldier Short Sword", kind: "weapons", slot: "short-sword", tier: 1,
+    weaponStats: { base: 50, enchant: { "+": 74, "++": 98, "+++": 122 } },
   },
-  {
-    id: "rusty-short-sword",
-    name: "Rusty Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 1,
-    weaponStats: {
-      base: 40,
-      enchant: { "+": 64, "++": 88, "+++": 112 },
-      special: "Stun",
-    },
+  { id: "rusty-short-sword", name: "Rusty Short Sword", kind: "weapons", slot: "short-sword", tier: 1,
+    weaponStats: { base: 40, enchant: { "+": 64, "++": 88, "+++": 112 }, special: "Stun" },
   },
-  {
-    id: "knight-short-sword",
-    name: "Knight Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 2,
-    weaponStats: {
-      base: 150,
-      enchant: { "+": 175, "++": 200, "+++": 225 },
-    },
+  { id: "knight-short-sword", name: "Knight Short Sword", kind: "weapons", slot: "short-sword", tier: 2,
+    weaponStats: { base: 150, enchant: { "+": 175, "++": 200, "+++": 225 } },
   },
-  {
-    id: "venom-short-sword",
-    name: "Venom Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 2,
-    weaponStats: {
-      base: 110,
-      enchant: { "+": 135, "++": 160, "+++": 185 },
-      special: "Poison",
-    },
+  { id: "venom-short-sword", name: "Venom Short Sword", kind: "weapons", slot: "short-sword", tier: 2,
+    weaponStats: { base: 110, enchant: { "+": 135, "++": 160, "+++": 185 }, special: "Poison" },
   },
-  {
-    id: "commander-short-sword",
-    name: "Commander Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 3,
-    weaponStats: {
-      base: 250,
-      enchant: { "+": 276, "++": 302, "+++": 328 },
-    },
+  { id: "commander-short-sword", name: "Commander Short Sword", kind: "weapons", slot: "short-sword", tier: 3,
+    weaponStats: { base: 250, enchant: { "+": 276, "++": 302, "+++": 328 } },
   },
-  {
-    id: "reborn-short-sword",
-    name: "Reborn Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 3,
-    weaponStats: {
-      base: 175,
-      enchant: { "+": 201, "++": 227, "+++": 253 }, // your list had 253 without the +++
-      special: "Burn",
-    },
+  { id: "reborn-short-sword", name: "Reborn Short Sword", kind: "weapons", slot: "short-sword", tier: 3,
+    weaponStats: { base: 175, enchant: { "+": 201, "++": 227, "+++": 253 },  special: "Burn" },
   },
-  {
-    id: "king-short-sword",
-    name: "King Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 4,
-    weaponStats: {
-      base: 400,
-      enchant: { "+": 431, "++": 462, "+++": 493 },
-    },
+  { id: "king-short-sword", name: "King Short Sword", kind: "weapons", slot: "short-sword", tier: 4,
+    weaponStats: { base: 400, enchant: { "+": 431, "++": 462, "+++": 493 } },
   },
-  {
-    id: "vampire-short-sword",
-    name: "Vampire Short Sword",
-    kind: "weapons",
-    slot: "short-sword",
-    tier: 4,
-    weaponStats: {
-      base: 300,
-      enchant: { "+": 331, "++": 362, "+++": 393 },
-      special: "Shock",
-    },
+  { id: "vampire-short-sword", name: "Vampire Short Sword", kind: "weapons", slot: "short-sword", tier: 4,
+    weaponStats: { base: 300, enchant: { "+": 331, "++": 362, "+++": 393 }, special: "Shock" },
   },
+
+// --- Big Swords ---
+{ id: "training-big-sword", name: "Training Big Sword", kind: "weapons", slot: "big-sword", tier: 0,
+  weaponStats: { base: 25, enchant: { "+": 32, "++": 39, "+++": 46 } },
+  summary: "Basic training greatsword.",
+},
+
+{ id: "buster-big-sword", name: "Buster Big Sword", kind: "weapons", slot: "big-sword", tier: 1,
+  weaponStats: { base: 62, enchant: { "+": 86, "++": 110, "+++": 134 } },
+},
+
+{ id: "rock-big-sword", name: "Rock Big Sword", kind: "weapons", slot: "big-sword", tier: 1,
+  weaponStats: { base: 50, enchant: { "+": 74, "++": 98, "+++": 122 }, special: "Stun" },
+},
+
+{ id: "wild-big-sword", name: "Wild Big Sword", kind: "weapons", slot: "big-sword", tier: 2,
+  weaponStats: { base: 185, enchant: { "+": 210, "++": 235, "+++": 260 } },
+},
+
+{ id: "toxic-big-sword", name: "Toxic Big Sword", kind: "weapons", slot: "big-sword", tier: 2,
+  weaponStats: { base: 135, enchant: { "+": 160, "++": 185, "+++": 210 }, special: "Poison" },
+},
+
+{ id: "vulcan-big-sword", name: "Vulcan Big Sword", kind: "weapons", slot: "big-sword", tier: 3,
+  weaponStats: { base: 310, enchant: { "+": 336, "++": 362, "+++": 388 } },
+},
+
+{ id: "blaze-big-sword", name: "Blaze Big Sword", kind: "weapons", slot: "big-sword", tier: 3,
+  weaponStats: { base: 215, enchant: { "+": 241, "++": 267, "+++": 293 }, special: "Burn" },
+},
+
+{ id: "fusion-big-sword", name: "Fusion Big Sword", kind: "weapons", slot: "big-sword", tier: 4,
+  weaponStats: { base: 500, enchant: { "+": 531, "++": 562, "+++": 593 } },
+},
+
+{ id: "storm-big-sword", name: "Storm Big Sword", kind: "weapons", slot: "big-sword", tier: 4,
+  weaponStats: { base: 375, enchant: { "+": 406, "++": 437, "+++": 468 }, special: "Shock" },
+},
+
+// --- DLC craftable (post-boss) shown in dropdown as Levels I–V ---
+{
+  id: "ether-sable",
+  name: "Ether Sable",
+  kind: "weapons",
+  slot: "sword-and-shield",
+  tier: 5,                 // DLC bucket
+  baseDamage: 620,         // badge shows Level I
+  // Dropdown shows full upgrade path (you can read gold/cost later if desired)
+  enchantments: [
+    {
+      tier: 1,
+      bonus: "Level I · Damage 620",
+      gold: 456000,
+      cost: [
+        { itemName: "Dimensional Garbage", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Wolfram Rock", quantity: 5 },
+      ],
+    },
+    {
+      tier: 2,
+      bonus: "Level II · Damage 960",
+      gold: 506000,
+      cost: [
+        { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Ether Sable", quantity: 1 },
+      ],
+    },
+    {
+      tier: 3,
+      bonus: "Level III · Damage 1488",
+      gold: 556000,
+      cost: [
+        { itemName: "Plasma Charge", quantity: 3 },
+        { itemName: "Dimensional Resistant Glass", quantity: 3 },
+        { itemName: "Ether Sable II", quantity: 1 },
+      ],
+    },
+    {
+      tier: 4,
+      bonus: "Level IV · Damage 2300",
+      gold: 606000,
+      cost: [
+        { itemName: "Light Power Crystal", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Ether Sable III", quantity: 1 },
+      ],
+    },
+    {
+      tier: 5,
+      bonus: "Level V · Damage 3500",
+      gold: 656000,
+      cost: [
+        { itemName: "Plasma Charge", quantity: 2 },
+        { itemName: "Light Power Crystal", quantity: 2 },
+        { itemName: "Ether Sable IV", quantity: 1 },
+      ],
+    },
+  ],
+  // Keep Blacksmith Recipe useful by showing Level I craft here:
+  recipe: {
+    gold: 456000,
+    materials: [
+      { itemName: "Dimensional Garbage", quantity: 3 },
+      { itemName: "Dimensional Resistant Metal", quantity: 2 },
+      { itemName: "Wolfram Rock", quantity: 5 },
+    ],
+  },
+  summary: "DLC sword & shield with upgrades I–V.",
+},
+
+
+{
+  id: "heros-sword",
+  name: "Hero's Sword",
+  kind: "weapons",
+  slot: "sword-and-shield",
+  tier: 5,
+  baseDamage: 50,
+  enchantments: [
+    {
+      tier: 1,
+      bonus: "Level I · Damage 50",
+      gold: 4000,
+      cost: [
+        { itemName: "Broken Sword", quantity: 5 },
+        { itemName: "Rune Tool", quantity: 1 },
+        { itemName: "Hardened Steel", quantity: 5 },
+      ],
+    },
+    {
+      tier: 2,
+      bonus: "Level II · Damage 150",
+      cost: [
+        { itemName: "Ancient Wood", quantity: 3 },
+        { itemName: "Old Bulb", quantity: 2 },
+        { itemName: "Hero's Sword", quantity: 1 },
+      ],
+    },
+    {
+      tier: 3,
+      bonus: "Level III · Damage 250",
+      cost: [
+        { itemName: "Desert Steel Ingot", quantity: 2 },
+        { itemName: "Thermo Magnetic Engine", quantity: 3 },
+        { itemName: "Hero's Sword II", quantity: 1 },
+      ],
+    },
+    {
+      tier: 4,
+      bonus: "Level IV · Damage 400",
+      cost: [
+        { itemName: "Copper Reel", quantity: 2 },
+        { itemName: "Welding Gun", quantity: 3 },
+        { itemName: "Hero's Sword III", quantity: 1 },
+      ],
+    },
+  ],
+  recipe: {
+    gold: 4000,
+    materials: [
+      { itemName: "Broken Sword", quantity: 5 },
+      { itemName: "Rune Tool", quantity: 1 },
+      { itemName: "Hardened Steel", quantity: 5 },
+    ],
+  },
+  summary: "Nintendo Switch exclusive. Base craft uses gold; upgrades use materials.",
+},
+
 ];
+
+
+
+/** Helpers to derive dropdown-friendly fields from weaponStats */
+function buildEnchantments(ws: NonNullable<GearItem["weaponStats"]>): EnchantmentTier[] {
+  return [
+    { tier: 1, bonus: `Damage ${ws.enchant["+"]}` },
+    { tier: 2, bonus: `Damage ${ws.enchant["++"]}` },
+    { tier: 3, bonus: `Damage ${ws.enchant["+++"]}` },
+  ];
+}
+
+/** Optional: quick stub recipes (use real materials as you collect them) */
+function defaultRecipeFor(tier: number): { gold: number; materials: MaterialLine[] } | undefined {
+  const byTier = {
+    0: { gold: 0,   materials: [] },
+    1: { gold: 500, materials: [{ itemName: "Iron Bar", quantity: 5 }, { itemName: "Plant Fibre", quantity: 8 }] },
+    2: { gold: 2500, materials: [{ itemName: "Steel Ingot", quantity: 6 }, { itemName: "Forest Essence", quantity: 4 }] },
+    3: { gold: 7500, materials: [{ itemName: "Tempered Steel", quantity: 8 }, { itemName: "Desert Crystal", quantity: 6 }] },
+    4: { gold: 20000, materials: [{ itemName: "Mythril Ingot", quantity: 10 }, { itemName: "Tech Core", quantity: 4 }] },
+  } as const;
+  return (byTier as any)[tier] as any;
+}
+
+/** Enrich base list so GearCard dropdowns work without changing how you author */
+export const WEAPONS: GearItem[] = BASE_WEAPONS.map((w) => {
+  const ws = w.weaponStats;
+  return {
+    ...w,
+    // shows on the mint badge:
+    baseDamage: ws?.base ?? w.baseDamage,
+
+    // shows in Enchantments dropdown:
+    enchantments: w.enchantments ?? (ws ? buildEnchantments(ws) : undefined),
+
+
+    // shows in Blacksmith Recipe dropdown:
+    recipe: w.recipe ?? (typeof w.tier === "number" ? defaultRecipeFor(w.tier) : undefined),
+  };
+});
