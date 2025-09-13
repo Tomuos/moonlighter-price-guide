@@ -63,12 +63,12 @@ export type GearId = "weapons" | "armour" | "amulets"; // rings → amulets
 export type GearTier = 0 | 1 | 2 | 3 | 4 | 5;
 
 
-export interface WeaponStats {
+export type WeaponStats = {
   base: number;
-  enchant: { "+": number; "++": number; "+++": number };
-  /** e.g., "Stun", "Poison", "Burn", "Shock" */
+  enchant?: { "+": number; "++": number; "+++": number }; // <- optional now
   special?: string;
-}
+};
+
 
 /** Re-usable line item for materials */
 export type MaterialLine = {
