@@ -173,8 +173,10 @@ export default function GearCard({ gear, onPressImage }: Props) {
       {open && recipeCount > 0 && (
         <View style={styles.dropdown}>
           <Text style={styles.dropdownTitle}>Blacksmith Recipe</Text>
+          
           {gear.recipe?.gold != null && (
-            <Text style={styles.dropdownItem}>🪙 Gold: {gear.recipe.gold}</Text>
+            <Text style={styles.dropdownItem}><Image source={require("../assets/images/Coin-pop.png")} style={{ width: 20, height: 14 }} /> 
+            Gold: {gear.recipe.gold}</Text>
           )}
           {gear.recipe!.materials!.map((r, idx: number) => (
             <Text key={`${r.itemName}-${idx}`} style={styles.dropdownItem}>
@@ -194,11 +196,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
               ✨ {typeof (e as any).tier !== "undefined" ? `Tier ${(e as any).tier}: ` : ""}{e.bonus}
             </Text>
           ))}
-          {gear.weaponStats?.enchant && (
-            <Text style={[styles.dropdownItem, { opacity: 0.9 }]}>
-              (+/{gear.weaponStats.enchant["+"]}  ++/{gear.weaponStats.enchant["++"]}  +++/{gear.weaponStats.enchant["+++"]})
-            </Text>
-          )}
+          
         </View>
       )}
 

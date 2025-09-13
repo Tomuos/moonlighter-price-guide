@@ -28,7 +28,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "desert-stone", name: "Desert Stone", dungeon:"desert", category: "material", minPrice: 2375, popularPrice: 2970, rarity: "uncommon", floors: [1,2,3] },
 
-  { id: "diamagnetic-sand", name: "Diamagnetic Sand", dungeon:"desert", category: "material", minPrice: 440, popularPrice: 550, rarity: "common", floors: [1,2,3] },
+  { id: "diamagnetic-sand", name: "Diamagnetic Sand", dungeon:"desert", category: "material", minPrice: 550, popularPrice: 600, rarity: "common", floors: [1,2,3] },
 
   { id: "fire-gem", name: "Fire Gem", dungeon:"desert", category: "material", minPrice: 1500, popularPrice: 1870, rarity: "rare", floors: [1,2,3], notes: "Used for armour crafting",  gearUsage: [
     { type: "weapon", name: "Reborn Short Sword", quantity: 4 },
@@ -44,7 +44,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
     { type: "armour", name: "Tier IV Fabric Armor Set", quantity: 15 },
   ], },
 
-  { id: "flammable-dust", name: "Flammable Dust", dungeon:"desert", category: "material", minPrice: 400, popularPrice: 440, rarity: "common", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
+  { id: "flammable-dust", name: "Flammable Dust", dungeon:"desert", category: "material", minPrice: 440, popularPrice: 440, rarity: "common", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Steel Armor Set", quantity: 8 },
   ], },
 
