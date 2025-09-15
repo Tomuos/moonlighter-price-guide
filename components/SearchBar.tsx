@@ -15,7 +15,6 @@ type BaseProps = {
   value: string;
   onClear?: () => void;
 
-  // ⬇️ these were missing
   placeholder?: string;
   placeholderTextColor?: string;
   style?: StyleProp<ViewStyle>;
@@ -38,7 +37,21 @@ export default function SearchBar(props: Props) {
   } = props;
 
   const [focused, setFocused] = useState(false);
-  const handleChange = "onChange" in props ? props.onChange : props.onChangeText;
+
+  // ✅ Safe caller: only calls whichever handler exists
+  const callChange = (next: string) => {
+    if ("onChange" in props && typeof props.onChange === "function") {
+      props.onChange(next);
+    } else if ("onChangeText" in props && typeof props.onChangeText === "function") {
+      props.onChangeText(next);
+    }
+  };
+
+  // ✅ Always clears parent state; then optional extras
+  const handleClear = () => {
+    callChange("");       // guarantees parent query resets
+    onClear?.();          // optional: reset filters/scroll/etc.
+  };
 
   const base = "#2F3646";
   const glow = "#26F9B6";
@@ -50,12 +63,12 @@ export default function SearchBar(props: Props) {
       style={[
         styles.container,
         { backgroundColor: base, borderColor: border },
-        style, // allow caller layout overrides
+        style,
       ]}
     >
       <TextInput
         value={value}
-        onChangeText={handleChange}
+        onChangeText={callChange}                 // 👈 use safe caller
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         onFocus={() => setFocused(true)}
@@ -69,7 +82,13 @@ export default function SearchBar(props: Props) {
       />
 
       {value ? (
-        <Pressable onPress={onClear} hitSlop={12} accessibilityLabel="Clear search">
+        <Pressable
+          onPress={handleClear}
+          hitSlop={12}
+          accessibilityLabel="Clear search"
+          accessibilityRole="button"
+          testID="search-clear"
+        >
           <Text style={styles.clearText}>Clear</Text>
         </Pressable>
       ) : null}
@@ -84,7 +103,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     alignItems: "center",
-    
   },
   input: {
     flex: 1,
