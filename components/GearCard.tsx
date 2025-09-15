@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import type { GearItem, GearId } from "../constants/types";
 import { gearImages } from "../app/data/gearImages";
+import { itemImages } from "@/app/data/itemImages"; 
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -60,7 +61,86 @@ export default function GearCard({ gear, onPressImage }: Props) {
     (gear.enchantments?.length ?? 0) > 0 ||
     !!gear.notes;
 
-    
+
+
+ function slugifyName(s?: string) {
+  return (s ?? "")
+    .toLowerCase()
+    .replace(/['’]/g, "")     // drop apostrophes e.g. Wood's -> woods
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function getMatImage(itemId?: string, itemName?: string) {
+  // Try explicit id first
+  if (itemId) {
+    if (itemImages[itemId]) return itemImages[itemId];
+    if (gearImages[itemId]) return gearImages[itemId];
+  }
+
+  // Fall back to name (as-is)
+  if (itemName) {
+    if (itemImages[itemName]) return itemImages[itemName];
+    if (gearImages[itemName]) return gearImages[itemName];
+
+    // Fall back to slugified key
+    const key = slugifyName(itemName);
+    if (itemImages[key]) return itemImages[key];
+    if (gearImages[key]) return gearImages[key];
+  }
+
+  return null;
+}
+
+const RECIPE_ICON_SIZE = 32;          // bump to taste: 24/28/32
+const RECIPE_BG_COLOR = "#ecd5a8ff";  // same as your item image box
+
+
+function MaterialRow({
+  id,
+  name,
+  qty,
+  alts,
+  size = RECIPE_ICON_SIZE,
+}: {
+  id?: string;
+  name?: string;
+  qty: number;
+  alts?: string[];
+  size?: number;
+}) {
+  const img = getMatImage(id, name);
+  const iconStyle = { width: size, height: size };
+
+  return (
+    <View style={[styles.matRow, { minHeight: size + 8 }]}>
+      <View
+        style={[
+          styles.matIconBox,
+          {
+            width: size + 8,
+            height: size + 8,
+            borderRadius: Math.round((size + 8) / 5),
+            backgroundColor: RECIPE_BG_COLOR,
+          },
+        ]}
+      >
+        {img ? (
+          <Image source={img} style={[styles.matIcon, iconStyle]} resizeMode="contain" />
+        ) : (
+          <View style={[styles.matIconFallback, iconStyle]} />
+        )}
+      </View>
+
+      <Text style={styles.matText} numberOfLines={1}>
+        {(name ?? id) ?? "Unknown"} × {qty}
+        {alts?.length ? `  (or: ${alts.join(", ")})` : ""}
+      </Text>
+    </View>
+  );
+}
+
+
 
   return (
     <View style={styles.card}>
@@ -173,19 +253,30 @@ export default function GearCard({ gear, onPressImage }: Props) {
       {open && recipeCount > 0 && (
         <View style={styles.dropdown}>
           <Text style={styles.dropdownTitle}>Blacksmith Recipe</Text>
-          
+
           {gear.recipe?.gold != null && (
-            <Text style={styles.dropdownItem}><Image source={require("../assets/images/Coin-pop.png")} style={{ width: 20, height: 14 }} /> 
-            Gold: {gear.recipe.gold}</Text>
+            <View style={styles.goldRow}>
+              <Image
+                source={require("../assets/images/Coin-pop.png")}
+                style={{ width: 20, height: 14, marginRight: 6 }}
+              />
+              <Text style={styles.goldText}>
+                Gold: {gear.recipe.gold.toLocaleString()}
+              </Text>
+            </View>
           )}
-          {gear.recipe!.materials!.map((r, idx: number) => (
-            <Text key={`${r.itemName}-${idx}`} style={styles.dropdownItem}>
-              {bulletFor(gear.kind)} {r.itemName} × {r.quantity}
-              {r.altItems?.length ? `  (or: ${r.altItems.join(", ")})` : ""}
-            </Text>
+
+          {gear.recipe!.materials!.map((r, idx) => (
+            <MaterialRow
+              key={`${r.itemName}-${idx}`}
+              name={r.itemName}
+              qty={r.quantity}
+              alts={r.altItems}
+            />
           ))}
         </View>
       )}
+
 
       {/* Enchantments */}
       {open && (gear.enchantments?.length ?? 0) > 0 && (
@@ -242,18 +333,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
 function capitalize(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
-function bulletFor(kind: GearId) {
-  switch (kind) {
-    case "weapons":
-      return "🗡️";
-    case "armour":
-      return "🛡️";
-    case "amulets":
-      return "💍";
-    default:
-      return "•";
-  }
-}
+
 
 const styles = StyleSheet.create({
   card: {
@@ -326,4 +406,20 @@ const styles = StyleSheet.create({
   dropdown: { marginTop: 10, borderTopColor: "#374151", borderTopWidth: 1, paddingTop: 8 },
   dropdownTitle: { color: "#e2e8f0", fontWeight: "600", marginBottom: 4 },
   dropdownItem: { color: "#cbd5e1", fontSize: 13, marginBottom: 2 },
+
+  matRow: { flexDirection: "row", alignItems: "center", marginTop: 4 },
+  matIconBox: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 8,
+    borderWidth: 1,
+    borderColor: "#5A6378", // matches your card border; tweak if you want
+  },
+  matIcon: {}, // size is set inline
+  matIconFallback: { backgroundColor: "#4b5563" },
+  matText: { color: "#cbd5e1", fontSize: 13 },
+
+  goldRow: { flexDirection: "row", alignItems: "center", marginBottom: 2 },
+  goldText: { color: "#ffd166", fontSize: 13 },
+
 });
