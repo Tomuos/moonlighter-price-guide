@@ -1,5 +1,6 @@
 // app/data/weapons.ts (or wherever this lives)
-import type { GearItem, EnchantmentTier, MaterialLine } from "@/constants/types";
+import type { GearItem, EnchantmentTier, } from "@/constants/types";
+import { BLACKSMITH_RECIPES_BY_ID } from "./recipes";
 
 const BASE_WEAPONS: GearItem[] = [
   
@@ -299,7 +300,7 @@ const BASE_WEAPONS: GearItem[] = [
       { itemName: "Rune Tool", quantity: 1 },
     ],
   },
-  summary: "Nintendo Switch exclusive bow. Stats mirror the regular bow path; upgrades use materials.",
+  summary: "Nintendo Switch exclusive bow.",
 },
 
 
@@ -357,7 +358,7 @@ const BASE_WEAPONS: GearItem[] = [
       { itemName: "Hardened Steel", quantity: 5 },
     ],
   },
-  summary: "Nintendo Switch exclusive. Base craft uses gold; upgrades use materials.",
+  summary: "Nintendo Switch exclusive.",
 },
 
 {
@@ -516,31 +517,15 @@ function buildEnchantments(ws: NonNullable<GearItem["weaponStats"]>): Enchantmen
 }
 
 
-/** Optional: quick stub recipes (use real materials as you collect them) */
-function defaultRecipeFor(tier: number): { gold: number; materials: MaterialLine[] } | undefined {
-  const byTier = {
-    0: { gold: 0,   materials: [] },
-    1: { gold: 500, materials: [{ itemName: "Iron Bar", quantity: 5 }, { itemName: "Plant Fibre", quantity: 8 }] },
-    2: { gold: 2500, materials: [{ itemName: "Steel Ingot", quantity: 6 }, { itemName: "Forest Essence", quantity: 4 }] },
-    3: { gold: 7500, materials: [{ itemName: "Tempered Steel", quantity: 8 }, { itemName: "Desert Crystal", quantity: 6 }] },
-    4: { gold: 20000, materials: [{ itemName: "Mythril Ingot", quantity: 10 }, { itemName: "Tech Core", quantity: 4 }] },
-  } as const;
-  return (byTier as any)[tier] as any;
-}
 
-/** Enrich base list so GearCard dropdowns work without changing how you author */
+
+
 export const WEAPONS: GearItem[] = BASE_WEAPONS.map((w) => {
   const ws = w.weaponStats;
   return {
     ...w,
-    // shows on the mint badge:
     baseDamage: ws?.base ?? w.baseDamage,
-
-    // shows in Enchantments dropdown:
     enchantments: w.enchantments ?? (ws ? buildEnchantments(ws) : undefined),
-
-
-    // shows in Blacksmith Recipe dropdown:
-    recipe: w.recipe ?? (typeof w.tier === "number" ? defaultRecipeFor(w.tier) : undefined),
+    recipe: w.recipe ?? BLACKSMITH_RECIPES_BY_ID[w.id] ?? undefined,
   };
 });

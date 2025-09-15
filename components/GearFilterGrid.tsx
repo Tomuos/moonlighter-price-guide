@@ -43,10 +43,17 @@ export default function GearFilterGrid({ value, onChange }: GearFilterGridProps)
               },
             ]}
           >
-            {/* 👇 text colour always equals the palette colour, so it matches the active border */}
-            <Text numberOfLines={2} style={[styles.text, { color: g.text }]}>
-              {g.label}
-            </Text>
+           
+            <Text
+  numberOfLines={2}
+  style={[
+    styles.text,
+    { color: active ? "#FFFFFF" : g.text }, // 👈 white if active, palette if not
+  ]}
+>
+  {g.label}
+</Text>
+
           </Pressable>
         );
       })}

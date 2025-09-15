@@ -70,12 +70,15 @@ export type WeaponStats = {
 };
 
 
-/** Re-usable line item for materials */
+
+
 export type MaterialLine = {
-  itemName: string;
+  itemId?: string;       
+  itemName?: string;    
   quantity: number;
-  altItems?: string[]; // optional alternates
+  altItems?: string[];
 };
+
 
 /** Optional per-upgrade step for armour/amulets/weapons */
 export type GearUpgrade = {
@@ -127,4 +130,6 @@ export interface GearItem {
 
   /** Misc effects (badges, etc.) */
   effects?: string[];
+
+  
 };

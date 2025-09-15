@@ -99,16 +99,17 @@ export default function ItemCard({ item, onPressImage }: Props) {
           </Text>
 
           <Text style={styles.priceLine}>
-            <Image source={require("../assets/images/Coin-norm.png")} style={{ width: 20, height: 14 }} />{" "}
-            <Text style={styles.priceStrong}>{item.minPrice}</Text>
-            {item.popularPrice != null && (
-              <Text>
-                {"   Popular "}
-                <Image source={require("../assets/images/Coin-pop.png")} style={{ width: 20, height: 14 }} />
-                <Text style={styles.priceStrong}>{item.popularPrice}</Text>
-              </Text>
-            )}
-          </Text>
+          <Image source={require("../assets/images/Coin-norm.png")} style={{ width: 20, height: 14 }} />{""}
+          <Text style={styles.priceGold}>{item.minPrice.toLocaleString()}</Text>
+          {item.popularPrice != null && (
+            <Text>
+              {"  Popular"}
+              <Image source={require("../assets/images/Coin-pop.png")} style={{ width: 20, height: 14 }} />
+              <Text style={styles.priceGold}>{item.popularPrice.toLocaleString()}</Text>
+            </Text>
+          )}
+        </Text>
+
 
           {item.notes ? <Text style={styles.notes}>{item.notes}</Text> : null}
         </View>
@@ -212,6 +213,9 @@ const styles = StyleSheet.create({
   priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
   priceStrong: { fontSize: 14, fontWeight: "500", color: "#FFFFFF" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
+  // in StyleSheet
+  priceGold: { fontSize: 14, fontWeight: "600", color: "#ffd166" }, // same gold used on GearCard
+
 
   dungeon: {
     fontSize: 12,
