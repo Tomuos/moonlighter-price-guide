@@ -135,7 +135,7 @@ const BASE_WEAPONS: GearItem[] = [
   weaponStats: { base: 40, enchant: { "+": 64, "++": 88, "+++": 112 }, special: "Stun" },
 },
 
-{ id: "woods-spear", name: "Wood's Spear", kind: "weapons", slot: "spear", tier: 2,
+{ id: "wood's-spear", name: "Wood's Spear", kind: "weapons", slot: "spear", tier: 2,
   weaponStats: { base: 150, enchant: { "+": 175, "++": 200, "+++": 225 },  },
 },
 

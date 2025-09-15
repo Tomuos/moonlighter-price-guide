@@ -34,7 +34,7 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "emergency-speed-amulet": require("../../assets/images/gear/emergency-speed-amulet.png"),
 "energy-flux-amulet": require("../../assets/images/gear/energy-flux-amulet.png"),
 "ether-sable": require("../../assets/images/gear/ether-sable.png"),
-"exter-bow": require("../../assets/images/gear/exeter-bow.png"),
+"exeter-bow": require("../../assets/images/gear/exeter-bow.png"),
 
 
 // "": require("../../assets/images/gear"), <-- when you need to add a new line
@@ -74,7 +74,7 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 
 "life-drain-amulet": require("../../assets/images/gear/life-drain-amulet.png"),
 "lightning-bow": require("../../assets/images/gear/lightning-bow.png"),
-"lightning-spear": require("../../assets/images/gear/lightning-spear.png"),
+"lightning-rod-spear": require("../../assets/images/gear/lightning-spear.png"),
 "luck-amulet": require("../../assets/images/gear/luck-amulet.png"),
 
 
@@ -91,6 +91,8 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "poison-elemental-amulet": require("../../assets/images/gear/poison-elemental-amulet.png"),
 "poison-puddle-amulet": require("../../assets/images/gear/poison-puddle-amulet.png"),
 
+
+// "": require("../../assets/images/gear"),
 
 "ragnarok-big-sword": require("../../assets/images/gear/ragnarok-big-sword.png"),
 "reborn-short-sword": require("../../assets/images/gear/reborn-short-sword.png"),
@@ -130,6 +132,9 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "warrior-spear": require("../../assets/images/gear/warrior-spear.png"),
 "wild-big-sword": require("../../assets/images/gear/wild-big-sword.png"),
 "wind-tree-sprout-familiar-amulet": require("../../assets/images/gear/wind-tree-sprout-familiar-amulet.png"),
-
+"wood's-spear": require("../../assets/images/gear/wood-spear.png"),
 
 };
+
+
+// "": require("../../assets/images/gear"),
