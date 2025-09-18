@@ -13,6 +13,7 @@ import {
 import type { GearItem, GearId } from "../constants/types";
 import { gearImages } from "../app/data/gearImages";
 import { itemImages } from "@/app/data/itemImages"; 
+import { BLACKSMITH_RECIPES_BY_ID } from "@/app/data/recipes";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -53,47 +54,105 @@ export default function GearCard({ gear, onPressImage }: Props) {
 
   const tierColor = gear.tier ? TIER_COLORS[gear.tier] ?? "#e2e8f0" : "#e2e8f0";
 
-  const recipeCount = gear.recipe?.materials?.length ?? 0;
-  const hasDetails =
-    recipeCount > 0 ||
-    (gear.effects?.length ?? 0) > 0 ||
-    (gear.upgrades?.length ?? 0) > 0 ||
-    (gear.enchantments?.length ?? 0) > 0 ||
-    !!gear.notes;
+ const recipe = BLACKSMITH_RECIPES_BY_ID[gear.id];
+const canExpand = !!recipe;
+const recipeCount = recipe?.materials?.length ?? 0;
+
+const hasDetails =
+  recipeCount > 0 ||
+  (gear.effects?.length ?? 0) > 0 ||
+  (gear.upgrades?.length ?? 0) > 0 ||
+  (gear.enchantments?.length ?? 0) > 0 ||
+  !!gear.notes;
 
 
 
- function slugifyName(s?: string) {
+function slugifyName(s?: string) {
   return (s ?? "")
     .toLowerCase()
-    .replace(/['’]/g, "")     // drop apostrophes e.g. Wood's -> woods
+    .replace(/['’]/g, "")           // Wood's -> woods
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
 
+function romanToArabic(r: string): number | null {
+  const m: Record<string, number> = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 };
+  let prev = 0, total = 0;
+  for (let i = r.length - 1; i >= 0; i--) {
+    const v = m[r[i].toUpperCase()] || 0;
+    if (!v) return null;
+    if (v < prev) total -= v; else { total += v; prev = v; }
+  }
+  return total;
+}
+
+function buildNameKeyVariants(raw?: string): string[] {
+  if (!raw) return [];
+  const name = raw.trim();
+
+  // strip trailing numeral (roman or digits) to get "base"
+  const m = name.match(/\s+([IVXLCDM]+|\d+)$/i);
+  const numeral = m?.[1];
+  const base = name.replace(/\s+([IVXLCDM]+|\d+)$/i, "").trim();
+
+  const asNumber =
+    !numeral ? null :
+    /^\d+$/.test(numeral) ? parseInt(numeral, 10) : romanToArabic(numeral);
+
+  // helper to push base/numeral shapes for a given base string
+  const bake = (b: string, out: string[]) => {
+    const baseSlug = slugifyName(b);
+    out.push(b, baseSlug); // raw and slug
+    if (numeral) {
+      out.push(`${baseSlug}-${numeral.toLowerCase()}`);
+      out.push(`${baseSlug}-${numeral.toUpperCase()}`);
+      if (asNumber != null) out.push(`${baseSlug}-${asNumber}`);
+    }
+  };
+
+  const variants: string[] = [];
+
+  // 1) As-is
+  bake(name, variants);
+
+  // 2) Without trailing numeral
+  bake(base, variants);
+
+  // 3) Armor/armour swaps AND removal (DLC keys omit the word)
+  const armorSwap = (s: string) =>
+    s.replace(/\barmor\b/gi, "armour");
+  const armorRemoved = (s: string) =>
+    s.replace(/\barmou?r\b/gi, "").replace(/\s{2,}/g, " ").trim();
+
+  const swapped = armorSwap(name);
+  if (swapped !== name) bake(swapped, variants);
+
+  bake(armorRemoved(name), variants);
+  bake(armorRemoved(base), variants);
+
+  // de-dupe, keep order
+  return Array.from(new Set(variants));
+}
+
 function getMatImage(itemId?: string, itemName?: string) {
-  // Try explicit id first
+  // explicit id first
   if (itemId) {
     if (itemImages[itemId]) return itemImages[itemId];
     if (gearImages[itemId]) return gearImages[itemId];
   }
 
-  // Fall back to name (as-is)
-  if (itemName) {
-    if (itemImages[itemName]) return itemImages[itemName];
-    if (gearImages[itemName]) return gearImages[itemName];
-
-    // Fall back to slugified key
-    const key = slugifyName(itemName);
-    if (itemImages[key]) return itemImages[key];
-    if (gearImages[key]) return gearImages[key];
+  // try a bunch of likely keys from the name
+  for (const key of buildNameKeyVariants(itemName)) {
+    if ((itemImages as any)[key]) return (itemImages as any)[key];
+    if ((gearImages as any)[key]) return (gearImages as any)[key];
   }
-
   return null;
 }
 
+
 const RECIPE_ICON_SIZE = 32;          // bump to taste: 24/28/32
 const RECIPE_BG_COLOR = "#ecd5a8ff";  // same as your item image box
+
 
 
 function MaterialRow({
@@ -140,6 +199,24 @@ function MaterialRow({
   );
 }
 
+
+// decide if this item is craftable
+const isCraftable = canExpand || gear.craftCost != null || !!gear.craftedAt;
+
+// amulets never show the meta row
+const isAmulet = gear.kind === "amulets";
+
+// optional "found" source (e.g., "Skeleton drops, floors 1–2")
+const hasSource = typeof gear.source === "string" && gear.source.trim().length > 0;
+
+// build the meta parts (slot • Crafted at ... • Found: ...)
+const metaParts: string[] = [];
+if (gear.slot) metaParts.push(capitalize(gear.slot));
+if (isCraftable) metaParts.push(gear.craftedAt ? `Crafted at: ${gear.craftedAt}` : "Craftable gear");
+if (hasSource) metaParts.push(`Found: ${gear.source}`);
+
+// only show meta for non-amulets, and only if we have something to say
+const showMeta = !isAmulet && metaParts.length > 0;
 
 
   return (
@@ -210,10 +287,10 @@ function MaterialRow({
             )}
           </View>
 
-          <Text style={styles.meta}>
-            {gear.slot ? `${capitalize(gear.slot)} • ` : ""}
-            {gear.craftedAt ? `Crafted at: ${gear.craftedAt}` : "Craftable gear"}
-          </Text>
+          {showMeta && (
+            <Text style={styles.meta}>{metaParts.join(" • ")}</Text>
+          )}
+
 
           {(gear.craftCost != null || gear.upgradeCost != null) && (
             <Text style={styles.priceLine}>
@@ -249,24 +326,23 @@ function MaterialRow({
         )}
       </View>
 
-      {/* Blacksmith Recipe */}
+      
+   {/* Blacksmith Recipe */}
       {open && recipeCount > 0 && (
         <View style={styles.dropdown}>
           <Text style={styles.dropdownTitle}>Blacksmith Recipe</Text>
 
-          {gear.recipe?.gold != null && (
+          {typeof recipe?.gold === "number" && (
             <View style={styles.goldRow}>
               <Image
                 source={require("../assets/images/Coin-pop.png")}
                 style={{ width: 20, height: 14, marginRight: 6 }}
               />
-              <Text style={styles.goldText}>
-                Gold: {gear.recipe.gold.toLocaleString()}
-              </Text>
+              <Text style={styles.goldText}>Gold: {recipe!.gold.toLocaleString()}</Text>
             </View>
           )}
 
-          {gear.recipe!.materials!.map((r, idx) => (
+          {recipe!.materials!.map((r, idx) => (
             <MaterialRow
               key={`${r.itemName}-${idx}`}
               name={r.itemName}

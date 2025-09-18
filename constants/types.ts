@@ -69,6 +69,31 @@ export type WeaponStats = {
   special?: string;
 };
 
+export type ArmourStatKey = "health" | "speed" | "defense";
+
+export type PlusTier = "+" | "++" | "+++";
+
+export type ArmourStatBlock = {
+  health?: number;
+  speed?: number;
+  defense?: number;
+};
+
+export type ArmourEnchantTiers = Record<PlusTier, ArmourStatBlock>;
+
+export type ArmourStats = {
+  /** Level I totals (what you’d show on the badge) */
+  base: ArmourStatBlock;
+
+  /** Totals at each enchant step (optional if some pieces don’t enchant) */
+  enchant?: ArmourEnchantTiers;
+};
+
+export type ArmourEnchant = {
+  bonus: ArmourStatBlock;     // { defense: 15 }
+  gold: number;
+  cost: MaterialLine[];
+};
 
 
 
@@ -82,13 +107,9 @@ export type MaterialLine = {
 
 /** Optional per-upgrade step for armour/amulets/weapons */
 export type GearUpgrade = {
-  /** the tier you’re upgrading TO */
   tier: GearTier;
-  /** gold */
   cost?: number;
-  /** required items */
   materials?: MaterialLine[];
-  /** e.g. "+10% dmg" */
   effects?: string[];
 };
 
@@ -100,36 +121,55 @@ export type BlacksmithRecipe = {
 
 /** For an “Enchantments” dropdown list (independent of WeaponStats.enchant) */
 export type EnchantmentTier = {
-  tier: number;            // 1..N (works for I–V upgrades too)
-  bonus: string;           // e.g. "Level II · Damage 960"
-  gold?: number;           // optional per-level gold cost
-  cost?: MaterialLine[];   // optional per-level materials
+  tier: number;            
+  bonus: string;           
+  gold?: number;           
+  cost?: MaterialLine[];   
 };
 
 export interface GearItem {
   id: string;
   name: string;
-  kind: GearId;                // "weapons" | "armour" | "amulets"
+  kind: GearId;
   image?: ImageSourcePropType;
-  slot?: string;               // e.g., "short-sword"
-  tier?: GearTier;             // 0..4
+  slot?: string;
+  tier?: GearTier;
   craftedAt?: string;
+  source?: string;
   summary?: string;
   notes?: string;
 
   /** Weapons */
-  baseDamage?: number;         // shown on main card
-  weaponStats?: WeaponStats;   // quick +/++/+++ numbers (optional)
-  enchantments?: EnchantmentTier[]; // for the dropdown (optional)
+  baseDamage?: number;
+  weaponStats?: WeaponStats;
+  enchantments?: EnchantmentTier[];
 
   /** Crafting / Upgrading */
-  recipe?: BlacksmithRecipe;   // blacksmith recipe (dropdown)
+  recipe?: BlacksmithRecipe;
   craftCost?: number;
   upgradeCost?: number;
   upgrades?: GearUpgrade[];
 
   /** Misc effects (badges, etc.) */
   effects?: string[];
-
   
-};
+  // setting up the items by type order
+   setOrder?: number;
+  /** Armour (NEW structured block) */
+  armourStats?: ArmourStats;
+
+}
+
+export type GearSlot = "helmet" | "chestplate" | "boots";
+
+export interface ArmourItem {
+  id: string;         
+  name: string;       
+  kind: "armour";     
+  slot: GearSlot;     
+  tier: number;       
+  health: number;     
+  speed?: number;     
+  defense?: number;   
+  summary?: string;   
+}

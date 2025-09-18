@@ -426,4 +426,454 @@ export const BLACKSMITH_RECIPES_BY_ID: Record<
 },
 
 
+ // =========================
+  // FABRIC SET
+  // =========================
+  "fabric-bandana": {
+    gold: 4000,
+    materials: [
+      { itemName: "Fabric", quantity: 4 },
+      { itemName: "Water Sphere", quantity: 2 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "fabric-bandana-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Fabric Bandana", quantity: 1 },
+      { itemName: "Straw", quantity: 3 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "fabric-bandana-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Fabric Bandana II", quantity: 1 },
+      { itemName: "Desert Rope", quantity: 3 },
+      { itemName: "Fireproof Cloth", quantity: 5 },
+    ],
+  },
+  "fabric-bandana-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Fabric Bandana III", quantity: 1 },
+      { itemName: "Treated Wood", quantity: 2 },
+      { itemName: "Wires", quantity: 2 },
+    ],
+  },
+
+  "fabric-chestplate": {
+    gold: 4000,
+    materials: [
+      { itemName: "Fabric", quantity: 10 },
+      { itemName: "Water Sphere", quantity: 6 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "fabric-chestplate-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Fabric Chestplate", quantity: 1 },
+      { itemName: "Straw", quantity: 3 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "fabric-chestplate-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Fabric Chestplate II", quantity: 1 },
+      { itemName: "Desert Rope", quantity: 3 },
+      { itemName: "Fireproof Cloth", quantity: 5 },
+    ],
+  },
+  "fabric-chestplate-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Fabric Chestplate III", quantity: 1 },
+      { itemName: "Treated Wood", quantity: 2 },
+      { itemName: "Wires", quantity: 2 },
+    ],
+  },
+
+  "fabric-boots": {
+    gold: 4000,
+    materials: [
+      { itemName: "Fabric", quantity: 6 },
+      { itemName: "Water Sphere", quantity: 4 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "fabric-boots-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Fabric Boots", quantity: 1 },
+      { itemName: "Straw", quantity: 3 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "fabric-boots-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Fabric Boots II", quantity: 1 },
+      { itemName: "Desert Rope", quantity: 3 },
+      { itemName: "Fireproof Cloth", quantity: 5 },
+    ],
+  },
+  "fabric-boots-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Fabric Boots III", quantity: 1 },
+      { itemName: "Treated Wood", quantity: 2 },
+      { itemName: "Wires", quantity: 2 },
+    ],
+  },
+
+  // =========================
+  // IRON SET
+  // =========================
+  "iron-helmet": {
+    gold: 4000,
+    materials: [
+      { itemName: "Iron Bar", quantity: 6 },
+      { itemName: "Teethstone", quantity: 4 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "iron-helmet-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Iron Helmet", quantity: 1 },
+      { itemName: "Strong Leaves", quantity: 4 },
+      { itemName: "Preserved Root", quantity: 2 },
+    ],
+  },
+  "iron-helmet-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Iron Helmet II", quantity: 1 },
+      { itemName: "Magnetite", quantity: 4 },
+      { itemName: "Insulating Dust", quantity: 2 },
+    ],
+  },
+  "iron-helmet-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Iron Helmet III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Gold Strands", quantity: 2 },
+    ],
+  },
+
+  "iron-chestplate": {
+    gold: 4000,
+    materials: [
+      { itemName: "Iron Bar", quantity: 6 },
+      { itemName: "Teethstone", quantity: 14 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "iron-chestplate-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Iron Chestplate", quantity: 1 },
+      { itemName: "Strong Leaves", quantity: 4 },
+      { itemName: "Preserved Root", quantity: 2 },
+    ],
+  },
+  "iron-chestplate-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Iron Chestplate II", quantity: 1 },
+      { itemName: "Magnetite", quantity: 4 },
+      { itemName: "Insulating Dust", quantity: 2 },
+    ],
+  },
+  "iron-chestplate-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Iron Chestplate III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Gold Strands", quantity: 2 },
+    ],
+  },
+
+  "iron-boots": {
+    gold: 4000,
+    materials: [
+      { itemName: "Iron Bar", quantity: 6 },
+      { itemName: "Teethstone", quantity: 14 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "iron-boots-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Iron Boots", quantity: 1 },
+      { itemName: "Strong Leaves", quantity: 4 },
+      { itemName: "Preserved Root", quantity: 2 },
+    ],
+  },
+  "iron-boots-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Iron Boots II", quantity: 1 },
+      { itemName: "Magnetite", quantity: 4 },
+      { itemName: "Insulating Dust", quantity: 2 },
+    ],
+  },
+  "iron-boots-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Iron Boots III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Gold Strands", quantity: 2 },
+    ],
+  },
+
+  // =========================
+  // STEEL SET
+  // =========================
+  "steel-helmet": {
+    gold: 4000,
+    materials: [
+      { itemName: "Hardened Steel", quantity: 6 },
+      { itemName: "Iron Bar", quantity: 12 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "steel-helmet-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Steel Helmet", quantity: 1 },
+      { itemName: "Ancient Wood", quantity: 2 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "steel-helmet-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Steel Helmet II", quantity: 1 },
+      { itemName: "Desert Steel Ingot", quantity: 1 },
+      { itemName: "Flammable Dust", quantity: 4 },
+    ],
+  },
+  "steel-helmet-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Steel Helmet III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Copper Reel", quantity: 2 },
+    ],
+  },
+
+  "steel-chestplate": {
+    gold: 4000,
+    materials: [
+      { itemName: "Hardened Steel", quantity: 8 },
+      { itemName: "Iron Bar", quantity: 14 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "steel-chestplate-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Steel Chestplate", quantity: 1 },
+      { itemName: "Ancient Wood", quantity: 2 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "steel-chestplate-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Steel Chestplate II", quantity: 1 },
+      { itemName: "Desert Steel Ingot", quantity: 1 },
+      { itemName: "Flammable Dust", quantity: 4 },
+    ],
+  },
+  "steel-chestplate-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Steel Chestplate III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Copper Reel", quantity: 2 },
+    ],
+  },
+
+  "steel-boots": {
+    gold: 4000,
+    materials: [
+      { itemName: "Hardened Steel", quantity: 4 },
+      { itemName: "Iron Bar", quantity: 12 },
+      { itemName: "Foundry Rests", quantity: 3 },
+    ],
+  },
+  "steel-boots-II": {
+    gold: 44000,
+    materials: [
+      { itemName: "Steel Boots", quantity: 1 },
+      { itemName: "Ancient Wood", quantity: 2 },
+      { itemName: "Magic Wood", quantity: 5 },
+    ],
+  },
+  "steel-boots-III": {
+    gold: 96000,
+    materials: [
+      { itemName: "Steel Boots II", quantity: 1 },
+      { itemName: "Desert Steel Ingot", quantity: 1 },
+      { itemName: "Flammable Dust", quantity: 4 },
+    ],
+  },
+  "steel-boots-IV": {
+    gold: 192000,
+    materials: [
+      { itemName: "Steel Boots III", quantity: 1 },
+      { itemName: "Wolfram Rock", quantity: 2 },
+      { itemName: "Copper Reel", quantity: 2 },
+    ],
+  },
+
+// =========================
+// DLC — COMPOSITE ARMOR
+// =========================
+"composite-helmet": { // Composite Armor Helmet
+  gold: 456000,
+  materials: [
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Dimensional Resistant Metal", quantity: 3 },
+    { itemName: "Fireproof Cloth", quantity: 5 },
+  ],
+}, 
+
+"composite-helmet-I": { // Composite Armor Helmet II
+  gold: 506000,
+  materials: [
+    { itemName: "Composite Armor Helmet", quantity: 1 },
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Dimensional Resistant Metal", quantity: 3 },
+  ],
+}, 
+
+"composite-helmet-II": { // Composite Armor Helmet III
+  gold: 556000,
+  materials: [
+    { itemName: "Composite Armor Helmet II", quantity: 1 },
+    { itemName: "Dimensional Resistant Glass", quantity: 3 },
+    { itemName: "Dimensional Resistant Metal", quantity: 3 },
+  ],
+}, 
+
+"composite-helmet-III": { // Composite Armor Helmet IV
+  gold: 606000,
+  materials: [
+    { itemName: "Composite Armor Helmet III", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 2 },
+    { itemName: "Dimensional Resistant Metal", quantity: 5 },
+  ],
+}, 
+
+"composite-helmet-IV": { // Composite Armor Helmet V
+  gold: 656000,
+  materials: [
+    { itemName: "Composite Armor Helmet IV", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 2 },
+    { itemName: "Light Power Crystal", quantity: 2 },
+  ],
+}, 
+
+
+// Chestplates
+"composite-chestplate": { // Composite Armor Chestplate
+  gold: 456000,
+  materials: [
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Carbon Fiber Plate", quantity: 3 },
+    { itemName: "Plastic Film", quantity: 5 },
+  ],
+}, 
+
+"composite-chestplate-I": { // Composite Armor Chestplate II
+  gold: 506000,
+  materials: [
+    { itemName: "Composite Armor Chestplate", quantity: 1 },
+    { itemName: "Carbon Fiber Plate", quantity: 3 },
+    { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+  ],
+}, 
+
+"composite-chestplate-II": { // Composite Armor Chestplate III
+  gold: 556000,
+  materials: [
+    { itemName: "Composite Armor Chestplate II", quantity: 1 },
+    { itemName: "Ancient Sacred Volume", quantity: 3 },
+    { itemName: "Carbon Fiber Plate", quantity: 3 },
+  ],
+},
+
+"composite-chestplate-III": { // Composite Armor Chestplate IV
+  gold: 606000,
+  materials: [
+    { itemName: "Composite Armor Chestplate III", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 2 },
+    { itemName: "Carbon Fiber Plate", quantity: 5 },
+  ],
+}, 
+
+"composite-chestplate-IV": { // Composite Armor Chestplate V
+  gold: 656000,
+  materials: [
+    { itemName: "Composite Armor Chestplate IV", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 2 },
+    { itemName: "Shock Absorb Material", quantity: 2 },
+  ],
+}, 
+
+
+// Boots
+"composite-boots": { // Composite Armor Boots
+  gold: 432000,
+  materials: [
+    { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Fabric", quantity: 5 },
+  ],
+}, 
+
+"composite-boots-I": { // Composite Armor Boots II
+  gold: 506000,
+  materials: [
+    { itemName: "Composite Armor Boots", quantity: 1 },
+    { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+    { itemName: "Dimensional Garbage", quantity: 3 },
+  ],
+},
+
+"composite-boots-II": { // Composite Armor Boots III
+  gold: 556000,
+  materials: [
+    { itemName: "Composite Armor Boots II", quantity: 1 },
+    { itemName: "Ancient Sacred Volume", quantity: 3 },
+    { itemName: "Dimensional Garbage", quantity: 3 },
+  ],
+}, 
+
+"composite-boots-III": { // Composite Armor Boots IV
+  gold: 606000,
+  materials: [
+    { itemName: "Composite Armor Boots III", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 2 },
+    { itemName: "Dimensional Garbage", quantity: 5 },
+  ],
+}, 
+
+"composite-boots-IV": { // Composite Armor Boots V
+  gold: 656000,
+  materials: [
+    { itemName: "Composite Armor Boots IV", quantity: 1 },
+    { itemName: "Dimensional Suit Fabric", quantity: 5 },
+    { itemName: "Dimensional Garbage", quantity: 2 },
+  ],
+}, 
+
 };
+
+

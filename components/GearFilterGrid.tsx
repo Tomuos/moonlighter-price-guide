@@ -3,6 +3,7 @@ import { View, Pressable, Text, StyleSheet } from "react-native";
 import type { GearId } from "../constants/gear";
 import { GEAR } from "../constants/gear";
 
+
 export type GearFilterGridProps = {
   value: GearId | "all";
   onChange: (v: GearId | "all") => void;
