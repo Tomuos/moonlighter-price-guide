@@ -22,6 +22,27 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "catapult-bow": require("../../assets/images/gear/catapult-bow.png"),
 "charged-attack-amulet": require("../../assets/images/gear/charged-attack-amulet.png"),
 "commander-short-sword": require("../../assets/images/gear/commander-short-sword.png"),
+
+// --- ARMOUR: Composite (DLC) ---
+// The icon is the same across tiers; map each id to the same file.
+"composite-helmet": require("../../assets/images/gear/composite-helmet.png"),
+"composite-helmet-I": require("../../assets/images/gear/composite-helmet.png"),
+"composite-helmet-II": require("../../assets/images/gear/composite-helmet.png"),
+"composite-helmet-III": require("../../assets/images/gear/composite-helmet.png"),
+"composite-helmet-IV": require("../../assets/images/gear/composite-helmet.png"),
+
+"composite-chestplate": require("../../assets/images/gear/composite-chestplate.png"),
+"composite-chestplate-I": require("../../assets/images/gear/composite-chestplate.png"),
+"composite-chestplate-II": require("../../assets/images/gear/composite-chestplate.png"),
+"composite-chestplate-III": require("../../assets/images/gear/composite-chestplate.png"),
+"composite-chestplate-IV": require("../../assets/images/gear/composite-chestplate.png"),
+
+"composite-boots": require("../../assets/images/gear/composite-boots.png"),
+"composite-boots-I": require("../../assets/images/gear/composite-boots.png"),
+"composite-boots-II": require("../../assets/images/gear/composite-boots.png"),
+"composite-boots-III": require("../../assets/images/gear/composite-boots.png"),
+"composite-boots-IV": require("../../assets/images/gear/composite-boots.png"),
+
 "confu-elemental-amulet": require("../../assets/images/gear/confu-elemental-amulet.png"),
 
 
@@ -38,6 +59,22 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 
 
 // "": require("../../assets/images/gear"), <-- when you need to add a new line
+
+// --- ARMOUR: Fabric (Bandana / Boots / Chestplate) ---
+"fabric-bandana": require("../../assets/images/gear/fabric-bandana.png"),
+"fabric-bandana-II": require("../../assets/images/gear/fabric-bandana-II.png"),
+"fabric-bandana-III": require("../../assets/images/gear/fabric-bandana-III.png"),
+"fabric-bandana-IV": require("../../assets/images/gear/fabric-bandana-IV.png"),
+
+"fabric-boots": require("../../assets/images/gear/fabric-boots.png"),
+"fabric-boots-II": require("../../assets/images/gear/fabric-boots-II.png"),
+"fabric-boots-III": require("../../assets/images/gear/fabric-boots-III.png"),
+"fabric-boots-IV": require("../../assets/images/gear/fabric-boots-IV.png"),
+
+"fabric-chestplate": require("../../assets/images/gear/fabric-chestplate.png"),
+"fabric-chestplate-II": require("../../assets/images/gear/fabric-chestplate-II.png"),
+"fabric-chestplate-III": require("../../assets/images/gear/fabric-chestplate-III.png"),
+"fabric-chestplate-IV": require("../../assets/images/gear/fabric-chestplate-IV.png"),
 
 
 "familiar-amulet": require("../../assets/images/gear/familiar-amulet.png"),
@@ -66,6 +103,23 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 
 
 "insta-kill-amulet": require("../../assets/images/gear/insta-kill-amulet.png"),
+
+// --- ARMOUR: Iron ---
+"iron-helmet": require("../../assets/images/gear/iron-helmet.png"),
+"iron-helmet-II": require("../../assets/images/gear/iron-helmet-II.png"),
+"iron-helmet-III": require("../../assets/images/gear/iron-helmet-III.png"),
+"iron-helmet-IV": require("../../assets/images/gear/iron-helmet-IV.png"),
+
+"iron-boots": require("../../assets/images/gear/iron-boots.png"),
+"iron-boots-II": require("../../assets/images/gear/iron-boots-II.png"),
+"iron-boots-III": require("../../assets/images/gear/iron-boots-III.png"),
+"iron-boots-IV": require("../../assets/images/gear/iron-boots-IV.png"),
+
+"iron-chestplate": require("../../assets/images/gear/iron-chestplate.png"),
+"iron-chestplate-II": require("../../assets/images/gear/iron-chestplate-II.png"),
+"iron-chestplate-III": require("../../assets/images/gear/iron-chestplate-III.png"),
+"iron-chestplate-IV": require("../../assets/images/gear/iron-chestplate-IV.png"),
+
 
 
 "king-short-sword": require("../../assets/images/gear/king-short-sword.png"),
@@ -107,6 +161,21 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "soldier-short-sword": require("../../assets/images/gear/soldier-short-sword.png"),
 "spiked-roll-amulet": require("../../assets/images/gear/spiked-roll-amulet.png"),
 "star-platinum-gloves": require("../../assets/images/gear/star-platinum-gloves.png"),
+// --- ARMOUR: Steel ---
+"steel-helmet": require("../../assets/images/gear/steel-helmet.png"),
+"steel-helmet-II": require("../../assets/images/gear/steel-helmet-II.png"),
+"steel-helmet-III": require("../../assets/images/gear/steel-helmet-III.png"),
+"steel-helmet-IV": require("../../assets/images/gear/steel-helmet-IV.png"),
+
+"steel-boots": require("../../assets/images/gear/steel-boots.png"),
+"steel-boots-II": require("../../assets/images/gear/steel-boots-II.png"),
+"steel-boots-III": require("../../assets/images/gear/steel-boots-III.png"),
+"steel-boots-IV": require("../../assets/images/gear/steel-boots-IV.png"),
+
+"steel-chestplate": require("../../assets/images/gear/steel-chestplate.png"),
+"steel-chestplate-II": require("../../assets/images/gear/steel-chestplate-II.png"),
+"steel-chestplate-III": require("../../assets/images/gear/steel-chestplate-III.png"),
+"steel-chestplate-IV": require("../../assets/images/gear/steel-chestplate-IV.png"),
 "storm-big-sword": require("../../assets/images/gear/storm-big-sword.png"),
 
 

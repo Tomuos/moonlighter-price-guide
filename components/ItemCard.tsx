@@ -13,6 +13,8 @@ import {
 import type { DungeonItem } from "../constants/types";
 import { itemImages } from "../app/data/itemImages";
 
+
+
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }

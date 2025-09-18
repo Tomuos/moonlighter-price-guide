@@ -5,21 +5,29 @@ import { getMoreItems } from "./data/moreItems";
 import GearCard from "../components/GearCard";
 import GearFilterGrid from "../components/GearFilterGrid";
 import SearchBar from "../components/SearchBar";
+import { sortArmour } from "../app/utils/sorters";
+
 
 export default function GearScreen() {
   const [gear, setGear] = useState<GearId | "all">("all");
   const [query, setQuery] = useState("");
 
   const data = useMemo(() => {
-    const all = getMoreItems(gear);
-    const q = query.trim().toLowerCase();
-    if (!q) return all;
-    return all.filter(
-      (it) =>
-        it.name.toLowerCase().includes(q) ||
-        (it.summary?.toLowerCase().includes(q) ?? false)
-    );
+  const all = getMoreItems(gear);
+
+  const q = query.trim().toLowerCase();
+  const filtered = !q
+      ? all
+      : all.filter(
+          (it) =>
+            it.name.toLowerCase().includes(q) ||
+            (it.summary?.toLowerCase().includes(q) ?? false)
+        );
+
+    // only sort when viewing Armour
+    return gear === "armour" ? sortArmour(filtered) : filtered;
   }, [gear, query]);
+
 
   return (
     <View style={styles.screen}>
