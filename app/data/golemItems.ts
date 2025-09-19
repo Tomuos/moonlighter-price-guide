@@ -41,7 +41,7 @@ export const GOLEM_ITEMS: DungeonItem[] = [
   { id: "ancient-pot", name: "Ancient Pot", dungeon: "golem",  category: "artifact", rarity: "uncommon", floors: [1,2,3], minPrice: 110, popularPrice: 135 },
   { id: "crystal-rock", name: "Crystal Rock", dungeon: "golem",  category: "material", rarity: "uncommon", floors: [1,2,3], minPrice: 83,  popularPrice: 102 },
   { id: "crystallized-energy", name: "Crystallized Energy", dungeon: "golem",  category: "material", rarity: "uncommon", floors: [1,2,3], minPrice: 110, popularPrice: 135 },
-  { id: "empowered-crystal", name: "Empowered Crystal", dungeon: "golem",  category: "material", rarity: "uncommon", floors: [1,2,3], minPrice: 110,  popularPrice: 135, notes: "Used in armour & weapon crafting",  enchantUsage: [
+  { id: "empowering-crystal", name: "Empowering Crystal", dungeon: "golem",  category: "material", rarity: "uncommon", floors: [1,2,3], minPrice: 110,  popularPrice: 135, notes: "Used in armour & weapon crafting",  enchantUsage: [
     { target: "Weapon Enchant I", qtyMin: 3, qtyMax: 5, icon: "enchant-weapon-1" },
     { target: "Armor Enchant I",  qtyMin: 3, qtyMax: 5, icon: "enchant-armor-1" },
     { target: "Weapon Enchant II", qtyMin: 5, qtyMax: 8, icon: "enchant-weapon-2" },

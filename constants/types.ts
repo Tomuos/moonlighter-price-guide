@@ -59,19 +59,18 @@ export type BrewUsage = {
  *          GEAR
  *  -------------------------- */
 export type GearId = "weapons" | "armour" | "amulets"; // rings → amulets
-
 export type GearTier = 0 | 1 | 2 | 3 | 4 | 5;
+export type PlusTier = "+" | "++" | "+++";
 
-
+/** ---------- Weapons ---------- */
 export type WeaponStats = {
   base: number;
-  enchant?: { "+": number; "++": number; "+++": number }; // <- optional now
-  special?: string;
+  enchant?: { "+": number; "++": number; "+++": number }; // optional 3-tier damage values
+  special?: "Stun" | "Poison" | "Burn" | "Shock" | "Top" | "Fire";
 };
 
+/** ---------- Armour ---------- */
 export type ArmourStatKey = "health" | "speed" | "defense";
-
-export type PlusTier = "+" | "++" | "+++";
 
 export type ArmourStatBlock = {
   health?: number;
@@ -79,41 +78,34 @@ export type ArmourStatBlock = {
   defense?: number;
 };
 
+/** Optional future support for I/II/III ( + / ++ / +++ ) totals */
 export type ArmourEnchantTiers = Record<PlusTier, ArmourStatBlock>;
 
 export type ArmourStats = {
   /** Level I totals (what you’d show on the badge) */
   base: ArmourStatBlock;
-
-  /** Totals at each enchant step (optional if some pieces don’t enchant) */
+  /** Totals at each enchant step (optional if you add +/++/+++ later) */
   enchant?: ArmourEnchantTiers;
 };
 
+/** Single-line armour enchant (what you asked for now) */
 export type ArmourEnchant = {
-  bonus: ArmourStatBlock;     // { defense: 15 }
-  gold: number;
-  cost: MaterialLine[];
+  /** Either structured numbers (we’ll render "+15 Defense · +10 Health") or override via text */
+  bonus: ArmourStatBlock & { text?: string };
+  gold?: number;
+  cost?: MaterialLine[];
 };
 
-
-
+/** ---------- Materials / Recipes / Upgrades ---------- */
 export type MaterialLine = {
-  itemId?: string;       
-  itemName?: string;    
+  /** Prefer one identifier; both supported to fit your current data */
+  itemId?: string;
+  itemName?: string;
   quantity: number;
+  /** Alternatives: any of these item names can satisfy the line */
   altItems?: string[];
 };
 
-
-/** Optional per-upgrade step for armour/amulets/weapons */
-export type GearUpgrade = {
-  tier: GearTier;
-  cost?: number;
-  materials?: MaterialLine[];
-  effects?: string[];
-};
-
-/** Use MaterialLine to avoid an undefined MaterialRef */
 export type BlacksmithRecipe = {
   materials: MaterialLine[];
   gold: number;
@@ -121,55 +113,70 @@ export type BlacksmithRecipe = {
 
 /** For an “Enchantments” dropdown list (independent of WeaponStats.enchant) */
 export type EnchantmentTier = {
-  tier: number;            
-  bonus: string;           
-  gold?: number;           
-  cost?: MaterialLine[];   
+  tier: number;            // 1..5
+  bonus: string;           // e.g., "Damage 324" or "Level II · Damage 150"
+  gold?: number;
+  cost?: MaterialLine[];
 };
 
-export interface GearItem {
+/** Optional per-upgrade step for armour/amulets/weapons */
+export type GearUpgrade = {
+  tier: GearTier;
+  cost?: number;                // legacy/simple “gold” shorthand
+  materials?: MaterialLine[];   // preferred
+  effects?: string[];
+};
+
+/** ---------- Base & Specialised Gear Items (Discriminated Union) ---------- */
+export type GearSlot = "helmet" | "chestplate" | "boots";
+
+interface BaseGear {
   id: string;
   name: string;
   kind: GearId;
   image?: ImageSourcePropType;
-  slot?: string;
+  slot?: string;                 // weapons/amulets can leave this loose (e.g., "bow", "ring")
   tier?: GearTier;
   craftedAt?: string;
   source?: string;
   summary?: string;
   notes?: string;
 
-  /** Weapons */
-  baseDamage?: number;
-  weaponStats?: WeaponStats;
-  enchantments?: EnchantmentTier[];
-
-  /** Crafting / Upgrading */
+  /** Crafting / Upgrading (shared) */
   recipe?: BlacksmithRecipe;
-  craftCost?: number;
+  craftCost?: number;            // optional shorthand if you’re not using recipe.gold
   upgradeCost?: number;
   upgrades?: GearUpgrade[];
 
   /** Misc effects (badges, etc.) */
   effects?: string[];
-  
-  // setting up the items by type order
-   setOrder?: number;
-  /** Armour (NEW structured block) */
-  armourStats?: ArmourStats;
 
+  /** Sorting helper */
+  setOrder?: number;
 }
 
-export type GearSlot = "helmet" | "chestplate" | "boots";
-
-export interface ArmourItem {
-  id: string;         
-  name: string;       
-  kind: "armour";     
-  slot: GearSlot;     
-  tier: number;       
-  health: number;     
-  speed?: number;     
-  defense?: number;   
-  summary?: string;   
+export interface WeaponItem extends BaseGear {
+  kind: "weapons";
+  baseDamage?: number;
+  weaponStats?: WeaponStats;
+  /** Dropdown tiers (auto-generated from weaponStats.enchant or explicitly provided) */
+  enchantments?: EnchantmentTier[];
 }
+
+export interface ArmourGearItem extends BaseGear {
+  kind: "armour";
+  /** Lock to armour slots for stronger typing */
+  slot: GearSlot;
+  /** Structured base stats (+ optional future tiers) */
+  armourStats: ArmourStats;
+  /** Single-line enchant you wanted right now */
+  armourEnchant?: ArmourEnchant;
+}
+
+export interface AmuletItem extends BaseGear {
+  kind: "amulets";
+  // Add amulet-specific fields later if needed
+}
+
+/** Use this everywhere your code expects “a gear item”. */
+export type GearItem = WeaponItem | ArmourGearItem | AmuletItem;

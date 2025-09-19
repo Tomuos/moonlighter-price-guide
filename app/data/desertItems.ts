@@ -62,7 +62,7 @@ export const DESERT_ITEMS: DungeonItem[] = [
 
   { id: "magnetic-tool", name: "Magnetic Tool", dungeon:"desert", category: "material", minPrice: 6000, popularPrice: 7150, rarity: "rare", floors: [1,2,3] },
 
-  { id: "mangetite", name: "Mangetite", dungeon:"desert", category: "material", minPrice: 700, popularPrice: 880, rarity: "uncommon", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
+  { id: "magnetite", name: "Magnetite", dungeon:"desert", category: "material", minPrice: 880, popularPrice: 1080, rarity: "uncommon", floors: [1,2,3], notes: "Used for armour crafting", gearUsage: [
     { type: "armour", name: "Tier IV Iron Armor Set", quantity: 12 },
   ], },
 
