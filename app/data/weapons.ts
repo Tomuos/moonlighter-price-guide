@@ -1,8 +1,15 @@
 // app/data/weapons.ts (or wherever this lives)
-import type { GearItem, EnchantmentTier, } from "@/constants/types";
+// app/data/weapons.ts
+import type {
+  WeaponItem,
+  WeaponStats,
+  EnchantmentTier,
+} from "@/constants/types";
+
+
 import { BLACKSMITH_RECIPES_BY_ID } from "./recipes";
 
-const BASE_WEAPONS: GearItem[] = [
+const BASE_WEAPONS: WeaponItem[] = [
   
 
 // --- Big Swords ---
@@ -506,9 +513,8 @@ const BASE_WEAPONS: GearItem[] = [
 
 
 /** Helpers to derive dropdown-friendly fields from weaponStats */
-function buildEnchantments(ws: NonNullable<GearItem["weaponStats"]>): EnchantmentTier[] {
-  if (!ws.enchant) return []; // no enchantments available
-
+function buildEnchantments(ws: WeaponStats): EnchantmentTier[] | undefined {
+  if (!ws.enchant) return undefined; // no enchantments available
   return [
     { tier: 1, bonus: `Damage ${ws.enchant["+"]}` },
     { tier: 2, bonus: `Damage ${ws.enchant["++"]}` },
@@ -520,7 +526,7 @@ function buildEnchantments(ws: NonNullable<GearItem["weaponStats"]>): Enchantmen
 
 
 
-export const WEAPONS: GearItem[] = BASE_WEAPONS.map((w) => {
+export const WEAPONS: WeaponItem[] = BASE_WEAPONS.map((w) => {
   const ws = w.weaponStats;
   return {
     ...w,

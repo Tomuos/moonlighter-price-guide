@@ -1,5 +1,6 @@
 import type { ImageSourcePropType } from "react-native";
 
+
 // "": require("../../assets/images/items"), <-- when you need to add a new line
 export const itemImages: Record<string, ImageSourcePropType> = {
   "ac-adapter": require("../../assets/images/items/ac-adapter.png"),
@@ -29,7 +30,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "crystallized-energy": require("../../assets/images/items/crystalized_energy.png"), 
   "crystal-rock": require("../../assets/images/items/crystal_rock.png"),
   "crystal-shards": require("../../assets/images/items/crystal-shards.png"),
-  "empowered-crystal": require("../../assets/images/items/empowered_crystal.png"), 
+  
 
 
   "desert-hist-1": require("../../assets/images/items/desert-hist1.png"),
@@ -49,6 +50,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
 
 
   "electric-jelly": require("../../assets/images/items/electric-jelly.png"),
+  "empowering-crystal": require("../../assets/images/items/empowering-crystal.png"), 
   "energy-capacitor": require("../../assets/images/items/energy-capacitor.png"),
 
 
@@ -115,7 +117,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "magic-wood": require("../../assets/images/items/magic_wood.png"),
   "magnetic-core": require("../../assets/images/items/magnetic-core.png"),
   "magnetic-tool": require("../../assets/images/items/magnetic-tool.png"),
-  "mangetite": require("../../assets/images/items/mangetite.png"),
+  "magnetite": require("../../assets/images/items/magnetite.png"),
   "mercury": require("../../assets/images/items/mercury.png"),
   "modified-seeds": require("../../assets/images/items/modified_seeds.png"),
   "monster-skull": require("../../assets/images/items/monster-skull.png"),

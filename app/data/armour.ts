@@ -5,18 +5,39 @@ export const ARMOUR: GearItem[] = [
  // -------------------------
 // Helmets
 // -------------------------
-{ id: "fabric-bandana", name: "Fabric Bandana", kind: "armour", slot: "helmet", tier: 1, setOrder:0,
+{ id: "fabric-bandana", name: "Fabric Bandana", kind: "armour", slot: "helmet", tier: 1, setOrder: 0,
   armourStats: { base: { health: 30, speed: 8 } },
+  armourEnchant: {
+    bonus: { defense: 15 },
+    gold: 1000,
+    cost: [{ itemName: "Empowering Crystal", quantity: 3 }],
+  },
 },
-{ id: "fabric-bandana-II", name: "Fabric Bandana II", kind: "armour", slot: "helmet", tier: 2, setOrder:0,
+{ id: "fabric-bandana-II", name: "Fabric Bandana II", kind: "armour", slot: "helmet", tier: 2, setOrder: 0,
   armourStats: { base: { health: 60, speed: 8 } },
+  armourEnchant: {
+    bonus: { defense: 30 },
+    gold: 2000,
+    cost: [{ itemName: "Empowering Crystal", quantity: 5 }],
+  },
 },
-{ id: "fabric-bandana-III", name: "Fabric Bandana III", kind: "armour", slot: "helmet", tier: 3, setOrder:0,
+{ id: "fabric-bandana-III", name: "Fabric Bandana III", kind: "armour", slot: "helmet", tier: 3, setOrder: 0,
   armourStats: { base: { health: 120, speed: 8 } },
+  armourEnchant: {
+    bonus: { defense: 60 },
+    gold: 5000,
+    cost: [{ itemName: "Empowering Crystal", quantity: 8 }],
+  },
 },
-{ id: "fabric-bandana-IV", name: "Fabric Bandana IV", kind: "armour", slot: "helmet", tier: 4, setOrder:0,
+{ id: "fabric-bandana-IV", name: "Fabric Bandana IV", kind: "armour", slot: "helmet", tier: 4, setOrder: 0,
   armourStats: { base: { health: 270, speed: 8 } },
+  armourEnchant: {
+    bonus: { defense: 120 },
+    gold: 12000,
+    cost: [{ itemName: "Empowering Crystal", quantity: 10 }],
+  },
 },
+
 
 { id: "iron-helmet", name: "Iron Helmet", kind: "armour", slot: "helmet", tier: 1, setOrder:1,
   armourStats: { base: { health: 40 } },
