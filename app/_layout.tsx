@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import AppBackground from "@/components/ui/AppBackground";
+import AppBackground from "../components/ui/AppBackground";
 import { ThemeProvider, DefaultTheme } from "@react-navigation/native";  // ← add
 
 // ← add

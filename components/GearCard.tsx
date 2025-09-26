@@ -50,9 +50,9 @@ const TIER_COLORS: Record<number, string> = {
 const RECIPE_ICON_SIZE = 32;
 const RECIPE_BG_COLOR = "#ecd5a8ff";
 const DEFENSE_ICON = require("../assets/images/detail-icons/shield-icon.png"); 
-// const SPEED_ICON = require("../assets/images/detail-icons/boot-icon.png"); 
-// const HEALTH_ICON = require("../assets/images/detail-icons/heart-icon.png"); 
-// const ATTACK_ICON = require("../assets/images/detail-icons/sword-icon.png"); 
+const SPEED_ICON = require("../assets/images/detail-icons/boot-icon.png"); 
+const HEALTH_ICON = require("../assets/images/detail-icons/heart-icon.png"); 
+const ATTACK_ICON = require("../assets/images/detail-icons/sword-icon.png"); 
 
 
 /* ---------- Type guards ---------- */
@@ -236,6 +236,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
       {/* Header row */}
       <View style={styles.row}>
         <View style={[styles.spriteBox, { backgroundColor: kindColors.box, borderColor: kindColors.pill }]}>
+          
           <Pressable onPress={() => onPressImage?.(gear)} accessibilityRole="button" accessibilityLabel={`${gear.name} image`}>
             {gearImages[gear.id] ? (
               <Image source={gearImages[gear.id]} style={styles.spriteImage} resizeMode="contain" />
@@ -247,14 +248,15 @@ export default function GearCard({ gear, onPressImage }: Props) {
           </Pressable>
         </View>
 
-        <View style={{ flex: 1, marginLeft: 12 }}>
+        {/* RIGHT COLUMN */}
+        <View style={styles.rightCol}>
           <Text style={[styles.title, { color: tierColor }]} numberOfLines={1} ellipsizeMode="tail">
             {gear.name}
           </Text>
 
-          {/* Pills */}
-          <View style={{ flexDirection: "row", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-            {/* hide kind pill for weapons */}
+          {/* PILLS ROW */}
+          <View style={styles.pillsRow}>
+            {/* kind pill (hide for weapons) */}
             {gear.kind !== "weapons" && (
               <View style={[styles.rarityPill, { borderColor: kindColors.pill }]}>
                 <View style={[styles.rarityDot, { backgroundColor: kindColors.pill }]} />
@@ -262,7 +264,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
               </View>
             )}
 
-            {/* tier */}
+            {/* tier pill */}
             {gear.tier != null && (
               <View style={[styles.rarityPill, { borderColor: tierColor }]}>
                 <View style={[styles.rarityDot, { backgroundColor: tierColor }]} />
@@ -270,14 +272,38 @@ export default function GearCard({ gear, onPressImage }: Props) {
               </View>
             )}
 
-            {/* base dmg */}
-            {isWeapon(gear) && (gear.baseDamage != null || gear.weaponStats?.base != null) && (
-              <View style={[styles.badge, { borderColor: "#62E6DB", backgroundColor: "#0e2930" }]}>
-                <Text style={[styles.badgeText, { color: "#62E6DB" }]}>Base DMG: {gear.baseDamage ?? gear.weaponStats?.base}</Text>
               </View>
+            
+
+            {/* weapon base dmg pill */}
+            {isWeapon(gear) && (gear.baseDamage != null || gear.weaponStats?.base != null) && (
+            <View style={{ width: "100%", marginTop: 6 }}>
+              <View style={styles.damagePill}>
+                <Image source={ATTACK_ICON} style={styles.damagePillIcon} resizeMode="contain" />
+                <Text style={styles.damagePillText}> DMG: {gear.baseDamage ?? gear.weaponStats?.base}</Text>
+              </View>
+            </View>
             )}
+            
+            {/* armour stat pills */}
+            {gear.kind === "armour" && (gear.armourStats?.base?.health != null || gear.armourStats?.base?.speed != null) && (
+              <View style={styles.statPillsRow}>
+                {typeof gear.armourStats.base.health === "number" && (
+                  <View style={styles.armourPill}>
+                    <Image source={HEALTH_ICON} style={styles.armourPillIcon} resizeMode="contain" />
+                    <Text style={styles.armourPillText}>{gear.armourStats.base.health} HP</Text>
+                  </View>
+                )}
+                {typeof gear.armourStats.base.speed === "number" && (
+                  <View style={styles.armourPill}>
+                    <Image source={SPEED_ICON} style={styles.armourPillIcon} resizeMode="contain" />
+                    <Text style={styles.armourPillText}>{gear.armourStats.base.speed} SPD</Text>
+                  </View>
+                )}
           </View>
 
+          )}
+          {/* meta + prices + summary stay INSIDE rightCol */}
           {showMeta && <Text style={styles.meta}>{metaParts.join(" • ")}</Text>}
 
           {(gear.craftCost != null || gear.upgradeCost != null) && (
@@ -300,6 +326,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
 
           {gear.summary && <Text style={styles.summary}>{gear.summary}</Text>}
         </View>
+
 
         {hasDetails && (
           <Pressable onPress={toggle} accessibilityRole="button" accessibilityLabel="Toggle details">
@@ -452,6 +479,54 @@ const styles = StyleSheet.create({
 
   title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
 
+armourPill: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+  paddingHorizontal: 4,
+  paddingVertical: 2,
+  borderRadius: 999,
+  borderWidth: 1,
+  borderColor: "#F0C36B",      // same green as your bonus text
+  backgroundColor: "#241e14ff",   // matches other pills’ bg
+},
+
+armourPillText: {
+  fontSize: 11,
+  fontWeight: "800",
+  color: "#e8d3a9ff",
+},
+
+armourPillIcon: {
+  width: 20,
+  height: 20,
+},
+
+statPillsRow: {
+  flexDirection: "row",
+  gap: 8,
+  marginTop: 6,
+  flexWrap: "wrap",
+  width: "100%",         // 👈 force full row
+  alignItems: "flex-start",
+},
+
+
+rightCol: {
+  flex: 1,
+  marginLeft: 12,
+  minWidth: 0,      // lets the title ellipsize instead of pushing siblings
+},
+
+pillsRow: {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  gap: 8,
+  marginTop: 4,
+  width: "100%",    // forces this row to sit under the title
+  alignItems: "flex-start",
+},
+
   rarityPill: {
     flexDirection: "row",
     alignItems: "center",
@@ -465,6 +540,35 @@ const styles = StyleSheet.create({
   },
   rarityDot: { width: 6, height: 6, borderRadius: 3, marginRight: 6 },
   rarityText: { fontSize: 11, fontWeight: "800" },
+
+  
+
+  damagePill: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
+  borderRadius: 999,
+  borderWidth: 1,
+  borderColor: "#62E6DB",
+  backgroundColor: "#0e2930",
+
+  // NEW: prevent stretching
+  alignSelf: "flex-start",
+  flexGrow: 0,
+  flexShrink: 0,
+},
+
+damagePillText: {
+  fontSize: 11,
+  fontWeight: "800",
+  color: "#62E6DB",
+},
+damagePillIcon: {
+  width: 20,
+  height: 20,
+},
 
   badge: {
     flexDirection: "row",

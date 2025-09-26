@@ -1,4 +1,4 @@
-import type { GearItem } from "@/constants/types";
+import type { GearItem } from "../../constants/types";
 
 export const AMULETS: GearItem[] = [
   { id: "anti-confusion-amulet", name: "Anti-Confusion Amulet", kind: "amulets", slot: "amulet", tier: 1,

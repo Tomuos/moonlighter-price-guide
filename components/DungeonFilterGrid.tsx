@@ -71,6 +71,9 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 8,
   },
+
+
+  
   btn: {
     flexBasis: "30%",
     flexGrow: 1,

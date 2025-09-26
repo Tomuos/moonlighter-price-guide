@@ -111,12 +111,22 @@ export type BlacksmithRecipe = {
   gold: number;
 };
 
-/** For an “Enchantments” dropdown list (independent of WeaponStats.enchant) */
+export type WeaponEnchantLevels = Record<string, number>; // e.g. { "+": 692, "++": 764, "+++": 837 }
+
+// keep your existing MaterialLine type as-is
+
 export type EnchantmentTier = {
-  tier: number;            // 1..5
-  bonus: string;           // e.g., "Damage 324" or "Level II · Damage 150"
+  tier?: number;
+  bonus: string;
   gold?: number;
   cost?: MaterialLine[];
+  // ⬇️ NEW: per-enchant damage numbers for + / ++ / +++
+  weaponStats?: {
+    enchant?: WeaponEnchantLevels;
+    // (optional) if you ever want to add base/special per tier:
+    base?: number;
+    special?: string;
+  };
 };
 
 /** Optional per-upgrade step for armour/amulets/weapons */
