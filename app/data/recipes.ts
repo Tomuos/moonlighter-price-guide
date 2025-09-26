@@ -1,5 +1,5 @@
 // app/data/recipes.ts
-import type { MaterialLine } from "@/constants/types";
+import type { MaterialLine } from "../../constants/types";
 
 export const BLACKSMITH_RECIPES_BY_ID: Record<
   string,
@@ -424,6 +424,77 @@ export const BLACKSMITH_RECIPES_BY_ID: Record<
     { itemName: "Conductor Metal", quantity: 4 },
   ],
 },
+
+// ==================
+// DLC
+// ==================
+
+"ether-sable": {
+  gold: 456000,
+  materials: [
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Dimensional Resistant Metal", quantity: 2 },
+    { itemName: "Wolfram Rock", quantity: 5 },
+  ],
+},
+
+"heros-bow": {
+  gold: 4000,
+  materials: [
+    { itemName: "Fabric", quantity: 3 },
+    { itemName: "Hardened Steel", quantity: 5 },
+    { itemName: "Rune Tool", quantity: 1 },
+  ],
+},
+
+"heros-sword": {
+  gold: 4000,
+  materials: [
+    { itemName: "Broken Sword", quantity: 5 },
+    { itemName: "Rune Tool", quantity: 1 },
+    { itemName: "Hardened Steel", quantity: 5 },
+  ],
+},
+
+"master-fists": {
+  gold: 456000,
+  materials: [
+    { itemName: "Dimensional Garbage", quantity: 3 },
+    { itemName: "Dimensional Resistant Metal", quantity: 2 },
+    { itemName: "Gold Strands", quantity: 5 },
+  ],
+},
+
+"ragnarok-big-sword": {
+  gold: 456000,
+  materials: [
+    { itemName: "Fossil Bone", quantity: 3 },
+    { itemName: "Heavy Metal Plates", quantity: 2 },
+    { itemName: "Hardened Steel", quantity: 5 },
+  ],
+},
+
+"valkyrie-spear": {
+  gold: 456000,
+  materials: [
+    { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+    { itemName: "Carbon Fiber Plate", quantity: 2 },
+    { itemName: "Desert Steel Sheet", quantity: 5 },
+  ],
+},
+
+"runic-bow": {
+  gold: 456000,
+  materials: [
+    { itemName: "Fossil Bone", quantity: 3 },
+    { itemName: "Small Spectral Flame", quantity: 2 },
+    { itemName: "Ancient Wood", quantity: 5 },
+  ],
+},
+
+
+
+
 
 
  // =========================

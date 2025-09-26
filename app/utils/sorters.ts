@@ -1,4 +1,4 @@
-import type { GearItem } from "@/constants/types";
+import type { GearItem } from "../../constants/types";
 
 function isArmourSlot(s: GearItem["slot"]): s is ArmourSlot {
   return s === "helmet" || s === "chestplate" || s === "boots";

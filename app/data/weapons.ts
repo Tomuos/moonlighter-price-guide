@@ -205,63 +205,38 @@ const BASE_WEAPONS: WeaponItem[] = [
 
 
 {
-  id: "ether-sable",
-  name: "Ether Sable",
-  kind: "weapons",
-  slot: "sword-and-shield",
-  tier: 5,                 // DLC bucket
-  baseDamage: 620,         // badge shows Level I
-  // Dropdown shows full upgrade path (you can read gold/cost later if desired)
+  id: "ether-sable", name: "Ether Sable", kind: "weapons", slot: "sword-and-shield", tier: 5,  baseDamage: 620,         
+ 
   enchantments: [
     {
       tier: 1,
       bonus: "Level I · Damage 620",
       gold: 456000,
-      cost: [
-        { itemName: "Dimensional Garbage", quantity: 3 },
-        { itemName: "Dimensional Resistant Metal", quantity: 2 },
-        { itemName: "Wolfram Rock", quantity: 5 },
-      ],
+      weaponStats: {enchant: { "+": 692, "++": 764, "+++": 837 }},
     },
     {
       tier: 2,
       bonus: "Level II · Damage 960",
       gold: 506000,
-      cost: [
-        { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
-        { itemName: "Dimensional Resistant Metal", quantity: 2 },
-        { itemName: "Ether Sable", quantity: 1 },
-      ],
+      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
     },
     {
       tier: 3,
       bonus: "Level III · Damage 1488",
       gold: 556000,
-      cost: [
-        { itemName: "Plasma Charge", quantity: 3 },
-        { itemName: "Dimensional Resistant Glass", quantity: 3 },
-        { itemName: "Ether Sable II", quantity: 1 },
-      ],
+      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
     },
     {
       tier: 4,
       bonus: "Level IV · Damage 2300",
       gold: 606000,
-      cost: [
-        { itemName: "Light Power Crystal", quantity: 3 },
-        { itemName: "Dimensional Resistant Metal", quantity: 2 },
-        { itemName: "Ether Sable III", quantity: 1 },
-      ],
+      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
     },
     {
       tier: 5,
       bonus: "Level V · Damage 3500",
       gold: 656000,
-      cost: [
-        { itemName: "Plasma Charge", quantity: 2 },
-        { itemName: "Light Power Crystal", quantity: 2 },
-        { itemName: "Ether Sable IV", quantity: 1 },
-      ],
+      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
     },
   ],
   // Keep Blacksmith Recipe useful by showing Level I craft here:
