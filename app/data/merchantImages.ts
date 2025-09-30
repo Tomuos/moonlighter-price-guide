@@ -28,6 +28,7 @@ export const merchantImages: Record<string, ImageSourcePropType> = {
   "hp-potion-6": require("../../assets/images/merchant/hp_potion_6.png"),
   "hp-potion-7": require("../../assets/images/merchant/hp_potion_7.png"),
   "hp-potion-8": require("../../assets/images/merchant/hp_potion_8.png"),
+  "hyper-potion": require("../../assets/images/merchant/hyper_potion.png"),
   "guidance-desert-potion": require("../../assets/images/merchant/guidance_desert_potion.png"),
   "guidance-forest-potion": require("../../assets/images/merchant/guidance_forest_potion.png"),
   "guidance-golem-potion": require("../../assets/images/merchant/guidance_golem_potion.png"),
