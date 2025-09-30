@@ -14,22 +14,22 @@ const SLOT_ORDER: Record<ArmourSlot, number> = {
 
 export function sortArmour(items: GearItem[]) {
   return [...items].sort((a, b) => {
-    // 1) Fabric(0) < Iron(1) < Steel(2) < Composite(3)
+   
     const aSet = (a as any).setOrder as number | undefined;
     const bSet = (b as any).setOrder as number | undefined;
     if ((aSet ?? 99) !== (bSet ?? 99)) return (aSet ?? 99) - (bSet ?? 99);
 
-    // 2) Helmet < Chestplate < Boots (fallback 99 for non-armour slots)
+    
     const aSlotOrder = isArmourSlot(a.slot) ? SLOT_ORDER[a.slot] : 99;
     const bSlotOrder = isArmourSlot(b.slot) ? SLOT_ORDER[b.slot] : 99;
     if (aSlotOrder !== bSlotOrder) return aSlotOrder - bSlotOrder;
 
-    // 3) Tier ascending (fallback 0)
+    
     const aTier = (a as any).tier as number | undefined;
     const bTier = (b as any).tier as number | undefined;
     if ((aTier ?? 0) !== (bTier ?? 0)) return (aTier ?? 0) - (bTier ?? 0);
 
-    // 4) Stable fallback
+    
     return a.name.localeCompare(b.name);
   });
 }

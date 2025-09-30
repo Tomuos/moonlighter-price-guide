@@ -1,24 +1,11 @@
 // app/components/GearCard.tsx
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  StyleSheet,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-} from "react-native";
-import type {
-  GearItem,
-  GearId,
-  WeaponItem,
-  EnchantmentTier,
-  MaterialLine,
-} from "../constants/types";
+import { View, Text, Image, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager, } from "react-native";
+import type { GearItem, GearId, WeaponItem, EnchantmentTier, MaterialLine, } from "../constants/types";
 import { gearImages } from "../app/data/gearImages";
-import { itemImages } from "@/app/data/itemImages";
+import { materialImages } from "../app/data/materialImages";
+import { merchantImages } from "../app/data/merchantImages";
+import { slugify } from "../app/utils/slug"; //
 import { BLACKSMITH_RECIPES_BY_ID } from "@/app/data/recipes";
 
 /* Enable Android layout animations */
@@ -37,6 +24,7 @@ const KIND_COLORS: Record<GearId, { pill: string; text: string; box: string }> =
   weapons: { pill: "#62E6DB", text: "#62E6DB", box: "#ecd5a8ff" },
   armour: { pill: "#F0C36B", text: "#F0C36B", box: "#ecd5a8ff" },
   amulets: { pill: "#FAA5EF", text: "#FAA5EF", box: "#ecd5a8ff" },
+  merchant: { pill: "#f36b6bff", text: "#f36b6bff", box: "#ecd5a8ff" },
 };
 
 const TIER_COLORS: Record<number, string> = {
@@ -65,71 +53,111 @@ function capitalize(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-function slugifyName(s?: string) {
-  return (s ?? "").toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+function MerchantPrices({ it }: { it: GearItem }) {
+  if (it.kind !== "merchant") return null;
+
+  const m = it as unknown as {
+    sellPrice?: number;
+    popularPrice?: number;
+    buyPrice?: number;
+  };
+
+  const hasSell = typeof m.sellPrice === "number";
+  const hasPop  = typeof m.popularPrice === "number";
+  const hasBuy  = typeof m.buyPrice === "number";
+  if (!hasSell && !hasPop && !hasBuy) return null;
+
+  return (
+  <Text style={styles.priceLine}>
+    {hasSell && (
+      <>
+        <Image source={require("../assets/images/Coin-norm.png")} style={{ width: 20, height: 14 }} />{" "}
+        <Text style={styles.priceNumSell}>{m.sellPrice!.toLocaleString()}</Text>
+      </>
+    )}
+
+    {hasPop && (
+      <>
+        {"  "}
+        <Text style={styles.priceLabel}>Popular </Text>
+        <Image source={require("../assets/images/Coin-pop.png")} style={{ width: 20, height: 14 }} />{" "}
+        <Text style={styles.priceNumPop}>{m.popularPrice!.toLocaleString()}</Text>
+      </>
+    )}
+
+    {hasBuy && (
+      <>
+        {"  "}
+        <Text style={styles.priceLabel}>Buy </Text>
+        <Image source={require("../assets/images/Coin-norm.png")} style={{ width: 20, height: 14 }} />{" "}
+        <Text style={styles.priceNumBuy}>{m.buyPrice!.toLocaleString()}</Text>
+      </>
+    )}
+  </Text>
+);
+
 }
 
+
+
+
+
 function romanToArabic(r: string): number | null {
-  const m: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
-  let prev = 0,
-    total = 0;
+  const map: Record<string, number> = {I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+  let total = 0, prev = 0;
   for (let i = r.length - 1; i >= 0; i--) {
-    const v = m[r[i].toUpperCase()] || 0;
+    const v = map[r[i].toUpperCase()] || 0;
     if (!v) return null;
-    if (v < prev) total -= v;
-    else {
-      total += v;
-      prev = v;
-    }
+    total += v < prev ? -v : v;
+    prev = v;
   }
   return total;
 }
 
-function buildNameKeyVariants(raw?: string): string[] {
-  if (!raw) return [];
-  const name = raw.trim();
-
-  // strip trailing numeral (roman or digits) to get "base"
-  const m = name.match(/\s+([IVXLCDM]+|\d+)$/i);
-  const numeral = m?.[1];
-  const base = name.replace(/\s+([IVXLCDM]+|\d+)$/i, "").trim();
-  const asNumber = !numeral ? null : /^\d+$/.test(numeral) ? parseInt(numeral, 10) : romanToArabic(numeral);
-
-  const variants: string[] = [];
-  const bake = (b: string) => {
-    const baseSlug = slugifyName(b);
-    variants.push(b, baseSlug);
-    if (numeral) {
-      variants.push(`${baseSlug}-${numeral.toLowerCase()}`, `${baseSlug}-${numeral.toUpperCase()}`);
-      if (asNumber != null) variants.push(`${baseSlug}-${asNumber}`);
-    }
-  };
-
-  bake(name);
-  bake(base);
-
-  // Armor/armour swaps AND removal (DLC keys may omit the word)
-  const armorSwap = (s: string) => s.replace(/\barmor\b/gi, "armour");
-  const armorRemoved = (s: string) => s.replace(/\barmou?r\b/gi, "").replace(/\s{2,}/g, " ").trim();
-
-  const swapped = armorSwap(name);
-  if (swapped !== name) bake(swapped);
-  bake(armorRemoved(name));
-  bake(armorRemoved(base));
-
-  return Array.from(new Set(variants));
+function withRomanVariants(k: string): string[] {
+  const out = [k];
+  const m = k.match(/-(i|ii|iii|iv|v|vi|vii|viii|ix|x)$/i);
+  if (m) {
+    const upper = k.replace(m[0], "-" + m[1].toUpperCase());
+    out.push(upper);
+    const n = romanToArabic(m[1]);
+    if (n) out.push(k.replace(m[0], "-" + n));
+  }
+  return out;
 }
 
 function getMatImage(itemId?: string, itemName?: string) {
-  if (itemId) {
-    if ((itemImages as any)[itemId]) return (itemImages as any)[itemId];
-    if ((gearImages as any)[itemId]) return (gearImages as any)[itemId];
+  const base: string[] = [];
+
+  // 1) id candidates
+  if (itemId) base.push(itemId, slugify(itemId));
+
+  // 2) name candidates + armor/armour handling + removal
+  if (itemName) {
+    const s = slugify(itemName); // "Composite Armor Helmet III" -> "composite-armor-helmet-iii"
+    base.push(
+      s,
+      s.replace(/-armou?r-/g, "-"),  // remove armor/armour
+      s.replace(/-armor-/g, "-armour-"),
+      s.replace(/-armour-/g, "-armor-")
+    );
   }
-  for (const key of buildNameKeyVariants(itemName)) {
-    if ((itemImages as any)[key]) return (itemImages as any)[key];
-    if ((gearImages as any)[key]) return (gearImages as any)[key];
+
+  // 3) expand each base with roman/numeric + underscore versions
+  const candidates = new Set<string>();
+  for (const k of base) {
+    for (const v of withRomanVariants(k)) {
+      candidates.add(v);
+      candidates.add(v.replace(/-/g, "_"));
+    }
   }
-  return null;
+
+  for (const k of candidates) {
+    const hit = (materialImages as any)[k];
+    if (hit) return hit;
+  }
+  return null; // or a placeholder image
 }
 
 function formatArmourEnchantText(g: GearItem): string {
@@ -189,6 +217,8 @@ function MaterialRow({
 
 /* ====================================================================== */
 
+
+
 export default function GearCard({ gear, onPressImage }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -237,15 +267,40 @@ export default function GearCard({ gear, onPressImage }: Props) {
       <View style={styles.row}>
         <View style={[styles.spriteBox, { backgroundColor: kindColors.box, borderColor: kindColors.pill }]}>
           
-          <Pressable onPress={() => onPressImage?.(gear)} accessibilityRole="button" accessibilityLabel={`${gear.name} image`}>
-            {gearImages[gear.id] ? (
-              <Image source={gearImages[gear.id]} style={styles.spriteImage} resizeMode="contain" />
-            ) : (
-              <View style={[styles.image, styles.placeholder]}>
-                <Text style={styles.placeholderText}>?</Text>
-              </View>
-            )}
-          </Pressable>
+          <Pressable
+  onPress={() => onPressImage?.(gear)}
+  accessibilityRole="button"
+  accessibilityLabel={`${gear.name} image`}
+>
+  {gear.kind === "merchant"
+    ? merchantImages[gear.id]
+      ? (
+        <Image
+          source={merchantImages[gear.id]}
+          style={styles.spriteImage}
+          resizeMode="contain"
+        />
+      )
+      : (
+        <View style={[styles.image, styles.placeholder]}>
+          <Text style={styles.placeholderText}>?</Text>
+        </View>
+      )
+    : gearImages[gear.id]
+      ? (
+        <Image
+          source={gearImages[gear.id]}
+          style={styles.spriteImage}
+          resizeMode="contain"
+        />
+      )
+      : (
+        <View style={[styles.image, styles.placeholder]}>
+          <Text style={styles.placeholderText}>?</Text>
+        </View>
+      )
+  }
+</Pressable>
         </View>
 
         {/* RIGHT COLUMN */}
@@ -272,8 +327,14 @@ export default function GearCard({ gear, onPressImage }: Props) {
               </View>
             )}
 
-              </View>
             
+
+              </View>
+            {gear.kind === "merchant" && (
+              <View style={styles.priceRow}>
+                <MerchantPrices it={gear} />
+              </View>
+            )}
 
             {/* weapon base dmg pill */}
             {isWeapon(gear) && (gear.baseDamage != null || gear.weaponStats?.base != null) && (
@@ -527,6 +588,18 @@ pillsRow: {
   alignItems: "flex-start",
 },
 
+priceRow: {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  gap: 8,
+  marginTop: 6,
+},
+
+priceCoin: { width: 20, height: 14, marginRight: 6 },
+pricePillText: { color: "#ffd166", fontWeight: "800", fontSize: 12 },
+pricePillLabel: { color: "#ffd166", fontSize: 11, opacity: 0.9, marginLeft: 4 },
+
+
   rarityPill: {
     flexDirection: "row",
     alignItems: "center",
@@ -620,6 +693,14 @@ damagePillIcon: {
 
   goldRow: { flexDirection: "row", alignItems: "center", marginBottom: 2 },
   goldText: { color: "#ffd166", fontSize: 13 },
+
+
+// new: number colors
+priceNumSell: { fontSize: 14, fontWeight: "700", color: "#ffd166" }, // normal coin
+priceNumPop:  { fontSize: 14, fontWeight: "700", color: "#ffe69a" }, // popular coin (slightly lighter)
+priceNumBuy:  { fontSize: 14, fontWeight: "700", color: "#b9fbc0" }, // buy label (green-ish), tweak if you like
+priceLabel:   { fontSize: 12, color: "#FFFFFF" },
+
 
   /* Enchant layout: one line (label+gold), then materials */
   enchantLine: { marginTop: 4, marginBottom: 6 },

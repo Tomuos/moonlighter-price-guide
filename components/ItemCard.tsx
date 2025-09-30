@@ -77,11 +77,7 @@ export default function ItemCard({ item, onPressImage }: Props) {
             )}
           </Pressable>
 
-          {/* --- OPTIONAL DEBUG (uncomment to display) ---
-          <Text style={{ fontSize: 10, color: "#111", marginTop: 2 }}>
-            {asset?.width}×{asset?.height}px
-          </Text>
-          */}
+          
         </View>
 
         <View style={{ flex: 1, marginLeft: 12 }}>
