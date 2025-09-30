@@ -63,20 +63,29 @@ export default function GearFilterGrid({ value, onChange }: GearFilterGridProps)
 }
 
 const styles = StyleSheet.create({
-  grid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+
+
+  
   btn: {
-  minWidth: "48%",        // two per row minimum
-  flexBasis: "48%",
-  flexGrow: 1,            // 👈 lets them stretch to the container edges
-  flexShrink: 1,
-  height: 46,
-  borderRadius: 12,
-  paddingHorizontal: 12,
-  paddingVertical: 8,
-  alignItems: "center",
-  justifyContent: "center",
-  borderWidth: 1,
-},
+    flexBasis: "30%",
+    flexGrow: 1,
+    height: 46,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  labelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   text: {
     fontWeight: "800",
     textAlign: "center",

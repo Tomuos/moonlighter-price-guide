@@ -948,3 +948,10 @@ export const BLACKSMITH_RECIPES_BY_ID: Record<
 };
 
 
+export const ALCHEMIST_RECIPES_BY_ID: Record<string, { gold: number; materials: MaterialLine[] }> = {
+  "hp-potion-1": { gold: 200,  materials: [{ itemName: "Jelly", quantity: 5 }, { itemName: "Root", quantity: 2 }] },
+  "hp-potion-2": { gold: 500,  materials: [{ itemName: "Jelly", quantity: 10 }, { itemName: "Plant Flesh", quantity: 2 }] },
+  "hp-potion-3": { gold: 900,  materials: [{ itemName: "Jelly", quantity: 12 }, { itemName: "Pungent Gland", quantity: 2 }] },
+  "hp-potion-4": { gold: 1300, materials: [{ itemName: "Jelly", quantity: 14 }, { itemName: "Venom", quantity: 2 }] },
+  "hyper-potion": { gold: 1500, materials: [{ itemName: "Jelly", quantity: 16 }, { itemName: "Ancient Wood", quantity: 2 }] },
+};

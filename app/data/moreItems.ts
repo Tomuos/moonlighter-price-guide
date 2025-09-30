@@ -3,11 +3,13 @@ import type { GearId, GearItem } from "../../constants/types";
 import { WEAPONS } from "./weapons";
 import { ARMOUR }  from "./armour";   // ← make sure file is exactly "armour.ts"
 import { AMULETS } from "./amulets";  // ← and exactly "amulets.ts"
+import { MERCHANT } from "./merchant";
 
 export const ALL_GEAR: Record<GearId, GearItem[]> = {
   weapons: WEAPONS,
   armour:  ARMOUR,
   amulets: AMULETS,
+  merchant: MERCHANT,
 };
 
 export function getMoreItems(gear: GearId | "all"): GearItem[] {

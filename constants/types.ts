@@ -58,7 +58,7 @@ export type BrewUsage = {
 /** ---------------------------
  *          GEAR
  *  -------------------------- */
-export type GearId = "weapons" | "armour" | "amulets"; // rings → amulets
+export type GearId = "weapons" | "armour" | "amulets" | "merchant"; // rings → amulets
 export type GearTier = 0 | 1 | 2 | 3 | 4 | 5;
 export type PlusTier = "+" | "++" | "+++";
 
@@ -188,5 +188,33 @@ export interface AmuletItem extends BaseGear {
   // Add amulet-specific fields later if needed
 }
 
+export interface MerchantItem extends BaseGear {
+  id: string;
+  name: string;
+  kind: "merchant";
+  category?: "potion" | "dlc" | "broken" | "misc";
+  hpRestore?: number | "full";
+  potionRecipe?: PotionRecipe;
+
+
+  buyPrice?: number;   // gold cost to buy directly
+  sellPrice?: number;  // gold you get for selling
+  popularPrice?: number,
+  recipeId?: string;
+}
+
+
+
 /** Use this everywhere your code expects “a gear item”. */
-export type GearItem = WeaponItem | ArmourGearItem | AmuletItem;
+export type GearItem = WeaponItem | ArmourGearItem | AmuletItem | MerchantItem;
+
+export type PotionRecipe = {
+  gold: number;
+  cost: MaterialLine[];
+};
+
+
+
+
+
+
