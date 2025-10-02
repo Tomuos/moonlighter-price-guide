@@ -123,7 +123,7 @@ export type EnchantmentTier = {
   // ⬇️ NEW: per-enchant damage numbers for + / ++ / +++
   weaponStats?: {
     enchant?: WeaponEnchantLevels;
-    // (optional) if you ever want to add base/special per tier:
+    
     base?: number;
     special?: string;
   };
@@ -132,8 +132,8 @@ export type EnchantmentTier = {
 /** Optional per-upgrade step for armour/amulets/weapons */
 export type GearUpgrade = {
   tier: GearTier;
-  cost?: number;                // legacy/simple “gold” shorthand
-  materials?: MaterialLine[];   // preferred
+  cost?: number;                
+  materials?: MaterialLine[];   
   effects?: string[];
 };
 
@@ -145,7 +145,7 @@ interface BaseGear {
   name: string;
   kind: GearId;
   image?: ImageSourcePropType;
-  slot?: string;                 // weapons/amulets can leave this loose (e.g., "bow", "ring")
+  slot?: string;                 
   tier?: GearTier;
   craftedAt?: string;
   source?: string;
@@ -154,7 +154,7 @@ interface BaseGear {
 
   /** Crafting / Upgrading (shared) */
   recipe?: BlacksmithRecipe;
-  craftCost?: number;            // optional shorthand if you’re not using recipe.gold
+  craftCost?: number;            
   upgradeCost?: number;
   upgrades?: GearUpgrade[];
 
@@ -188,6 +188,9 @@ export interface AmuletItem extends BaseGear {
   // Add amulet-specific fields later if needed
 }
 
+
+
+
 export interface MerchantItem extends BaseGear {
   id: string;
   name: string;
@@ -201,6 +204,7 @@ export interface MerchantItem extends BaseGear {
   sellPrice?: number;  // gold you get for selling
   popularPrice?: number,
   recipeId?: string;
+
 }
 
 
