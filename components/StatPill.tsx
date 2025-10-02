@@ -4,23 +4,15 @@ import { View, Text, Image, StyleSheet, ImageSourcePropType } from "react-native
 
 type Props = {
   icon: ImageSourcePropType;
-  text: string;             // e.g., "30 HP"
-  border?: string;
-  bg?: string;
-  textColor?: string;
+  text: string;
+  accent?: string; // <— add this
 };
 
-export default function StatPill({
-  icon,
-  text,
-  border = "#F0C36B",
-  bg = "#241e14ff",
-  textColor = "#e8d3a9ff",
-}: Props) {
+export default function StatPill({ icon, text, accent = "#f36b6bff" }: Props) {
   return (
-    <View style={[styles.pill, { borderColor: border, backgroundColor: bg }]}>
+    <View style={[styles.pill, { borderColor: accent }]}>
       <Image source={icon} style={styles.icon} resizeMode="contain" />
-      <Text style={[styles.txt, { color: textColor }]}>{text}</Text>
+      <Text style={[styles.text, { color: accent }]}>{text}</Text>
     </View>
   );
 }
@@ -29,12 +21,13 @@ const styles = StyleSheet.create({
   pill: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 999,
+    backgroundColor: "#0e0e0eff",
     borderWidth: 1,
+    borderRadius: 9999,
+    paddingHorizontal: 10,
+    height: 26,
+    gap: 6,
   },
-  icon: { width: 20, height: 20 },
-  txt: { fontSize: 11, fontWeight: "800" },
+  icon: { width: 16, height: 16 },
+  text: { fontSize: 12, fontWeight: "700" },
 });

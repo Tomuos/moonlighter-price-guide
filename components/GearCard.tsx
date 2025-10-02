@@ -92,11 +92,9 @@ export default function GearCard({ gear, onPressImage }: Props) {
             {gear.name}
           </Text>
 
-          {/* pills row */}
+         {/* pills row */}
           <View style={styles.pillsRow}>
-            {gear.kind !== "weapons" && (
-              <RarityPill label={gear.kind} color={kindColors.pill} />
-            )}
+            <RarityPill label={gear.kind.toUpperCase()} color={kindColors.pill} />
             {gear.tier != null && (
               <RarityPill label={`Tier ${gear.tier}`} color={tierColor} />
             )}
@@ -110,6 +108,13 @@ export default function GearCard({ gear, onPressImage }: Props) {
                 popular={(gear as any).popularPrice}
                 buy={(gear as any).buyPrice}
               />
+            </View>
+          )}
+
+          {/* merchant recovery (hpRestore) */}
+          {gear.kind === "merchant" && typeof (gear as any).hpRestore === "number" && (
+            <View style={styles.statPillsRow}>
+              <StatPill text={`HEALS ${(gear as any).hpRestore} HP`} icon={HEALTH_ICON} />
             </View>
           )}
 
