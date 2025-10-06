@@ -12,7 +12,8 @@ import StatPill from "../components/StatPill";
 import DamagePill from "../components/DamagePill";
 import { PriceLine, MerchantPricesInline, GoldRow } from "../components/PriceCoins";
 import MaterialRow from "../components/MaterialRow";
-import { capitalize, formatArmourEnchantText } from "../app/utils/format";
+import { capitalize, formatArmourEnchantText, formatPotionHp } from "../app/utils/format";
+
 
 const DEFENSE_ICON = require("../assets/images/detail-icons/shield-icon.png");
 const SPEED_ICON   = require("../assets/images/detail-icons/boot-icon.png");
@@ -112,10 +113,15 @@ export default function GearCard({ gear, onPressImage }: Props) {
           )}
 
           {/* merchant recovery (hpRestore) */}
-          {gear.kind === "merchant" && typeof (gear as any).hpRestore === "number" && (
-            <View style={styles.statPillsRow}>
-              <StatPill text={`HEALS ${(gear as any).hpRestore} HP`} icon={HEALTH_ICON} />
-            </View>
+          {gear.kind === "merchant" && (gear as any).hpRestore && (
+            (() => {
+              const hpLabel = formatPotionHp((gear as any).hpRestore);
+              return hpLabel ? (
+                <View style={styles.statPillsRow}>
+                  <StatPill icon={HEALTH_ICON} text={hpLabel.toUpperCase()} />
+                </View>
+              ) : null;
+            })()
           )}
 
           {/* weapon base dmg pill */}
@@ -229,6 +235,9 @@ export default function GearCard({ gear, onPressImage }: Props) {
       )}
     </View>
   );
+
+
+  
 }
 
 const styles = StyleSheet.create({

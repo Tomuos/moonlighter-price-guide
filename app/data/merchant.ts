@@ -238,6 +238,7 @@ export const MERCHANT: MerchantItem[] = [
   {
     id: "hyper-potion", name: "Hyper Potion", kind: "merchant", category: "potion",
     tier: 5, 
+    hpRestore: 'full',
     summary: "Restores you to full health",
      potionRecipe: {
       gold: 20520,

@@ -2,6 +2,8 @@ import type { ImageSourcePropType } from "react-native";
 
 // "": require("../../assets/images/merchant"), <-- when you need to add a new line
 export const merchantImages: Record<string, ImageSourcePropType> = {
+
+  
     // =========================
     //      BROKEN WEAPONS      
     // =========================
@@ -17,6 +19,7 @@ export const merchantImages: Record<string, ImageSourcePropType> = {
   "dimensional-suit-fabric": require("../../assets/images/merchant/dimensional_suit_fabric.png"),
   "light-power-crystal": require("../../assets/images/merchant/light_power_crystal.png"),
     
+
     // ====================
     //      POTIONS      
     // ====================

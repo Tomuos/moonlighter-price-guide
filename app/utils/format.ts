@@ -15,3 +15,19 @@ export function formatArmourEnchantText(g: GearItem): string {
   if (typeof b.speed === "number") parts.push(`+${b.speed} Speed`);
   return parts.join(" · ");
 }
+
+// --- Merchant potion HP formatter ---
+export function formatPotionHp(hp: number | "full" | undefined): string | null {
+  if (hp == null) return null;
+
+  if (typeof hp === "string" && hp.toLowerCase() === "full") {
+    return "Full HP";
+  }
+
+  if (typeof hp === "number") {
+    if (hp <= 0) return null;
+    return `Heals ${hp} HP`;
+  }
+
+  return null;
+}
