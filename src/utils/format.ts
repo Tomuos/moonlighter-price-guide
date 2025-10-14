@@ -1,5 +1,5 @@
 // app/utils/format.ts
-import type { GearItem } from "@/constants/types";
+import type { GearItem } from "../../constants/types";
 
 export function capitalize(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;

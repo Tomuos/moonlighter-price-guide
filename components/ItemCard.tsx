@@ -1,8 +1,8 @@
-// app/components/ItemCard.tsx
+
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager,  } from "react-native";
 import type { DungeonItem } from "../constants/types";
-import { itemImages } from "../app/data/itemImages";
+import { itemImages } from "../src/data/itemImages";
 import SpriteBox from "../components/SpriteBox";
 import RarityPill from "../components/RarityPill";
 import Section from "../components/Section";

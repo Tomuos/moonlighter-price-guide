@@ -4,7 +4,7 @@ import { View, FlatList } from "react-native";
 import DungeonFilterGrid from "../components/DungeonFilterGrid";
 import SearchBar from "../components/SearchBar";
 import ItemCard from "../components/ItemCard";
-import { getItems } from "../app/data/items";
+import { getItems } from "../src/data/items";
 import type { DungeonId } from "../constants/types";
 
 export default function DungeonsScreen() {

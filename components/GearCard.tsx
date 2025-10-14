@@ -1,10 +1,10 @@
-// app/components/GearCard.tsx
+
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager, Image } from "react-native";
 import type { GearItem, GearId, WeaponItem, EnchantmentTier, MaterialLine } from "../constants/types";
-import { gearImages } from "../app/data/gearImages";
-import { merchantImages } from "../app/data/merchantImages";
-import { BLACKSMITH_RECIPES_BY_ID } from "../app/data/recipes";
+import { gearImages } from "../src/data/gearImages";
+import { merchantImages } from "../src/data/merchantImages";
+import { BLACKSMITH_RECIPES_BY_ID } from "../src/data//recipes";
 import Section from "../components/Section";
 import SpriteBox from "../components/SpriteBox";
 import RarityPill from "../components/RarityPill";
@@ -12,7 +12,7 @@ import StatPill from "../components/StatPill";
 import DamagePill from "../components/DamagePill";
 import { PriceLine, MerchantPricesInline, GoldRow } from "../components/PriceCoins";
 import MaterialRow from "../components/MaterialRow";
-import { capitalize, formatArmourEnchantText, formatPotionHp } from "../app/utils/format";
+import { capitalize, formatArmourEnchantText, formatPotionHp } from "../src/utils/format";
 
 
 const DEFENSE_ICON = require("../assets/images/detail-icons/shield-icon.png");
