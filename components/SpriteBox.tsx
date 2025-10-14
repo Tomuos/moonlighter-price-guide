@@ -1,4 +1,4 @@
-// app/components/ui/SpriteBox.tsx
+
 import React from "react";
 import { View, Image, Text, Pressable, StyleSheet, ImageSourcePropType } from "react-native";
 

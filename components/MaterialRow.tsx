@@ -1,7 +1,7 @@
-// app/components/MaterialRow.tsx
+
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
-import { getMatImage } from "../app/utils/images";
+import { getMatImage } from "../src/utils/images";
 
 const RECIPE_BG_COLOR = "#ecd5a8ff";
 

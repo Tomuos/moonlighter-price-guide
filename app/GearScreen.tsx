@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import type { GearId } from "../constants/gear";
-import { getMoreItems } from "./data/moreItems";
+import { getMoreItems } from "../src/data/moreItems";
 import GearCard from "../components/GearCard";
 import GearFilterGrid from "../components/GearFilterGrid";
 import SearchBar from "../components/SearchBar";
-import { sortArmour } from "../app/utils/sorters";
+import { sortArmour } from "../src/utils/sorters";
 
 
 export default function GearScreen() {

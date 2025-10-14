@@ -1,4 +1,4 @@
-// app/components/ui/PriceCoins.tsx
+
 import React from "react";
 import { Text, Image, StyleSheet, View } from "react-native";
 

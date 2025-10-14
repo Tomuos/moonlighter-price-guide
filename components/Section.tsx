@@ -1,4 +1,4 @@
-// app/components/ui/Section.tsx
+
 import React, { PropsWithChildren } from "react";
 import { View, Text, StyleSheet } from "react-native";
 

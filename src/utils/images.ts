@@ -1,6 +1,6 @@
 // app/utils/images.ts
-import { materialImages } from "@/app/data/materialImages";
-import { slugify } from "@/app/utils/slug";
+import { materialImages } from "../data/materialImages";
+import { slugify } from "../utils/slug";
 
 function romanToArabic(r: string): number | null {
   const map: Record<string, number> = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 };
