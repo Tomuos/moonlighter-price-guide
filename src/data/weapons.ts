@@ -121,7 +121,7 @@ const BASE_WEAPONS: WeaponItem[] = [
 // --- Spears ---
 
 { id: "broom-spear", name: "Broom", kind: "weapons", slot: "spear", tier: 0,
-  weaponStats: { base: 6, enchant: { "+": 6, "++": 6, "+++": 6 } }, // dummy values
+  weaponStats: { base: 6, enchant: { "+": 6, "++": 6, "+++": 6 } }, 
   enchantments: [
     { tier: 1, bonus: "+5% Speed" },
     { tier: 2, bonus: "+10% Speed" },
