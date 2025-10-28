@@ -8,7 +8,7 @@ import { BLACKSMITH_RECIPES_BY_ID } from "../src/data//recipes";
 import Section from "../components/Section";
 import SpriteBox from "../components/SpriteBox";
 import RarityPill from "../components/RarityPill";
-import StatPill from "../components/StatPill";
+import ArmourPill from "../components/ArmourPill";
 import DamagePill from "../components/DamagePill";
 import { PriceLine, MerchantPricesInline, GoldRow } from "../components/PriceCoins";
 import MaterialRow from "../components/MaterialRow";
@@ -117,8 +117,8 @@ export default function GearCard({ gear, onPressImage }: Props) {
             (() => {
               const hpLabel = formatPotionHp((gear as any).hpRestore);
               return hpLabel ? (
-                <View style={styles.statPillsRow}>
-                  <StatPill icon={HEALTH_ICON} text={hpLabel.toUpperCase()} />
+                <View style={styles.ArmourPillsRow}>
+                  <ArmourPill icon={HEALTH_ICON} text={hpLabel.toUpperCase()} />
                 </View>
               ) : null;
             })()
@@ -133,12 +133,12 @@ export default function GearCard({ gear, onPressImage }: Props) {
 
           {/* armour stat pills */}
           {gear.kind === "armour" && (gear.armourStats?.base?.health != null || gear.armourStats?.base?.speed != null) && (
-            <View style={styles.statPillsRow}>
+            <View style={styles.ArmourPillsRow}>
               {typeof gear.armourStats.base.health === "number" && (
-                <StatPill icon={HEALTH_ICON} text={`${gear.armourStats.base.health} HP`} />
+                <ArmourPill icon={HEALTH_ICON} text={`${gear.armourStats.base.health} HP`} />
               )}
               {typeof gear.armourStats.base.speed === "number" && (
-                <StatPill icon={SPEED_ICON} text={`${gear.armourStats.base.speed} SPD`} />
+                <ArmourPill icon={SPEED_ICON} text={`${gear.armourStats.base.speed} SPD`} />
               )}
             </View>
           )}
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
   pillsRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4, width: "100%", alignItems: "flex-start" },
   priceRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 6 },
-  statPillsRow: { flexDirection: "row", gap: 8, marginTop: 6, flexWrap: "wrap", width: "100%", alignItems: "flex-start" },
+  ArmourPillsRow: { flexDirection: "row", gap: 8, marginTop: 6, flexWrap: "wrap", width: "100%", alignItems: "flex-start" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
   summary: { color: "#a3e635", fontSize: 12, marginTop: 4 },
   chev: { color: "#e2e8f0", fontSize: 18, paddingHorizontal: 8, paddingVertical: 4 },
