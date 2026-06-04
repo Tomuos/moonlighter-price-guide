@@ -1,52 +1,63 @@
-
 import React from "react";
 import { View, Image, Text, Pressable, StyleSheet, ImageSourcePropType } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 type Props = {
   source?: ImageSourcePropType | null;
-  size?: number;                 // content box size (image area)
-  bg?: string;                   // container bg
-  border?: string;               // border color
+  size?: number;
+  bg?: [string, string];   // centre → edge
+  border?: string;
   onPress?: () => void;
   accessibilityLabel?: string;
 };
 
 export default function SpriteBox({
   source,
-  size = 48,
-  bg = "#ecd5a8ff",
+  size = 42,
+  bg = ["#cbb68c", "#ecd5a8"], // 👈 default gradient
   border = "#5A6378",
   onPress,
   accessibilityLabel,
 }: Props) {
-  const body = source ? (
-    <Image source={source} style={{ width: size, height: size }} resizeMode="contain" />
+  const content = source ? (
+    <Image
+      source={source}
+      style={{ width: size, height: size }}
+      resizeMode="contain"
+    />
   ) : (
     <View style={[styles.image, { width: size, height: size }]}>
       <Text style={styles.placeholderText}>?</Text>
     </View>
   );
 
+  const Wrapper = onPress ? Pressable : View;
+
   return (
-    <View style={[styles.wrap, { backgroundColor: bg, borderColor: border }]}>
-      {onPress ? (
-        <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={accessibilityLabel}>
-          {body}
-        </Pressable>
-      ) : (
-        body
-      )}
-    </View>
+    <Wrapper
+      onPress={onPress}
+      accessibilityRole={onPress ? "button" : undefined}
+      accessibilityLabel={accessibilityLabel}
+    >
+      <LinearGradient
+        colors={bg}
+        start={{ x: 0.5, y: 0.4 }}   // 👈 slightly above centre
+        end={{ x: 1, y: 1 }}         // 👈 fade outward
+        style={[styles.wrap, { borderColor: border }]}
+      >
+        {content}
+      </LinearGradient>
+    </Wrapper>
   );
 }
 
 const styles = StyleSheet.create({
   wrap: {
-    padding: 4,
-    borderRadius: 5,
+    padding: 3,
+    borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 3,
   },
   image: {
     borderRadius: 8,
@@ -54,5 +65,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  placeholderText: { color: "#64748b", fontWeight: "700", fontSize: 18 },
+  placeholderText: {
+    color: "#9399a1",
+    fontWeight: "700",
+    fontSize: 18,
+  },
 });

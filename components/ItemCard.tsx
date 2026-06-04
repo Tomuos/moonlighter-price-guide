@@ -39,9 +39,9 @@ export default function ItemCard({ item, onPressImage }: Props) {
       <View style={styles.row}>
         <SpriteBox
           source={img as any}
-          bg="#ecd5a8ff"
+          bg={["rgb(249, 142, 80)", "rgb(255, 228, 175)"]}
           border={rarityColor}
-          size={48}
+          size={42}
           onPress={() => onPressImage?.(item)}
           accessibilityLabel={`${item.name} image`}
         />
@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: "row", alignItems: "center" },
   title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
+  notes: { color: "#a3e635", fontSize: 12, marginTop: 4 },
   priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
   priceGold: { fontSize: 14, fontWeight: "600", color: "#ffd166" },
   dungeon: { fontSize: 12, color: "#CBD5E1", marginTop: 4 },
-  notes: { color: "#a3e635", fontSize: 12, marginTop: 4 },
   chev: { color: "#e2e8f0", fontSize: 18, paddingHorizontal: 8, paddingVertical: 4 },
   dropdownItem: { color: "#cbd5e1", fontSize: 13, marginBottom: 2 },
 });

@@ -99,6 +99,8 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "hero-ring": require("../../assets/images/gear/hero_ring.png"),
 "heros-bow": require("../../assets/images/gear/heros_bow.png"),
 "heros-sword": require("../../assets/images/gear/heros_sword.png"),
+"heros-sword-II": require("../../assets/images/gear/heros_sword.png"),
+"heros-sword-III": require("../../assets/images/gear/heros_sword.png"),
 "hunter-bow": require("../../assets/images/gear/hunter_bow.png"),
 
 

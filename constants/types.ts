@@ -39,11 +39,11 @@ export type GearUsage = {
 };
 
 export type EnchantUsage = {
-  target: string;                 // e.g. "Weapon Enchant I"
-  qtyMin: number;                 // e.g. 3
-  qtyMax?: number;                // e.g. 5 (omit if fixed)
-  gold?: number;                  // optional extra cost
-  icon?: string;                  // optional icon uri or name
+  target: string;                 
+  qtyMin: number;                
+  qtyMax?: number;                
+  gold?: number;                  
+  icon?: string;                  
 };
 
 export type BrewUsage = {
@@ -116,17 +116,29 @@ export type WeaponEnchantLevels = Record<string, number>; // e.g. { "+": 692, "+
 // keep your existing MaterialLine type as-is
 
 export type EnchantmentTier = {
-  tier?: number;
-  bonus: string;
+  tier?: number;                  // you already have this (optional)
+  bonus: string;                  // keep for display text if you want
   gold?: number;
   cost?: MaterialLine[];
-  // ⬇️ NEW: per-enchant damage numbers for + / ++ / +++
+
+  // NEW (self-contained per-row data):
+  plus?: PlusTier;                // "+", "++", "+++"
+  damage?: number;                // shows the new damage per tier
+  crystals?: number;              // Empowering Crystals for this step
+
+  // keep your existing 'weaponStats' mapping for legacy entries:
   weaponStats?: {
-    enchant?: WeaponEnchantLevels;
-    
+    enchant?: WeaponEnchantLevels;  // { "+": 692, "++": 764, "+++": 837 }
     base?: number;
     special?: string;
   };
+};
+
+export type EnchantRow = {
+  plus: PlusTier;            
+  damage: number;            
+  crystals?: number;         
+  gold?: number;             
 };
 
 /** Optional per-upgrade step for armour/amulets/weapons */
@@ -135,6 +147,8 @@ export type GearUpgrade = {
   cost?: number;                
   materials?: MaterialLine[];   
   effects?: string[];
+  baseDamage?: number;
+  enchantments?: EnchantmentTier[];
 };
 
 /** ---------- Base & Specialised Gear Items (Discriminated Union) ---------- */
