@@ -205,41 +205,76 @@ const BASE_WEAPONS: WeaponItem[] = [
 
 
 {
-  id: "ether-sable", name: "Ether Sable", kind: "weapons", slot: "sword-and-shield", tier: 5,  baseDamage: 620,         
+  id: "ether-sable", name: "Ether Sable", kind: "weapons", slot: "sword-and-shield", tier: 5,          
  
-  enchantments: [
+  upgrades: [
     {
-      tier: 1,
-      bonus: "Level I · Damage 620",
-      gold: 456000,
-      weaponStats: {enchant: { "+": 692, "++": 764, "+++": 837 }},
+      tier: 1,                           // Level I
+      baseDamage: 620,
+      cost: 456000,
+      materials: [
+        { itemName: "Dimensional Garbage", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Wolfram Rock", quantity: 5 },
+      ],
+      enchantments: [
+        { plus: "+",   damage: 692, crystals: 3, bonus: "Level I + · Damage 692" },
+        { plus: "++",  damage: 764, crystals: 3, bonus: "Level I ++ · Damage 764" },
+        { plus: "+++", damage: 837, crystals: 3, bonus: "Level I +++ · Damage 837" },
+      ],
     },
     {
-      tier: 2,
-      bonus: "Level II · Damage 960",
-      gold: 506000,
-      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
+      tier: 2,                           // Level II
+      baseDamage: 960,
+      cost: 506000,
+      materials: [
+        { itemName: "Dimensional Res. Mineral Ore", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Ether Sable", quantity: 1 },
+      ],
+      // TODO: fill correct damages for Level II enchants I'm not far enough in the game to test
+      enchantments: [
+        // { plus: "+",   damage: ???, crystals: 5, bonus: "Level II + · Damage …" },
+        // { plus: "++",  damage: ???, crystals: 6, bonus: "Level II ++ · Damage …" },
+        // { plus: "+++", damage: ???, crystals: 7, bonus: "Level II +++ · Damage …" },
+      ],
     },
     {
-      tier: 3,
-      bonus: "Level III · Damage 1488",
-      gold: 556000,
-      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
+      tier: 3,                           // Level III
+      baseDamage: 1488,
+      cost: 556000,
+      materials: [
+        { itemName: "Plasma Charge", quantity: 3 },
+        { itemName: "Dimensional Resistant Glass", quantity: 3 },
+        { itemName: "Ether Sable II", quantity: 1 },
+      ],
+      enchantments: [],
     },
     {
-      tier: 4,
-      bonus: "Level IV · Damage 2300",
-      gold: 606000,
-      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
+      tier: 4,                           // Level IV
+      baseDamage: 2300,
+      cost: 606000,
+      materials: [
+        { itemName: "Light Power Crystal", quantity: 3 },
+        { itemName: "Dimensional Resistant Metal", quantity: 2 },
+        { itemName: "Ether Sable III", quantity: 1 },
+      ],
+      enchantments: [],
     },
     {
-      tier: 5,
-      bonus: "Level V · Damage 3500",
-      gold: 656000,
-      weaponStats: {enchant: { "+": 431, "++": 462, "+++": 493 }},
+      tier: 5,                           // Level V
+      baseDamage: 3500,
+      cost: 656000,
+      materials: [
+        { itemName: "Plasma Charge", quantity: 2 },
+        { itemName: "Light Power Crystal", quantity: 2 },
+        { itemName: "Ether Sable IV", quantity: 1 },
+      ],
+      enchantments: [],
     },
   ],
-  // Keep Blacksmith Recipe useful by showing Level I craft here:
+
+  // (Optional) keep 'recipe' for a quick Level I craft preview, if you like:
   recipe: {
     gold: 456000,
     materials: [
@@ -248,42 +283,89 @@ const BASE_WEAPONS: WeaponItem[] = [
       { itemName: "Wolfram Rock", quantity: 5 },
     ],
   },
-  summary: "DLC sword & shield with upgrades I–V.",
+
+  summary: "DLC sword & shield with per-level recipes and enchants.",
 },
 
-// Switch Exclusive – Hero’s Bow
+// Switch Exclusive – Hero’s Bow (tier-5 DLC with per-level recipes)
 {
   id: "heros-bow",
   name: "Hero's Bow",
   kind: "weapons",
   slot: "bow",
-  tier: 5,                  // Switch-exclusive reskin
-  baseDamage: 35,           // Level I
-  enchantments: [
+  tier: 5,                     // DLC bucket
+
+  // Keep Level I damage at top if you use it elsewhere
+  baseDamage: 35,
+
+  // DLC levels I–IV encoded as upgrades using your existing GearUpgrade type
+  upgrades: [
     {
-      tier: 1,
-      bonus: "Level I · Damage 35",
-      gold: 4000,
-      cost: [
+      tier: 1,                 // Level I
+      baseDamage: 35,
+      cost: 4000,
+      materials: [
         { itemName: "Fabric", quantity: 3 },
         { itemName: "Hardened Steel", quantity: 5 },
         { itemName: "Rune Tool", quantity: 1 },
       ],
+      // Fill +/++/+++ damages when you have them; example row format shown
+      enchantments: [
+        { plus: "+",   damage:  53 , crystals: 5, bonus: "Level I + · Damage 53" },
+        { plus: "++",  damage:  71 , crystals: 6, bonus: "Level I ++ · Damage 71" },
+        { plus: "+++", damage:  89 , crystals: 7, bonus: "Level I +++ · Damage 89" },
+      ],
     },
-    { tier: 2, bonus: "Level II · Damage 105" },
-    { tier: 3, bonus: "Level III · Damage 175" },
-    { tier: 4, bonus: "Level IV · Damage 300" },
+    {
+      tier: 2,                 // Level II
+      baseDamage: 105,
+      // cost not provided in your notes; omit if unknown
+      materials: [
+        { itemName: "Hero's Bow", quantity: 1 },
+        { itemName: "Ancient Wood", quantity: 3 },
+        { itemName: "Old Bulb", quantity: 2 },
+      ],
+      enchantments: [
+        { plus: "+",   damage:  124 , crystals: 5, bonus: "Level I + · Damage 124" },
+        { plus: "++",  damage:  143 , crystals: 6, bonus: "Level I ++ · Damage 143" },
+        { plus: "+++", damage:  162 , crystals: 7, bonus: "Level I +++ · Damage 162" },
+      ],
+    },
+    {
+      tier: 3,                 // Level III
+      baseDamage: 175,
+      materials: [
+        { itemName: "Hero's Bow II", quantity: 1 },
+        { itemName: "Desert Steel Ingot", quantity: 2 },
+        { itemName: "Thermo Magnetic Engine", quantity: 3 },
+      ],
+      enchantments: [
+        { plus: "+",   damage:  195 , crystals: 5, bonus: "Level I + · Damage 195" },
+        { plus: "++",  damage:  215 , crystals: 6, bonus: "Level I ++ · Damage 215" },
+        { plus: "+++", damage:  235 , crystals: 7, bonus: "Level I +++ · Damage 235" },
+      ],
+    },
+    {
+      tier: 4,                 // Level IV
+      baseDamage: 300,
+      materials: [
+        { itemName: "Hero's Bow III", quantity: 1 },
+        { itemName: "Copper Reel", quantity: 2 },
+        { itemName: "Welding Gun", quantity: 3 },
+      ],
+      enchantments: [
+        { plus: "+",   damage:  324 , crystals: 5, bonus: "Level I + · Damage 324" },
+        { plus: "++",  damage:  348 , crystals: 6, bonus: "Level I ++ · Damage 348" },
+        { plus: "+++", damage:  372 , crystals: 7, bonus: "Level I +++ · Damage 372" },
+      ],
+    },
   ],
-  recipe: {
-    gold: 4000,
-    materials: [
-      { itemName: "Fabric", quantity: 3 },
-      { itemName: "Hardened Steel", quantity: 5 },
-      { itemName: "Rune Tool", quantity: 1 },
-    ],
-  },
-  summary: "Nintendo Switch exclusive bow.",
+
+ 
+
+  summary: "Nintendo Switch exclusive bow with per-level recipes and enchants.",
 },
+
 
 
 {

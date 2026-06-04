@@ -26,12 +26,32 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 
 type Props = { gear: GearItem; onPressImage?: (gear: GearItem) => void };
 
-const KIND_COLORS: Record<GearId, { pill: string; text: string; box: string }> = {
-  weapons:  { pill: "#62E6DB", text: "#62E6DB", box: "#ecd5a8ff" },
-  armour:   { pill: "#F0C36B", text: "#F0C36B", box: "#ecd5a8ff" },
-  amulets:  { pill: "#FAA5EF", text: "#FAA5EF", box: "#ecd5a8ff" },
-  merchant: { pill: "#f36b6bff", text: "#f36b6bff", box: "#ecd5a8ff" },
+const KIND_COLORS: Record<
+  GearId,
+  { pill: string; text: string; box: [string, string] }
+> = {
+  weapons: {
+    pill: "#62E6DB",
+    text: "#62E6DB",
+    box: ["rgb(194, 223, 218)", "#ecd5a8"],
+  },
+  armour: {
+    pill: "#F0C36B",
+    text: "#F0C36B",
+    box: ["#f8d27eff", "#ecd5a8"],
+  },
+  amulets: {
+    pill: "#FAA5EF",
+    text: "#FAA5EF",
+    box: ["#f3c8e7ff", "#ecd5a8"],
+  },
+  merchant: {
+    pill: "#f36b6bff",
+    text: "#f36b6bff",
+    box: ["#f7c3c3ff", "#ecd5a8"],
+  },
 };
+
 
 const TIER_COLORS: Record<number, string> = {
   1: "#c1ccde", 2: "#6cffa2", 3: "#45aafd", 4: "#c383ff", 5: "#ffc052",
@@ -83,7 +103,7 @@ export default function GearCard({ gear, onPressImage }: Props) {
           source={imageSource as any}
           bg={kindColors.box}
           border={kindColors.pill}
-          size={48}
+          size={42}
           onPress={() => onPressImage?.(gear)}
           accessibilityLabel={`${gear.name} image`}
         />
@@ -250,14 +270,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 2,
   },
-  row: { flexDirection: "row", alignItems: "center" },
+  row: { flexDirection: "row", alignItems: "center",  },
   rightCol: { flex: 1, marginLeft: 12, minWidth: 0 },
   title: { fontSize: 14, fontWeight: "700", marginRight: 8 },
   pillsRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4, width: "100%", alignItems: "flex-start" },
-  priceRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 6 },
+  priceRow: { flexDirection: "row", flexWrap: "nowrap", gap: 8, marginTop: 6 },
   ArmourPillsRow: { flexDirection: "row", gap: 8, marginTop: 6, flexWrap: "wrap", width: "100%", alignItems: "flex-start" },
   meta: { color: "#FFFFFF", fontSize: 12, marginTop: 2 },
-  summary: { color: "#a3e635", fontSize: 12, marginTop: 4 },
+  summary: { color: "#a3e635", fontSize: 12, marginTop: 10 },
   chev: { color: "#e2e8f0", fontSize: 18, paddingHorizontal: 8, paddingVertical: 4 },
   dropdownItem: { color: "#cbd5e1", fontSize: 13, marginBottom: 2 },
 });
