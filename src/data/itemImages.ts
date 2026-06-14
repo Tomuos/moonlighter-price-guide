@@ -118,7 +118,7 @@ export const itemImages: Record<string, ImageSourcePropType> = {
   "magnetic-core": require("../../assets/images/items/magnetic_core.png"),
   "magnetic-tool": require("../../assets/images/items/magnetic_tool.png"),
   "magnetite": require("../../assets/images/items/magnetite.png"),
-  "mercury": require("../../assets/images/items/mercury.png"),
+  "mercury-drops": require("../../assets/images/items/mercury_drops.png"),
   "modified-seeds": require("../../assets/images/items/modified_seeds.png"),
   "monster-skull": require("../../assets/images/items/monster_skull.png"),
 

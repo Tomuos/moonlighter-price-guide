@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { View, Text, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager, Image } from "react-native";
+import { View, Text, Pressable, StyleSheet, LayoutAnimation, Image } from "react-native";
 import type { GearItem, GearId, WeaponItem, EnchantmentTier, MaterialLine } from "../constants/types";
 import { gearImages } from "../src/data/gearImages";
 import { merchantImages } from "../src/data/merchantImages";
@@ -20,9 +20,7 @@ const SPEED_ICON   = require("../assets/images/detail-icons/boot-icon.png");
 const HEALTH_ICON  = require("../assets/images/detail-icons/heart-icon.png");
 const ATTACK_ICON  = require("../assets/images/detail-icons/sword-icon.png");
 
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
+
 
 type Props = { gear: GearItem; onPressImage?: (gear: GearItem) => void };
 
@@ -33,22 +31,22 @@ const KIND_COLORS: Record<
   weapons: {
     pill: "#62E6DB",
     text: "#62E6DB",
-    box: ["rgb(194, 223, 218)", "#ecd5a8"],
+    box: ["rgb(255, 225, 199)", "rgb(255, 203, 168)"],
   },
   armour: {
     pill: "#F0C36B",
     text: "#F0C36B",
-    box: ["#f8d27eff", "#ecd5a8"],
+    box: ["rgb(255, 225, 199)", "rgb(255, 203, 168)"],
   },
   amulets: {
     pill: "#FAA5EF",
     text: "#FAA5EF",
-    box: ["#f3c8e7ff", "#ecd5a8"],
+    box: ["rgb(255, 225, 199)", "rgb(255, 203, 168)"],
   },
   merchant: {
     pill: "#f36b6bff",
     text: "#f36b6bff",
-    box: ["#f7c3c3ff", "#ecd5a8"],
+    box: ["rgb(255, 225, 199)", "rgb(255, 203, 168)"],
   },
 };
 
@@ -187,27 +185,38 @@ export default function GearCard({ gear, onPressImage }: Props) {
         </Section>
       )}
 
-      {/* Enchantments (weapons multi-tier) */}
-      {open && isWeapon(gear) && (gear.enchantments?.length ?? 0) > 0 && (
-        <Section title="Enchantments">
-          {gear.enchantments!.map((e: EnchantmentTier, idx: number) => (
-            <View key={`${e.bonus}-${idx}`} style={{ marginTop: 4, marginBottom: 6 }}>
-              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-                <Text style={styles.dropdownItem}>✨ {typeof e.tier !== "undefined" ? `Tier ${e.tier}: ` : ""}{e.bonus}</Text>
-                {typeof e.gold === "number" ? (
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Image source={require("../assets/images/detail-icons/Coin-pop.png")} style={{ width: 20, height: 14, marginRight: 6 }} />
-                    <Text style={{ color: "#ffd166", fontSize: 13 }}>{e.gold.toLocaleString()}</Text>
-                  </View>
-                ) : null}
-              </View>
-              {e.cost?.map((m: MaterialLine, i: number) => (
-                <MaterialRow key={`emat-${idx}-${m.itemName ?? m.itemId}-${i}`} id={m.itemId} name={m.itemName} qty={m.quantity} alts={m.altItems} />
-              ))}
+     {/* Enchantments (weapons multi-tier) */}
+{open && isWeapon(gear) && (gear.enchantments?.length ?? 0) > 0 && (
+  <Section title="Enchantments">
+    {gear.enchantments!.map((e: EnchantmentTier, idx: number) => (
+      <View key={`${e.bonus}-${idx}`} style={{ marginTop: 6, marginBottom: 10 }}>
+        
+        {/* Changed container to column configuration to separate text and currency lines */}
+        <View style={{ flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
+          
+          {/* Main Tier and Damage info line */}
+          <Text style={styles.dropdownItem}>
+            ✨ {typeof e.tier !== "undefined" ? `Tier ${e.tier}: ` : ""}{e.bonus}
+          </Text>
+          
+          {/* Gold row drops underneath with consistent spacing offset */}
+          {typeof e.gold === "number" ? (
+            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 2, paddingLeft: 22 }}>
+              <Image 
+                source={require("../assets/images/detail-icons/Coin-pop.png")} 
+                style={{ width: 20, height: 14, marginRight: 6 }} 
+              />
+              <Text style={{ color: "#ffd166", fontSize: 13, fontWeight: "600" }}>
+                {e.gold.toLocaleString()}
+              </Text>
             </View>
-          ))}
-        </Section>
-      )}
+          ) : null}
+          
+        </View>
+      </View>
+    ))}
+  </Section>
+)}
 
       {/* Enchant (armour single-line) */}
       {open && gear.kind === "armour" && gear.armourEnchant && (

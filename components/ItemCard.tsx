@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { View, Text, Pressable, StyleSheet, LayoutAnimation, Platform, UIManager,  } from "react-native";
+import { View, Text, Pressable, StyleSheet, LayoutAnimation,   } from "react-native";
 import type { DungeonItem } from "../constants/types";
 import { itemImages } from "../src/data/itemImages";
 import SpriteBox from "../components/SpriteBox";
@@ -8,18 +8,16 @@ import RarityPill from "../components/RarityPill";
 import Section from "../components/Section";
 import { MerchantPricesInline } from "../components/PriceCoins";
 
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
+
 
 type Props = { item: DungeonItem; onPressImage?: (item: DungeonItem) => void };
 
 const rarityColors: Record<string, string> = {
   common: "#c1ccdeff",
-  uncommon: "#6cffa2ff",
-  rare: "#45aafdff",
-  epic: "#c383ffff",
-  legendary: "#ffc052ff",
+  uncommon: "rgb(108, 255, 169)",
+  rare: "rgb(129, 230, 255)",
+  epic: "rgb(193, 126, 255)",
+  legendary: "rgb(255, 186, 82)",
 };
 
 export default function ItemCard({ item, onPressImage }: Props) {
@@ -39,7 +37,7 @@ export default function ItemCard({ item, onPressImage }: Props) {
       <View style={styles.row}>
         <SpriteBox
           source={img as any}
-          bg={["rgb(249, 142, 80)", "rgb(255, 228, 175)"]}
+          bg={["rgb(255, 225, 199)", "rgb(255, 203, 168)"]}
           border={rarityColor}
           size={42}
           onPress={() => onPressImage?.(item)}
@@ -136,7 +134,7 @@ const styles = StyleSheet.create({
   notes: { color: "#a3e635", fontSize: 12, marginTop: 4 },
   priceLine: { marginTop: 4, fontSize: 12, color: "#FFFFFF" },
   priceGold: { fontSize: 14, fontWeight: "600", color: "#ffd166" },
-  dungeon: { fontSize: 12, color: "#CBD5E1", marginTop: 4 },
+  dungeon: { fontSize: 12, color: "#ffffff", marginTop: 4 },
   chev: { color: "#e2e8f0", fontSize: 18, paddingHorizontal: 8, paddingVertical: 4 },
   dropdownItem: { color: "#cbd5e1", fontSize: 13, marginBottom: 2 },
 });

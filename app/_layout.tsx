@@ -1,9 +1,10 @@
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { View, LogBox } from "react-native";
 import AppBackground from "../components/ui/AppBackground";
 import { ThemeProvider, DefaultTheme } from "@react-navigation/native";  // ← add
+
 
 // ← add
 const TransparentTheme = {
@@ -13,6 +14,10 @@ const TransparentTheme = {
     background: "transparent", // ← kill the white behind tab scenes
   },
 };
+
+LogBox.ignoreLogs([
+  'setLayoutAnimationEnabledExperimental is currently a no-op',
+]);
 
 export default function RootLayout() {
   return (
