@@ -55,6 +55,9 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "emergency-speed-amulet": require("../../assets/images/gear/emergency_speed_amulet.png"),
 "energy-flux-amulet": require("../../assets/images/gear/energy_flux_amulet.png"),
 "ether-sable": require("../../assets/images/gear/ether_sable.png"),
+"ether-sable-II": require("../../assets/images/gear/ether_sable.png"),
+"ether-sable-III": require("../../assets/images/gear/ether_sable.png"),
+"ether-sable-IV": require("../../assets/images/gear/ether_sable.png"),
 "exeter-bow": require("../../assets/images/gear/exeter_bow.png"),
 
 
@@ -98,6 +101,8 @@ export const gearImages: Record<string, ImageSourcePropType> = {
 "hell-spear": require("../../assets/images/gear/hell_spear.png"),
 "hero-ring": require("../../assets/images/gear/hero_ring.png"),
 "heros-bow": require("../../assets/images/gear/heros_bow.png"),
+"heros-bow-II": require("../../assets/images/gear/heros_bow.png"),
+"heros-bow-III": require("../../assets/images/gear/heros_bow.png"),
 "heros-sword": require("../../assets/images/gear/heros_sword.png"),
 "heros-sword-II": require("../../assets/images/gear/heros_sword.png"),
 "heros-sword-III": require("../../assets/images/gear/heros_sword.png"),
